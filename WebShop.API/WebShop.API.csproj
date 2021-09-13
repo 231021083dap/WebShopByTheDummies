@@ -10,6 +10,13 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Authorization\" />
+    <Folder Include="Database\Entities\" />
+    <Folder Include="DTO\Responses\" />
+    <Folder Include="DTO\Requests\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
