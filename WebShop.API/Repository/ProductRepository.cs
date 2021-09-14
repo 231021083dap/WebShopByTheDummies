@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop.API.Database;
+using WebShop.API.Database.Entities;
 
 namespace WebShop.API.Repository
 {
@@ -15,6 +18,8 @@ namespace WebShop.API.Repository
     }
     public class ProductRepository : IProductRepository
     {
+        private readonly WebShopContext _context;
+
         public ProductRepository(WebShopContext context)
         {
             _context = context;
