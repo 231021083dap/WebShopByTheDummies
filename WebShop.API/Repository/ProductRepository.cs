@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop.API.Database;
+using WebShop.API.Database.Entities;
 
 namespace WebShop.API.Repository
 {
@@ -15,6 +18,7 @@ namespace WebShop.API.Repository
     }
     public class ProductRepository : IProductRepository
     {
+        private readonly WebShopContext _context;
         public ProductRepository(WebShopContext context)
         {
             _context = context;
@@ -22,12 +26,14 @@ namespace WebShop.API.Repository
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
+                //.Include(a => a.CategoryId)
                 .ToListAsync();
         }
 
         public async Task<Product> GetProductById(int productId)
         {
             return await _context.Product
+                //.Include(a => a.CategoryId)
                 .FirstOrDefaultAsync(a => a.Id == productId);
         }
         public async Task<Product> CreateProduct(Product product)
