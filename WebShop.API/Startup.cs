@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -11,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebShop.API.Database;
 
 namespace WebShop.API
 {
@@ -27,7 +29,11 @@ namespace WebShop.API
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<WebShopContext>(
+                o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebShop.API", Version = "v1" });
