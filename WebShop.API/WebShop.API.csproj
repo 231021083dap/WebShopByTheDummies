@@ -24,9 +24,7 @@
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Authorization\" />
-    <Folder Include="DTO\Responses\" />
     <Folder Include="DTO\Requests\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
