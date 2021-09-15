@@ -6,9 +6,7 @@ using WebShop.API.Database.Entities;
 using WebShop.API.Repository;
 
 namespace WebShop.API.Services
-{
-    public class ProductService
-    {
+{ 
         public interface IProductService
         {
             Task<List<ProductResponse>> GetAllProducts();
@@ -17,10 +15,10 @@ namespace WebShop.API.Services
             Task<ProductResponse> Update(int productId, UpdateProduct updateProduct);
             Task<bool> Delete(int productId);
         }
-        public class AuthorService : IProductService
+        public class ProductService : IProductService
         {
             private readonly IProductRepository _productRepository;
-            public AuthorService(IProductRepository productRepository)
+            public ProductService(IProductRepository productRepository)
             {
                 _productRepository = productRepository;
             }
@@ -42,15 +40,47 @@ namespace WebShop.API.Services
                 }).ToList();
             }
 
-            public Task<ProductResponse> GetProductById(int productId)
+            public async Task<ProductResponse> GetProductById(int productId)
             {
-                throw new NotImplementedException();
+                Product product = await _productRepository.GetProductById(productId);
+                return product == null ? null : new ProductResponse
+                {
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Description = product.Description,
+                    Category = product.CategoryId,
+                    Image = product.ImageId
+                    //        .Select(b => new ProductImageResponse
+                    //{
+                    //    Id = b.Id,
+                    //    Path = b.Path
+                    //}).ToList()
+                };
             }
 
 
-            public Task<ProductResponse> Create(NewProduct newProduct)
+            public async Task<ProductResponse> CreateProduct(NewProduct newProduct)
             {
-                throw new NotImplementedException();
+                Product product = new Product
+                {
+
+                    Name = newProduct.Name,
+                    Price = newProduct.Price,
+                    Description = newProduct.Description,
+                    CategoryId = newProduct.CategoryId,
+                    ImageId = newProduct.ImageId
+                };
+            product = await _productRepository.CreateProduct(product);
+            return product == null ? null : new ProductResponse
+                {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Category = product.CategoryId,
+                Image = product.ImageId
+                };
             }
 
             public Task<bool> Delete(int productId)
@@ -63,4 +93,5 @@ namespace WebShop.API.Services
                 throw new NotImplementedException();
             }
         }
+    
 }
