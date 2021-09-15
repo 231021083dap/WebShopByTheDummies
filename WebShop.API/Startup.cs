@@ -13,6 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
+using WebShop.API.Repository;
+using WebShop.API.Services;
 
 namespace WebShop.API
 {
@@ -28,6 +30,8 @@ namespace WebShop.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddDbContext<WebShopContext>(
                 o => o.UseSqlServer(Configuration.GetConnectionString("Default")));
