@@ -83,14 +83,33 @@ namespace WebShop.API.Services
                 };
             }
 
-            public Task<bool> Delete(int productId)
+            public async Task<bool> DeleteProduct(int productId)
             {
-                throw new NotImplementedException();
+            var result = await _productRepository.DeleteProduct(productId);
+            return true;
             }
 
-            public Task<ProductResponse> Update(int productId, UpdateProduct updateProduct)
+            public async Task<ProductResponse> Update(int productId, UpdateProduct updateProduct)
             {
-                throw new NotImplementedException();
+            Product product = new Product
+            {
+                Name = updateProduct.Name,
+                Price = updateProduct.Price,
+                Description = updateProduct.Description,
+                CategoryId = updateProduct.CategoryId,
+                ImageId = updateProduct.ImageId
+            };
+            product = await _productRepository.UpdateProduct(productId, product);
+            return product == null ? null : new ProductResponse
+                {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Category = product.CategoryId,
+                Image = product.ImageId
+                };
+
             }
         }
     
