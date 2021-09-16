@@ -22,7 +22,8 @@ namespace WebShop.API.Database.Entities
 
         //Unsure if this would work?
         [ForeignKey("ZipCity.Zipcode")]
-        public ZipCity Zipcode { get; set; }
+        public int Zipcode { get; set; }
+        public ZipCity ZipCity { get; set; }
 
         [Required]
         public string County { get; set; }

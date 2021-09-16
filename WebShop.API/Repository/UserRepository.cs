@@ -8,7 +8,7 @@ using WebShop.API.Database.Entities;
 namespace WebShop.API.Repository
 {
 
-        public interface IUserRepository
+    public interface IUserRepository
     {
         Task<List<User>> GetAllUsers();
         Task<User> GetUserById(int userId);

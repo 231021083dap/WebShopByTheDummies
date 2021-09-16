@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebShop.API.Database.Entities
@@ -14,5 +15,8 @@ namespace WebShop.API.Database.Entities
 
         [ForeignKey("Address.Id")]
         public int AddressId { get; set; }
+
+        [Required]
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

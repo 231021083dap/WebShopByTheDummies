@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebShop.API.Database.Entities
@@ -22,5 +23,9 @@ namespace WebShop.API.Database.Entities
 
         [ForeignKey("Image.Id")]
         public int ImageId { get; set; }
+
+        public List<Image> Image { get; set; }
+
+        public Category Category { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
+using WebShop.API.DTO.Responses;
 using WebShop.API.Repository;
 
 namespace WebShop.API.Services
@@ -11,14 +12,14 @@ namespace WebShop.API.Services
         {
             Task<List<ProductResponse>> GetAllProducts();
             Task<ProductResponse> GetProductById(int productId);
-            Task<ProductResponse> Create(NewProduct newProduct);
-            Task<ProductResponse> Update(int productId, UpdateProduct updateProduct);
-            Task<bool> Delete(int productId);
+            Task<ProductResponse> CreateProduct(NewProduct newProduct);
+            Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct);
+            Task<bool> DeleteProduct(int productId);
         }
         public class ProductService : IProductService
         {
             private readonly IProductRepository _productRepository;
-            public ProductService(IProductRepository productRepository)
+            public ProductService(IProductRepository productRepository) 
             {
                 _productRepository = productRepository;
             }
@@ -32,7 +33,7 @@ namespace WebShop.API.Services
                     // Price = a.Price,
                     // Description = a.Description
                     // Category = a.CategoryId
-                    // Image = a.Images.Select(b => new ProductImageResponse
+                    // Image = a.Images.Select(b => new ImageResponse
                     //{ 
                     //  Id = b.Id,
                     //  Path = b.Path
@@ -40,25 +41,29 @@ namespace WebShop.API.Services
                 }).ToList();
             }
 
-            public async Task<ProductResponse> GetProductById(int productId)
+        public async Task<ProductResponse> GetProductById(int productId)
+        {
+            Product product = await _productRepository.GetProductById(productId);
+            return product == null ? null : new ProductResponse
             {
-                Product product = await _productRepository.GetProductById(productId);
-                return product == null ? null : new ProductResponse
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                ImageId = new ImageResponse
                 {
-                    Id = product.Id,
-                    Name = product.Name,
-                    Price = product.Price,
-                    Description = product.Description,
-                    Category = product.CategoryId,
-                    Image = product.ImageId
-                    //        .Select(b => new ProductImageResponse
-                    //{
-                    //    Id = b.Id,
-                    //    Path = b.Path
-                    //}).ToList()
-                };
-            }
+                    //Id = product.ImageId,
+                    //Path = product.Image.
+                    
+                },
+                CategoryId = new CategoryResponse
+                {
+                    //Id = product.CategoryId.Id,
+                    //Name = product.CategoryId.Name
 
+                }
+            };
+        }
 
             public async Task<ProductResponse> CreateProduct(NewProduct newProduct)
             {
@@ -78,9 +83,19 @@ namespace WebShop.API.Services
                 Name = product.Name,
                 Price = product.Price,
                 Description = product.Description,
-                Category = product.CategoryId,
-                Image = product.ImageId
-                };
+                ImageId = new ImageResponse
+                {
+                    //Id = product.ImageId.Id,
+                    //Path = product.ImageId.Path
+
+                },
+                CategoryId = new CategoryResponse
+                {
+                    //Id = product.CategoryId.Id,
+                    //Name = product.CategoryId.Name
+
+                }
+            };
             }
 
             public async Task<bool> DeleteProduct(int productId)
@@ -89,7 +104,7 @@ namespace WebShop.API.Services
             return true;
             }
 
-            public async Task<ProductResponse> Update(int productId, UpdateProduct updateProduct)
+            public async Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct)
             {
             Product product = new Product
             {
@@ -106,9 +121,19 @@ namespace WebShop.API.Services
                 Name = product.Name,
                 Price = product.Price,
                 Description = product.Description,
-                Category = product.CategoryId,
-                Image = product.ImageId
-                };
+                ImageId = new ImageResponse
+                {
+                    //Id = product.ImageId.Id,
+                    //Path = product.ImageId.Path
+
+                },
+                CategoryId = new CategoryResponse
+                {
+                    //Id = product.CategoryId.Id,
+                    //Name = product.CategoryId.Name
+
+                }
+            };
 
             }
         }
