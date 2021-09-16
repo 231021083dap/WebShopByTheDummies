@@ -13,8 +13,7 @@ namespace WebShop.API.Database.Entities
         [Required]
         public string Password { get; set; }
 
-        // This is needed for when we setup role.
-        //public Helpers.Role Role { get; set; }
+        public Helpers.Role Role { get; set; }
 
         //Trying to display/send over details for a forbind list showing
         //public Customer Customer { get; set; }

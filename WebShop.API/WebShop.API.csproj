@@ -21,11 +21,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Authorization\" />
-    <Folder Include="DTO\Requests\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
