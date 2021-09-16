@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,12 +27,14 @@ namespace WebShop.API.Repository
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
+                //.Include(a => a.CategoryId)
                 .ToListAsync();
         }
 
         public async Task<Product> GetProductById(int productId)
         {
             return await _context.Product
+                //.Include(a => a.CategoryId)
                 .FirstOrDefaultAsync(a => a.Id == productId);
         }
         public async Task<Product> CreateProduct(Product product)
