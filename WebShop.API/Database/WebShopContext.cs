@@ -20,50 +20,84 @@ namespace WebShop.API.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region User
+
+            //ADMIN
+            modelBuilder.Entity<User>().HasData(
+            new User
+            {
+                Id = 1,
+                Email = "admin@admin.dk",
+                Password = "admin",
+                Role = Helpers.Role.Admin
+            },
+
+            //USER - (CUSTOMER)
+            new User
+            {
+                Id = 10,
+                Email = "user@user.dk",
+                Password = "test",
+                Role = Helpers.Role.User
+            });
+
+            #endregion
+
+            #region Address
             //modelBuilder.Entity<Address>().HasData(
             //new Address
             //{
             //});
+            #endregion
 
+            #region Category
             //modelBuilder.Entity<Category>().HasData(
             //new Category
             //{
             //});
+            #endregion
 
+            #region Customer
             //modelBuilder.Entity<Customer>().HasData(
             //new Customer
             //{
             //});
+            #endregion
 
+            #region Image
             //modelBuilder.Entity<Image>().HasData(
             //new Image
             //{
             //});
+            #endregion
 
+            #region Order
             //modelBuilder.Entity<Order>().HasData(
             //new Order
             //{
             //});
+            #endregion
 
+            #region OrderItem
             //modelBuilder.Entity<OrderItem>().HasData(
             //new OrderItem
             //{
             //});
+            #endregion
 
+            #region Product
             //modelBuilder.Entity<Product>().HasData(
             //new Product
             //{
             //});
+            #endregion
 
-            //modelBuilder.Entity<User>().HasData(
-            //new User
-            //{
-            //});
-
+            #region MyRegion
             //modelBuilder.Entity<ZipCity>().HasData(
             //new ZipCity
             //{
             //});
+            #endregion
         }
     }
 }

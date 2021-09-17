@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WebShop.API.Database;
@@ -7,11 +6,11 @@ using WebShop.API.Database.Entities;
 
 namespace WebShop.API.Repository
 {
-
     public interface IUserRepository
     {
         Task<List<User>> GetAllUsers();
-        Task<User> GetUserById(int userId);
+        Task<User> GetByEmail(string email);
+        Task<User> GetByUserId(int userId);
         Task<User> CreateUser(User user);
         Task<User> UpdateUser(int userId, User user);
         Task<User> DeleteUser(int userId);
@@ -19,7 +18,6 @@ namespace WebShop.API.Repository
     public class UserRepository : IUserRepository
     {
         private readonly WebShopContext _context;
-
         public UserRepository(WebShopContext context)
         {
             _context = context;
@@ -30,7 +28,11 @@ namespace WebShop.API.Repository
             return await _context.User
                 .ToListAsync();
         }
-        public async Task<User> GetUserById(int userId)
+        public async Task<User> GetByEmail(string Email)
+        {
+            return await _context.User.FirstOrDefaultAsync(u => u.Email == Email);
+        }
+        public async Task<User> GetByUserId(int userId)
         {
             return await _context.User
                 .FirstOrDefaultAsync(a => a.Id == userId);
@@ -41,19 +43,6 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return user;
         }
-
-        public async Task<User> DeleteUser(int userId)
-        {
-            User user = await _context.User.FirstOrDefaultAsync(a => a.Id == userId);
-            if (user != null)
-            {
-                _context.User.Remove(user);
-                await _context.SaveChangesAsync();
-            }
-            return user;
-        }
-
-
         public async Task<User> UpdateUser(int userId, User user)
         {
             User updateUser = await _context.User.FirstOrDefaultAsync(a => a.Id == userId);
@@ -67,6 +56,15 @@ namespace WebShop.API.Repository
             }
             return updateUser;
         }
-
+        public async Task<User> DeleteUser(int userId)
+        {
+            User user = await _context.User.FirstOrDefaultAsync(a => a.Id == userId);
+            if (user != null)
+            {
+                _context.User.Remove(user);
+                await _context.SaveChangesAsync();
+            }
+            return user;
+        }
     }
 }
