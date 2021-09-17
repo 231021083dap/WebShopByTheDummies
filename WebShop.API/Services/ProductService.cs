@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
+using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
 using WebShop.API.Repository;
 

@@ -12,7 +12,9 @@ namespace WebShop.API.DTO.Requests
 
         public string Description { get; set; }
 
-        //This only works if we wanna use 1 picture at the time
+        [Required]
+        public int CategoryId { get; set; }
+
         [Required]
         public int ImageId { get; set; }
     }
