@@ -9,4 +9,11 @@ namespace WebShop.API.DTO.Responses
         public AddressResponse AddressId { get; set; }
         public List<OrderItemOrderResponse> OrderItems { get; set; }
     }
+    public class OrderItemOrderResponse
+    {
+        public int Id { get; set; }
+        public ProductResponse ProductId { get; set; }
+        public int Amount { get; set; }
+        public int CurrentPrice { get; set; }
+    }
 }

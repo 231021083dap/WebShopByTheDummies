@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebShop.API.Database.Entities
 {
@@ -9,5 +10,8 @@ namespace WebShop.API.Database.Entities
 
         [Required]
         public string Path { get; set; }
+
+        [ForeignKey("Product.Id")]
+        public int productId { get; set; }
     }
 }
