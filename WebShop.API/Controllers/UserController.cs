@@ -9,9 +9,10 @@ using WebShop.API.DTO.Responses;
 using WebShop.API.Helpers;
 using WebShop.API.Services;
 
+// HUSK AT SLÅ Authorize TIL NÅR VI ENGANG NÅR TIL CLIENT SITE TESTING
 namespace WebShop.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -67,7 +68,7 @@ namespace WebShop.API.Controllers
             }
         }
 
-        [Authorize(Role.Admin)] // only admins are allowed entry to this endpoint
+        /*[Authorize(Role.Admin)]*/ // only admins are allowed entry to this endpoint
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -97,7 +98,7 @@ namespace WebShop.API.Controllers
             }
         }
 
-        [Authorize(Role.User, Role.Admin)]
+        //[Authorize(Role.User, Role.Admin)]
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] int userId)
         {
