@@ -25,7 +25,5 @@ namespace WebShop.API.Database.Entities
         public int ImageId { get; set; }
 
         public List<Image> Image { get; set; }
-
-        public Category Category { get; set; }
     }
 }
