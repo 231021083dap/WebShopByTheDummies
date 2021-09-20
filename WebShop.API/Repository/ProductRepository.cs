@@ -27,7 +27,7 @@ namespace WebShop.API.Repository
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
-                .Include(a => a.Category)
+                .Include(a => a.CategoryId)
                 .Include(b => b.Image)
                 .ToListAsync();
         }
