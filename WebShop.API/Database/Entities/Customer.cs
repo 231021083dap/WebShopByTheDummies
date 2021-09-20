@@ -6,11 +6,11 @@ namespace WebShop.API.Database.Entities
 {
     public class Customer
     {
-        [Key]
-        public int Id { get; set; }
-
         [ForeignKey("User.Id")]
         public int UserId { get; set; }
+
+        [Key]
+        public int Id { get; set; }
 
         [Required]
         public string FirstName { get; set; }
