@@ -17,6 +17,8 @@ namespace WebShop.API.Database.Entities
         [Required]
         public int Amount { get; set; }
 
+        //Needs to be a get of some kind?
+        //How would it change the price else? 
         [Required]
         public int CurrentPrice { get; set; }
     }
