@@ -20,50 +20,133 @@ namespace WebShop.API.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Address>().HasData(
-            //new Address
-            //{
-            //});
+            #region User
+
+            //ADMIN
+            modelBuilder.Entity<User>().HasData(
+            new User
+            {
+                Id = 1,
+                Email = "admin@admin.dk",
+                Password = "admin",
+                Role = Helpers.Role.Admin
+            },
+
+            //USER - (CUSTOMER)
+            new User
+            {
+                Id = 10,
+                Email = "user@user.dk",
+                Password = "test",
+                Role = Helpers.Role.User
+            });
+
+            #endregion
+
+            #region Address
+
+            modelBuilder.Entity<Address>().HasData(
+            new Address
+            {
+                CustomerId = 10,
+                Id = 10,
+                StreetName = "Nyborggade",
+                Number = 34,
+                Floor = "2. TV",
+                Zipcode = 2100,
+                County = "Danmark"
+            });
+
+            #endregion
+
+            #region Category
 
             //modelBuilder.Entity<Category>().HasData(
             //new Category
             //{
+            //    Id = 1,
+            //    Name = "Test category",
+            //    Picture = ""
             //});
 
-            //modelBuilder.Entity<Customer>().HasData(
-            //new Customer
-            //{
-            //});
+            #endregion
+
+            #region Customer
+
+            modelBuilder.Entity<Customer>().HasData(
+            new Customer
+            {
+                UserId = 10,
+                Id = 10,
+                FirstName = "Christian",
+                MiddleName = "Møller",
+                LastName = "Jørgensen"
+            });
+
+            #endregion
+
+            #region Image
 
             //modelBuilder.Entity<Image>().HasData(
             //new Image
             //{
+            //    Id = 1,
+            //    Path = ""
             //});
+
+            #endregion
+
+            #region Order
 
             //modelBuilder.Entity<Order>().HasData(
             //new Order
             //{
+            //    Id = 1,
+            //    OrdreDate = "",
+            //    AddressId = 10
             //});
+
+            #endregion
+
+            #region OrderItem
 
             //modelBuilder.Entity<OrderItem>().HasData(
             //new OrderItem
             //{
+            //    OrderId = 1,
+            //    Id = 1,
+            //    ProductId = 1,
+            //    Amount = 2,
+            //    CurrentPrice = 
             //});
 
-            //modelBuilder.Entity<Product>().HasData(
-            //new Product
-            //{
-            //});
+            #endregion
 
-            //modelBuilder.Entity<User>().HasData(
-            //new User
-            //{
-            //});
+            #region Product
 
-            //modelBuilder.Entity<ZipCity>().HasData(
-            //new ZipCity
-            //{
-            //});
+            modelBuilder.Entity<Product>().HasData(
+            new Product
+            {
+                Id = 1,
+                Name = "TestProduct",
+                CategoryId = 1,
+                Price = 100,
+                Description = "MAKE TESTS GREAT AGIAN",
+                ImageId = 1
+            });
+
+            #endregion
+
+            #region ZipCity
+
+            modelBuilder.Entity<ZipCity>().HasData(
+            new ZipCity
+            {
+                Zipcode = 2100,
+                City = "Østerbro"
+            });
+
+            #endregion
         }
     }
 }
