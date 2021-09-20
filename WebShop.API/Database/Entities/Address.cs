@@ -8,6 +8,8 @@ namespace WebShop.API.Database.Entities
         [ForeignKey("Customer.Id")]
         public int CustomerId { get; set; }
 
+        public Customer customer { get; set; }
+
         [Key]
         public int Id { get; set; }
 

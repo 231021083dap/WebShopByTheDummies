@@ -8,6 +8,7 @@ namespace WebShop.API.Database.Entities
     {
         [ForeignKey("User.Id")]
         public int UserId { get; set; }
+        public User user { get; set; }
 
         [Key]
         public int Id { get; set; }
@@ -20,6 +21,7 @@ namespace WebShop.API.Database.Entities
 
         [Required]
         public string LastName { get; set; }
+        
 
         //Needs service to work if needed
         //public List<User> Users { get; set; }

@@ -7,40 +7,50 @@ using WebShop.API.DTO.Responses;
 using WebShop.API.Repository;
 
 namespace WebShop.API.Services
-{ 
-        public interface IProductService
+{
+    public interface IProductService
+    {
+        Task<List<ProductResponse>> GetAllProducts();
+        Task<ProductResponse> GetProductById(int productId);
+        Task<ProductResponse> CreateProduct(NewProduct newProduct);
+        Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId);
+        Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct);
+        Task<bool> DeleteProduct(int productId);
+    }
+    public class ProductService : IProductService
+    {
+        private readonly IProductRepository _productRepository;
+        private readonly IImageRepository _imageRepository;
+        public ProductService(IProductRepository productRepository, IImageRepository imageRepository)
         {
-            Task<List<ProductResponse>> GetAllProducts();
-            Task<ProductResponse> GetProductById(int productId);
-            Task<ProductResponse> CreateProduct(NewProduct newProduct);
-            Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct);
-            Task<bool> DeleteProduct(int productId);
+            _productRepository = productRepository;
+            _imageRepository = imageRepository;
         }
-        public class ProductService : IProductService
+        #region Get Áll Products
+        public async Task<List<ProductResponse>> GetAllProducts()
         {
-            private readonly IProductRepository _productRepository;
-            public ProductService(IProductRepository productRepository) 
+            List<Product> products = await _productRepository.GetAllProducts();
+            return products == null ? null : products.Select(p => new ProductResponse
             {
-                _productRepository = productRepository;
-            }
-            public async Task<List<ProductResponse>> GetAllProducts()
-            {
-                List<Product> products = await _productRepository.GetAllProducts();
-                return products == null ? null : products.Select(a => new ProductResponse
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Description = p.Description,
+                Category = new ProductCategoryResponse
                 {
-                    // Id = a.Id,
-                    // Name = a.Name,
-                    // Price = a.Price,
-                    // Description = a.Description
-                    // Category = a.CategoryId
-                    // Image = a.Images.Select(b => new ImageResponse
-                    //{ 
-                    //  Id = b.Id,
-                    //  Path = b.Path
-                    // }).ToList()
-                }).ToList();
-            }
-
+                    Id = p.Category.Id,
+                    Name = p.Category.Name
+                },
+                Images = p.Image.Select(i => new ProductImageResponse
+                {
+                    imageId = i.Id,
+                    Path = i.Path,
+                    productId = p.Id
+                }).ToList()
+            }).ToList();
+        }
+        #endregion
+        #region Get Product By Id
         public async Task<ProductResponse> GetProductById(int productId)
         {
             Product product = await _productRepository.GetProductById(productId);
@@ -50,91 +60,113 @@ namespace WebShop.API.Services
                 Name = product.Name,
                 Price = product.Price,
                 Description = product.Description,
-                ImageId = new ImageResponse
+                Category = new ProductCategoryResponse
                 {
-                    //Id = product.ImageId,
-                    //Path = product.Image.
-                    
+                    Id = product.Category.Id,
+                    Name = product.Category.Name
                 },
-                CategoryId = new CategoryResponse
+                Images = product.Image.Select(p => new ProductImageResponse
                 {
-                    //Id = product.CategoryId.Id,
-                    //Name = product.CategoryId.Name
-
-                }
+                    imageId = p.Id,
+                    Path = p.Path,
+                    productId = product.Id
+                }).ToList()
             };
         }
-
-            public async Task<ProductResponse> CreateProduct(NewProduct newProduct)
+        #endregion
+        #region Create Product
+        public async Task<ProductResponse> CreateProduct(NewProduct newProduct)
+        {
+            Product product = new Product
             {
-                Product product = new Product
-                {
 
-                    Name = newProduct.Name,
-                    Price = newProduct.Price,
-                    Description = newProduct.Description,
-                    CategoryId = newProduct.CategoryId,
-                    ImageId = newProduct.ImageId
-                };
+                Name = newProduct.Name,
+                Price = newProduct.Price,
+                Description = newProduct.Description,
+                CategoryId = newProduct.CategoryId,
+
+            };
             product = await _productRepository.CreateProduct(product);
             return product == null ? null : new ProductResponse
-                {
+            {
                 Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
                 Description = product.Description,
-                ImageId = new ImageResponse
+                Category = new ProductCategoryResponse
                 {
-                    //Id = product.ImageId.Id,
-                    //Path = product.ImageId.Path
-
+                    Id = product.Category.Id
                 },
-                CategoryId = new CategoryResponse
+                Images = product.Image.Select(a => new ProductImageResponse
                 {
-                    //Id = product.CategoryId.Id,
-                    //Name = product.CategoryId.Name
-
-                }
+                    imageId = a.Id,
+                    Path = a.Path,
+                    productId = product.Id
+                }).ToList()
             };
-            }
 
-            public async Task<bool> DeleteProduct(int productId)
+
+
+
+        }
+        #endregion
+        #region Create ProductImage
+        public async Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId)
+        {
+            
+            Product product = await _productRepository.GetProductById(productId);
+            if (product != null)
             {
+                Image image = new Image
+                {
+                    Path = newProductImage.Path,
+                    productId = product.Id
+                };
+
+                image = await _imageRepository.CreateImage(image);
+
+                return image == null ? null : new ProductImageResponse
+                {
+                    imageId = image.Id,
+                    Path = image.Path,
+                    productId = image.productId
+                };
+            }
+            return null;
+            
+        }
+        #endregion
+        #region Delete Product
+        public async Task<bool> DeleteProduct(int productId)
+        {
             var result = await _productRepository.DeleteProduct(productId);
             return true;
-            }
-
-            public async Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct)
-            {
+        }
+        #endregion
+        #region Update Product
+        public async Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct)
+        {
             Product product = new Product
             {
                 Name = updateProduct.Name,
                 Price = updateProduct.Price,
                 Description = updateProduct.Description,
                 CategoryId = updateProduct.CategoryId,
-                ImageId = updateProduct.ImageId
+
             };
             product = await _productRepository.UpdateProduct(productId, product);
             return product == null ? null : new ProductResponse
-                {
+            {
                 Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
-                Description = product.Description,
-                ImageId = new ImageResponse
-                {
-                    //Id = product.ImageId.Id,
-                    //Path = product.ImageId.Path
+                Description = product.Description
 
-                },
-                CategoryId = new CategoryResponse
-                {
-                    //Id = product.CategoryId.Id,
-                    //Name = product.CategoryId.Name
-
-                }
             };
 
-            }
         }
+
+        #endregion
+    }
+
 }

@@ -21,9 +21,9 @@ namespace WebShop.API.Database.Entities
         [Required]
         public string Description { get; set; }
 
-        [ForeignKey("Image.Id")]
-        public int ImageId { get; set; }
+        public List<Image> Image { get; set; } = new();
 
-        public List<Image> Image { get; set; }
+        public Category Category { get; set; }
+
     }
 }

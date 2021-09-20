@@ -18,5 +18,7 @@ namespace WebShop.API.Database.Entities
 
         [Required]
         public List<OrderItem> OrderItems { get; set; }
+
+        public Address address { get; set; }
     }
 }

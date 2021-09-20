@@ -27,7 +27,8 @@ namespace WebShop.API.Repository
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
-                //.Include(a => a.CategoryId)
+                .Include(a => a.Category)
+                .Include(b => b.Image)
                 .ToListAsync();
         }
 
@@ -64,6 +65,8 @@ namespace WebShop.API.Repository
                 updateProduct.Name = product.Name;
                 updateProduct.Price = product.Price;
                 updateProduct.Description = product.Description;
+                updateProduct.CategoryId = product.CategoryId;
+                
                 await _context.SaveChangesAsync();
             }
             return updateProduct;
