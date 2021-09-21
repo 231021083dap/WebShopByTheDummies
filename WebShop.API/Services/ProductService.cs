@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
@@ -13,35 +14,39 @@ namespace WebShop.API.Services
         Task<List<ProductResponse>> GetAllProducts();
         Task<ProductResponse> GetProductById(int productId);
         Task<ProductResponse> CreateProduct(NewProduct newProduct);
+        Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId);
         Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct);
         Task<bool> DeleteProduct(int productId);
     }
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository)
+        private readonly IImageRepository _imageRepository;
+        public ProductService(IProductRepository productRepository, IImageRepository imageRepository)
         {
             _productRepository = productRepository;
+            _imageRepository = imageRepository;
         }
         #region Get Áll Products
         public async Task<List<ProductResponse>> GetAllProducts()
         {
             List<Product> products = await _productRepository.GetAllProducts();
-            return products == null ? null : products.Select(a => new ProductResponse
+            return products == null ? null : products.Select(p => new ProductResponse
             {
-                Id = a.Id,
-                Name = a.Name,
-                Price = a.Price,
-                Description = a.Description,
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Description = p.Description,
                 Category = new ProductCategoryResponse
                 {
-                    Id = a.Category.Id,
-                    Name = a.Category.Name
+                    Id = p.Category.Id,
+                    Name = p.Category.Name
                 },
-                Images = a.Image.Select(b => new ImageResponse
+                Images = p.Image.Select(i => new ProductImageResponse
                 {
-                    Id = b.Id,
-                    Path = b.Path
+                    imageId = i.Id,
+                    Path = i.Path,
+                    productId = p.Id
                 }).ToList()
             }).ToList();
         }
@@ -61,10 +66,11 @@ namespace WebShop.API.Services
                     Id = product.Category.Id,
                     Name = product.Category.Name
                 },
-                Images = product.Image.Select(b => new ImageResponse
+                Images = product.Image.Select(p => new ProductImageResponse
                 {
-                    Id = b.Id,
-                    Path = b.Path
+                    imageId = p.Id,
+                    Path = p.Path,
+                    productId = product.Id
                 }).ToList()
             };
         }
@@ -79,7 +85,7 @@ namespace WebShop.API.Services
                 Price = newProduct.Price,
                 Description = newProduct.Description,
                 CategoryId = newProduct.CategoryId,
-                
+
             };
             product = await _productRepository.CreateProduct(product);
             return product == null ? null : new ProductResponse
@@ -92,15 +98,38 @@ namespace WebShop.API.Services
                 {
                     Id = product.Category.Id
                 },
-                Images = product.Image.Select(a => new ImageResponse
+                Images = product.Image.Select(a => new ProductImageResponse
                 {
-                    Id = a.Id,
-                    Path = a.Path
+                    imageId = a.Id,
+                    Path = a.Path,
+                    productId = product.Id
                 }).ToList()
             };
+        }
+        #endregion
+        #region Create ProductImage
+        public async Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId)
+        {
 
+            Product product = await _productRepository.GetProductById(productId);
+            if (product != null)
+            {
+                Image image = new Image
+                {
+                    Path = newProductImage.Path,
+                    productId = product.Id
+                };
 
+                image = await _imageRepository.CreateImage(image);
 
+                return image == null ? null : new ProductImageResponse
+                {
+                    imageId = image.Id,
+                    Path = image.Path,
+                    productId = image.productId
+                };
+            }
+            return null;
 
         }
         #endregion
@@ -120,7 +149,7 @@ namespace WebShop.API.Services
                 Price = updateProduct.Price,
                 Description = updateProduct.Description,
                 CategoryId = updateProduct.CategoryId,
-                
+
             };
             product = await _productRepository.UpdateProduct(productId, product);
             return product == null ? null : new ProductResponse
@@ -133,7 +162,6 @@ namespace WebShop.API.Services
             };
 
         }
-
         #endregion
     }
 
