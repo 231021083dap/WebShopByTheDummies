@@ -16,6 +16,7 @@ namespace WebShop.API.Services
         Task<LoginResponse> Authenticate(LoginRequest login);
         Task<UserResponse> Register(RegisterUser newUser);
         Task<UserResponse> Update(int userId, UpdateUser updateUser);
+        Task<bool> Delete(int userId);
     }
 
     public class UserService : IUserService
@@ -98,6 +99,12 @@ namespace WebShop.API.Services
             user = await _userRepository.UpdateUser(userId, user);
 
             return userResponse(user);
+        }
+
+        public async Task<bool> Delete(int userId)
+        {
+            var result = await _userRepository.DeleteUser(userId);
+            return true;
         }
 
         private UserResponse userResponse(User user)

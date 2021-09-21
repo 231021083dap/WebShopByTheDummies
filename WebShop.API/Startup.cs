@@ -38,6 +38,12 @@ namespace WebShop.API
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy(name: CORSRules,
@@ -57,9 +63,6 @@ namespace WebShop.API
                 o => o.UseSqlServer(_configuration.GetConnectionString("Default")));
 
             services.AddControllers();
-
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
 
             services.AddControllers().AddJsonOptions(x =>
             {

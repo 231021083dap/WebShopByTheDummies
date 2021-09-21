@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -12,9 +10,7 @@ namespace WebShop.API.Repository
     {
         Task<List<Customer>> GetAllCustomers();
         Task<Customer> GetCustomerById(int customerId);
-        Task<Customer> CreateCustomer(Customer customer);
         Task<Customer> UpdateCustomer(int costumerId, Customer customer);
-        Task<Customer> DeleteCustomer(int costumerId);
     }
 
     public class CustomerRepository : ICustomerRepository
@@ -30,31 +26,14 @@ namespace WebShop.API.Repository
         public async Task<List<Customer>> GetAllCustomers()
         {
             return await _context.Customer
+                .Include(a => a.User)
                 .ToListAsync();
         }
 
-        public async Task<Customer> GetCustomerById(int bookId)
+        public async Task<Customer> GetCustomerById(int customerId)
         {
             return await _context.Customer
-                .FirstOrDefaultAsync(a => a.Id == bookId);
-        }
-
-        public async Task<Customer> CreateCustomer(Customer customer)
-        {
-            _context.Customer.Add(customer);
-            await _context.SaveChangesAsync();
-            return customer;
-        }
-
-        public async Task<Customer> DeleteCustomer(int customerId)
-        {
-            Customer customer = await _context.Customer.FirstOrDefaultAsync(a => a.Id == customerId);
-            if (customer != null)
-            {
-                _context.Customer.Remove(customer);
-                await _context.SaveChangesAsync();
-            }
-            return customer;
+                .FirstOrDefaultAsync(a => a.Id == customerId);
         }
 
         public async Task<Customer> UpdateCustomer(int customerId, Customer customer)

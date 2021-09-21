@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebShop.API.Database.Entities
@@ -21,7 +20,8 @@ namespace WebShop.API.Database.Entities
         [Required]
         public string LastName { get; set; }
 
-        //Needs service to work if needed
-        //public List<User> Users { get; set; }
+        public User User { get; set; }
+        //public Address Address { get; set; }
+        //public ZipCity ZipCity { get; set; }
     }
 }

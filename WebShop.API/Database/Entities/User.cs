@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebShop.API.Database.Entities
 {
@@ -15,7 +16,6 @@ namespace WebShop.API.Database.Entities
 
         public Helpers.Role Role { get; set; }
 
-        //Trying to display/send over details for a forbind list showing
-        //public Customer Customer { get; set; }
+        public List<Customer> Customers { get; set; } = new();
     }
 }
