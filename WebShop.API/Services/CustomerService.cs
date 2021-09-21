@@ -5,7 +5,6 @@ using WebShop.API.Database.Entities;
 using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
 using WebShop.API.Repository;
-using static WebShop.API.DTO.Responses.CustomerResponse;
 
 namespace WebShop.API.Services
 {
@@ -47,37 +46,41 @@ namespace WebShop.API.Services
             Customer customer = await _customerRepository.GetCustomerById(userId);
             return customer == null ? null : new CustomerResponse
             {
-                //User = new CustomerUserResponse
-                //{
-                //    Id = customer.User.Id,
-                //    Email = customer.User.Email
-                //},
-                //FirstName = customer.FirstName,
-                //MiddleName = customer.MiddleName,
-                //LastName = customer.LastName,
+                User = new CustomerUserResponse
+                {
+                    Id = customer.User.Id,
+                    Email = customer.User.Email
+                },
 
-                //Addresses = new CustomerAddressResponse
-                //{
-                //    Id = customer.Address.Id,
-                //    StreetName = customer.Address.StreetName,
-                //    Number = customer.Address.Number,
-                //    Floor = customer.Address.Floor,
-                //    ZipCity = new AddressZipCityResponse
-                //    {
-                //        Zipcode = customer.ZipCity.Zipcode,
-                //        City = customer.ZipCity.City
-                //    },
-                //    County = customer.Address.County
-                //}
+                FirstName = customer.FirstName,
+                MiddleName = customer.MiddleName,
+                LastName = customer.LastName,
+
+                Addresses = customer.Addresses.Select(address => new CustomerAddressResponse
+                {
+                    Id = address.Id,
+                    StreetName = address.StreetName,
+                    Number = address.Number,
+                    Floor = address.Floor,
+
+                    ZipCity = new ZipCityResponse
+                    {
+                        Zipcode = address.ZipCity.Zipcode,
+                        City = address.ZipCity.City
+                    },
+
+                    County = address.County
+                }).ToList()
             };
         }
 
+        //USER - Update account
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
             Customer customer = new Customer
             {
-                //Email?
-                //Address?
+                //Email
+                //Password
                 FirstName = updateCustomer.FirstName,
                 MiddleName = updateCustomer.MiddleName,
                 LastName = updateCustomer.LastName
@@ -88,11 +91,16 @@ namespace WebShop.API.Services
             return customer == null ? null : new CustomerResponse
             {
                 ////Skal være det samme som vist øverst!
-                //Id = customer.Id,
                 FirstName = customer.FirstName,
                 MiddleName = customer.MiddleName,
                 LastName = customer.LastName
             };
         }
+
+        //Update address
+
+        //Delete address
+
+        //Create address 
     }
 }

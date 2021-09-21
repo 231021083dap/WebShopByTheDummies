@@ -13,7 +13,7 @@ using WebShop.API.Services;
 namespace WebShop.API.Controllers
 {        
     //[Authorize]
-    [Route("api/[controller]")]
+    [Route("API/")]
     [ApiController]
     public class LoginSectionController : ControllerBase
     {
@@ -30,7 +30,7 @@ namespace WebShop.API.Controllers
 
         #region Authenticate (LOGIN)
         [AllowAnonymous]
-        [HttpPost("authenticate")]
+        [HttpPost("Authenticate")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -57,7 +57,7 @@ namespace WebShop.API.Controllers
 
         #region Register (SIGNUP)
         [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost("Register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -78,7 +78,7 @@ namespace WebShop.API.Controllers
 
         #region GetAllUsers (ADMIN ONLY)
         /*[Authorize(Role.Admin)]*/ // only admins are allowed entry to this endpoint
-        [HttpGet]
+        [HttpGet("Users")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -110,24 +110,24 @@ namespace WebShop.API.Controllers
 
         #region GetByUserId (ADMIN ONLY)
         //[Authorize(Role.User, Role.Admin)]
-        [HttpGet("{userId}")]
+        [HttpGet("User/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] int userId)
         {
             try
             {
                 // only admins can access other user records
-                var currentUser = (UserResponse)HttpContext.Items["User"];
-                if (userId != currentUser.Id && currentUser.Role != Role.Admin)
-                {
-                    return Unauthorized(new { message = "Unauthorized" });
-                }
+                //var currentUser = (UserResponse)HttpContext.Items["User"];
+                //if (userId != currentUser.Id && currentUser.Role != Role.Admin)
+                //{
+                //    return Unauthorized(new { message = "Unauthorized" });
+                //}
 
                 UserResponse user = await _userService.GetByUserId(userId);
 
-                if (user == null)
-                {
-                    return NoContent();
-                }
+                //if (user == null)
+                //{
+                //    return NoContent();
+                //}
 
                 return Ok(user);
 
@@ -140,7 +140,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Delete (User limited)
-        [HttpDelete("{userId}")]
+        [HttpDelete("User/{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -168,10 +168,8 @@ namespace WebShop.API.Controllers
 
         #region Customer
 
-        [Route("/api/customer")]
         #region GetAllCustomers (ADMIN ONLY)
-
-        [HttpGet]
+        [HttpGet("Customers")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -204,10 +202,7 @@ namespace WebShop.API.Controllers
 
         #region GetCustomerById (ADMIN ONLY)
         //[Authorize(Role.User, Role.Admin)]
-        [Route("/api/customer2")]
-        //[HttpGet("{userId}")]
-        [HttpGet]
-
+        [HttpGet("Customer/{userId}")]
         public async Task<IActionResult> GetByCustomerId([FromRoute] int userId)
         {
             try

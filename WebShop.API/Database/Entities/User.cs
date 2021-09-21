@@ -16,6 +16,8 @@ namespace WebShop.API.Database.Entities
 
         public Helpers.Role Role { get; set; }
 
-        public List<Customer> Customers { get; set; } = new();
+        public Customer Customer { get; set; }
+
+        //public List<Customer> Customers { get; set; } = new();
     }
 }
