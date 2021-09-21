@@ -102,8 +102,8 @@ namespace WebShop.API.Services
                 Images = product.Image.Select(a => new ProductImageResponse
                 {
                     imageId = a.Id,
-                    Path = a.Path,
-                    productId = product.Id
+                    productId = product.Id,
+                    Path = a.Path
                 }).ToList()
             };
         }
