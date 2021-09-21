@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace WebShop.API.Database.Entities
 {
@@ -14,5 +15,7 @@ namespace WebShop.API.Database.Entities
         //Don't know if string will work here?
         [Required]
         public string Picture { get; set; }
+
+        public List<Product> products { get; set; } = new();
     }
 }

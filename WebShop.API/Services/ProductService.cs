@@ -15,6 +15,7 @@ namespace WebShop.API.Services
         Task<ProductResponse> GetProductById(int productId);
         Task<ProductResponse> CreateProduct(NewProduct newProduct);
         Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId);
+        Task<bool> DeleteProductImage(int imageId);
         Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct);
         Task<bool> DeleteProduct(int productId);
     }
@@ -107,7 +108,7 @@ namespace WebShop.API.Services
             };
         }
         #endregion
-        #region Create ProductImage
+        #region Create Image
         public async Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId)
         {
 
@@ -140,6 +141,14 @@ namespace WebShop.API.Services
             return true;
         }
         #endregion
+        #region Delete Image
+        public async Task<bool> DeleteProductImage(int imageId)
+        {
+            var result = await _imageRepository.DeleteImage(imageId);
+            return true;
+        }
+        #endregion
+        
         #region Update Product
         public async Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct)
         {

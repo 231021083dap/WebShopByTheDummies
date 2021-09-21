@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
 using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
-using static WebShop.API.Repository.CategoryRepository;
+using WebShop.API.Repository;
 
 namespace WebShop.API.Services
 {
@@ -20,10 +20,12 @@ namespace WebShop.API.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IProductRepository productRepository)
         {
-            categoryRepository = _categoryRepository;
+            _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
         }
         #region Get All Categories
         public async Task<List<CategoryResponse>> GetAllCategories()

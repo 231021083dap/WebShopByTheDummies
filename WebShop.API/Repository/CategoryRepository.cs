@@ -8,8 +8,6 @@ using WebShop.API.Database.Entities;
 
 namespace WebShop.API.Repository
 {
-    public class CategoryRepository
-    {
         public interface ICategoryRepository
         {
             Task<List<Category>> GetAllCategories();
@@ -19,11 +17,11 @@ namespace WebShop.API.Repository
             Task<Category> DeleteCategory(int categoryId);
         }
 
-        public class BookRepository : ICategoryRepository
+        public class CategoryRepository : ICategoryRepository
         {
             private readonly WebShopContext _context;
 
-            public BookRepository(WebShopContext context)
+            public CategoryRepository(WebShopContext context)
             {
                 _context = context;
 
@@ -40,7 +38,7 @@ namespace WebShop.API.Repository
             public async Task<Category> GetCategoryById(int categoryId)
             {
                 return await _context.Category
-                    
+                    .Include(a => a.products)
                     .FirstOrDefaultAsync(a => a.Id == categoryId);
             }
             #endregion
@@ -80,5 +78,5 @@ namespace WebShop.API.Repository
             }
             #endregion
         }
-    }
+    
 }
