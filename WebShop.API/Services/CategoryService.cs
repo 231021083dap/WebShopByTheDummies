@@ -64,6 +64,6 @@ namespace WebShop.API.Services
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

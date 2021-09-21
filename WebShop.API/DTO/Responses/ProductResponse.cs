@@ -17,10 +17,11 @@ namespace WebShop.API.DTO.Responses
         public int productId { get; set; }
         public string Path { get; set; }
     }
+}
 
     public class ProductCategoryResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }
     }
-}
+

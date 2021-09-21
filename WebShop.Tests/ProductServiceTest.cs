@@ -40,7 +40,7 @@ namespace WebShop.Tests
                     Name = "One",
                     Picture = "two"
                 }
-                
+
             });
             products.Add(new Product
             {

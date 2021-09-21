@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
@@ -104,16 +105,12 @@ namespace WebShop.API.Services
                     productId = product.Id
                 }).ToList()
             };
-
-
-
-
         }
         #endregion
         #region Create ProductImage
         public async Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId)
         {
-            
+
             Product product = await _productRepository.GetProductById(productId);
             if (product != null)
             {
@@ -133,7 +130,7 @@ namespace WebShop.API.Services
                 };
             }
             return null;
-            
+
         }
         #endregion
         #region Delete Product
@@ -165,7 +162,6 @@ namespace WebShop.API.Services
             };
 
         }
-
         #endregion
     }
 

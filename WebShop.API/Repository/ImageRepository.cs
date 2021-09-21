@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -8,13 +9,13 @@ using WebShop.API.Database.Entities;
 namespace WebShop.API.Repository
 {
 
-    public interface IImageRepository
-    {
-        Task<List<Image>> GetAllImages();
-        Task<Image> GetImageById(int imageId);
-        Task<Image> CreateImage(Image image);
-        Task<Image> DeleteImage(int imageId);
-    }
+        public interface IImageRepository
+        {
+            Task<List<Image>> GetAllImages();
+            Task<Image> GetImageById(int imageId);
+            Task<Image> CreateImage(Image image);
+            Task<Image> DeleteImage(int imageId);
+        }
     public class ImageRepository
     {
         public class AuthorRepository : IImageRepository
@@ -28,7 +29,7 @@ namespace WebShop.API.Repository
             }
 
 
-            public async Task<List<Image>> GetAllImages()
+           public async Task<List<Image>> GetAllImages()
             {
                 return await _context.Image
                     //.Include(a => a.Product)
