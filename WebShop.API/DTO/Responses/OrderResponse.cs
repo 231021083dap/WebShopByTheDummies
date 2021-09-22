@@ -6,7 +6,7 @@ namespace WebShop.API.DTO.Responses
     {
         public int Id { get; set; }
         public string OrderDate { get; set; }
-        public AddressResponse AddressId { get; set; }
+        public AddressResponse Address { get; set; }
         public List<OrderItemOrderResponse> OrderItems { get; set; }
     }
     public class OrderItemOrderResponse

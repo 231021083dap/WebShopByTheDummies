@@ -51,19 +51,43 @@ namespace WebShop.API.Services
             };
         }
 
-        public Task<CategoryResponse> CreateCategory(NewCategory newCategory)
+        public async Task<CategoryResponse> CreateCategory(NewCategory newCategory)
         {
-            throw new NotImplementedException();
+            Category category = new Category
+            {
+                Name = newCategory.Name,
+                Picture = newCategory.Picture
+            };
+            category = await _categoryRepository.CreateCategory(category);
+            return category == null ? null : new CategoryResponse
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Picture = category.Picture
+            };
         }
 
-        public Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory)
+        public async Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory)
         {
-            throw new NotImplementedException();
+            Category category = new Category
+            {
+                Name = updateCategory.Name,
+                Picture = updateCategory.Picture
+            };
+            category = await _categoryRepository.UpdateCategory(categoryId, category);
+
+            return category == null ? null : new CategoryResponse
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Picture = category.Picture
+            };
         }
 
-        public Task<bool> DeleteCategory(int categoryId)
+        public async Task<bool> DeleteCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            var result = await _categoryRepository.DeleteCategory(categoryId);
+            return true;
         }
 
 

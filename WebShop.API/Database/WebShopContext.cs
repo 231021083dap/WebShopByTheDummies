@@ -91,13 +91,13 @@ namespace WebShop.API.Database
             new Image
             {
                 Id = 1,
-                productId = 1,
+                ProductId = 1,
                 Path = "Here/Perfect"
             },
             new Image
             {
                 Id = 2,
-                productId = 1,
+                ProductId = 1,
                 Path = "Someware/Nice"
             });
 

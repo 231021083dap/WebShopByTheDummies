@@ -16,11 +16,14 @@ namespace WebShop.API.Controllers
     {
         private readonly IProductService _productService;
         
+        
 
         public ProductController(IProductService productService)
         {
             _productService = productService;
+           
         }
+        #region Get All Products
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -45,6 +48,34 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+        #region Get All Categories
+        [HttpGet("/api/Category")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllCategories()
+        {
+            try
+            {
+                List<CategoryResponse> categories = await _productService.GetAllCategories();
+                if (categories == null)
+                {
+                    return Problem("No Data is available to categories, not even an empty list!");
+                }
+                if (categories.Count == 0)
+                {
+                    return NoContent();
+                }
+                return Ok(categories);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        #endregion
+        #region Get Product By Id
         [HttpGet("{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -67,6 +98,8 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+        #region Create Product
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -88,6 +121,8 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+        #region Create Image
         [HttpPost("image/{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -109,6 +144,8 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+        #region Update Product
         [HttpPut("{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -130,11 +167,13 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+        #region Delete Product
         [HttpDelete("{productId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteProduct([FromBody] int productId)
+        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
             try
             {
@@ -150,6 +189,8 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+        #region Delete Image
         [HttpDelete("image/{imageId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -165,11 +206,12 @@ namespace WebShop.API.Controllers
                 }
                 return NoContent();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                return Problem(ex.Message);
+               
             }
         }
+        #endregion
     }
 }

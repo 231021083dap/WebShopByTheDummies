@@ -12,6 +12,6 @@ namespace WebShop.API.Database.Entities
         public string Path { get; set; }
 
         [ForeignKey("Product.Id")]
-        public int productId { get; set; }
+        public int ProductId { get; set; }
     }
 }

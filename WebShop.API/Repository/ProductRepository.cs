@@ -29,7 +29,7 @@ namespace WebShop.API.Repository
         {
             return await _context.Product
                 .Include(a => a.Category)
-                .Include(b => b.Image)
+                .Include(b => b.Images)
                 .ToListAsync();
         }
         #endregion
@@ -37,7 +37,8 @@ namespace WebShop.API.Repository
         public async Task<Product> GetProductById(int productId)
         {
             return await _context.Product
-                .Include(a => a.Category)
+                .Include(p => p.Category)
+                .Include(p => p.Images)
                 .FirstOrDefaultAsync(a => a.Id == productId);
         }
         public async Task<Product> CreateProduct(Product product)
@@ -58,6 +59,9 @@ namespace WebShop.API.Repository
             }
             return product;
         }
+        #endregion
+        #region Delete image
+
         #endregion
         #region Update Product
         public async Task<Product> UpdateProduct(int productId, Product product)

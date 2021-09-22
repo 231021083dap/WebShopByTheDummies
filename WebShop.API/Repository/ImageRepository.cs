@@ -51,7 +51,7 @@ namespace WebShop.API.Repository
         #region Delete Image
         public async Task<Image> DeleteImage(int imageId)
         {
-            Image image = await _context.Image.FirstOrDefaultAsync(a => a.Id == imageId);
+            Image image = await _context.Image.FirstOrDefaultAsync(i => i.Id == imageId);
             if (image != null)
             {
                 _context.Image.Remove(image);
