@@ -231,6 +231,33 @@ namespace WebShop.API.Controllers
         }
         #endregion
 
+        #region UpdateCustomer
+
+        [HttpPut("{customerId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateCustomer([FromRoute] int customerId, [FromBody] UpdateCustomer updateCustomer)
+        {
+            try
+            {
+                CustomerResponse Customer = await _customerService.UpdateCustomer(customerId, updateCustomer);
+
+                if (Customer == null)
+                {
+                    return Problem("Customer was not updated, something went wrong");
+                }
+
+                return Ok(Customer);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+        #endregion
+
         #endregion
     }
 }

@@ -23,7 +23,6 @@ namespace WebShop.API.Database.Entities
         [ForeignKey("ZipCity.Id")]
         public int ZipCityId { get; set; }
 
-
         [Required]
         public string Country { get; set; }
 

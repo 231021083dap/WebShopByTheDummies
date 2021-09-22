@@ -18,11 +18,9 @@ namespace WebShop.API.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        //private readonly IZipCityRepository _zipcityRepository;
-        public CustomerService(ICustomerRepository customerRepository /* ,IZipCityRepository zipcityRepository*/)
+        public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
-            //_zipcityRepository = zipcityRepository;
         }
 
         //ADMIN
@@ -76,13 +74,11 @@ namespace WebShop.API.Services
             };
         }
 
-        //USER - Update account
+        //USER - Update - name, address, loginInfo
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
             Customer customer = new Customer
             {
-                //Email
-                //Password
                 FirstName = updateCustomer.FirstName,
                 MiddleName = updateCustomer.MiddleName,
                 LastName = updateCustomer.LastName
@@ -92,17 +88,10 @@ namespace WebShop.API.Services
 
             return customer == null ? null : new CustomerResponse
             {
-                ////Skal være det samme som vist øverst!
                 FirstName = customer.FirstName,
                 MiddleName = customer.MiddleName,
                 LastName = customer.LastName
             };
         }
-
-        //Update address
-
-        //Delete address
-
-        //Create address 
     }
 }

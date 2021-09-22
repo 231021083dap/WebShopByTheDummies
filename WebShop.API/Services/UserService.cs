@@ -22,11 +22,15 @@ namespace WebShop.API.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly IAddressRepository _addressRepository;
         private readonly IJwtUtils _jwtUtils;
 
-        public UserService(IUserRepository userRepository, IJwtUtils jwtUtils)
+        public UserService(IUserRepository userRepository, IJwtUtils jwtUtils, ICustomerRepository customerRepository, IAddressRepository addressRepository)
         {
             _userRepository = userRepository;
+            _customerRepository = customerRepository;
+            _addressRepository = addressRepository;
             _jwtUtils = jwtUtils;
         }
 
@@ -75,15 +79,42 @@ namespace WebShop.API.Services
 
         public async Task<UserResponse> Register(RegisterUser newUser)
         {
+            //Add login
             User user = new User
             {
                 Email = newUser.Email,
                 Password = newUser.Password,
                 Role = Helpers.Role.User // force all users created through Register, to Role.User
             };
-
             user = await _userRepository.CreateUser(user);
 
+            //Add name
+            if (user != null)
+            {
+                Customer customer = new Customer
+                {
+                    FirstName = newUser.Customer.FirstName,
+                    MiddleName = newUser.Customer.MiddleName,
+                    LastName = newUser.Customer.LastName,
+                    UserId = user.Id,
+                };
+                customer = await _customerRepository.CreateCustomer(customer);
+            }
+
+            //Add address
+            if (user != null)
+            {
+                Address address = new Address
+                {
+                    StreetName = newUser.Address.StreetName,
+                    Number = newUser.Address.Number,
+                    Floor = newUser.Address.Floor,
+                    ZipCityId = newUser.Address.Zipcode,
+                    Country = newUser.Address.Country,
+                    CustomerId = user.Id
+                };
+                address = await _addressRepository.CreateAddress(address);
+            }
             return userResponse(user);
         }
 
