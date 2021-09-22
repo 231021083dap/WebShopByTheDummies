@@ -8,12 +8,9 @@ using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 using WebShop.API.Authorization;
 using WebShop.API.Database;
-
 using WebShop.API.Repository;
 using WebShop.API.Services;
-
 using WebShop.API.Helpers;
-
 
 namespace WebShop.API
 {
@@ -34,12 +31,14 @@ namespace WebShop.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            //services.AddScoped<IAddressService, AddressService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
@@ -57,7 +56,6 @@ namespace WebShop.API
 
             services.Configure<AppSettings>(_configuration.GetSection("AppSettings"));
             services.AddScoped<IJwtUtils, JwtUtils>();
-
 
             services.AddDbContext<WebShopContext>(
                 o => o.UseSqlServer(_configuration.GetConnectionString("Default")));

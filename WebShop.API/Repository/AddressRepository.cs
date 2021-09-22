@@ -17,11 +17,11 @@ namespace WebShop.API.Repository
         Task<Address> UpdateAddress(int addressId, Address address);
         Task<Address> DeleteAddress(int addressId);
     }
-    public class AuthorRepository : IAddressRepository
+    public class AddressRepository : IAddressRepository
     {
         private readonly WebShopContext _context;
 
-        public AuthorRepository(WebShopContext context)
+        public AddressRepository(WebShopContext context)
         {
             _context = context;
 
@@ -30,7 +30,7 @@ namespace WebShop.API.Repository
         public async Task<List<Address>> GetAllAddresses()
         {
             return await _context.Address
-                .Include(a => a.Zipcode)
+                .Include(a => a.ZipCity)
                 .ToListAsync();
         }
         #endregion
@@ -38,7 +38,7 @@ namespace WebShop.API.Repository
         public async Task<Address> GetAddressById(int addressId)
         {
             return await _context.Address
-                .Include(a => a.Zipcode)
+                .Include(a => a.ZipCity)
                 .FirstOrDefaultAsync(a => a.Id == addressId);
         }
         #endregion
@@ -72,8 +72,8 @@ namespace WebShop.API.Repository
                 updateAddress.StreetName = address.StreetName;
                 updateAddress.Number = address.Number;
                 updateAddress.Floor = address.Floor;
-                updateAddress.Zipcode = address.Zipcode;
-                updateAddress.County = address.County;
+                updateAddress.ZipCityId = address.ZipCityId;
+                updateAddress.Country = address.Country;
                 await _context.SaveChangesAsync();
 
             }

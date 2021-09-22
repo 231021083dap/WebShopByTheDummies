@@ -20,14 +20,14 @@ namespace WebShop.API.Database.Entities
         [Required]
         public string Floor { get; set; }
 
-        [ForeignKey("ZipCity.Zipcode")]
-        public int Zipcode { get; set; }
+        [ForeignKey("ZipCity.Id")]
+        public int ZipCityId { get; set; }
 
-        public ZipCity ZipCity { get; set; }
 
         [Required]
-        public string County { get; set; }
+        public string Country { get; set; }
 
+        public ZipCity ZipCity { get; set; }
         public Customer Customer { get; set; }
     }
 }

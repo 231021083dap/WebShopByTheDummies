@@ -18,9 +18,11 @@ namespace WebShop.API.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        public CustomerService(ICustomerRepository customerRepository)
+        //private readonly IZipCityRepository _zipcityRepository;
+        public CustomerService(ICustomerRepository customerRepository /* ,IZipCityRepository zipcityRepository*/)
         {
             _customerRepository = customerRepository;
+            //_zipcityRepository = zipcityRepository;
         }
 
         //ADMIN
@@ -65,11 +67,11 @@ namespace WebShop.API.Services
 
                     ZipCity = new ZipCityResponse
                     {
-                        Zipcode = address.ZipCity.Zipcode,
+                        Zipcode = address.ZipCity.Id,
                         City = address.ZipCity.City
                     },
 
-                    County = address.County
+                    Country = address.Country
                 }).ToList()
             };
         }

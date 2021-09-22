@@ -7,6 +7,6 @@
         public int Number { get; set; }
         public string Floor { get; set; }
         public ZipCityResponse ZipCity { get; set; }
-        public string County { get; set; }
+        public string Country { get; set; }
     }
 }

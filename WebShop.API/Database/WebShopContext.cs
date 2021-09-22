@@ -53,8 +53,8 @@ namespace WebShop.API.Database
                 StreetName = "Nyborggade",
                 Number = 34,
                 Floor = "2. TV",
-                Zipcode = 2100,
-                County = "Danmark"
+                ZipCityId = 2100,
+                Country = "Danmark"
             });
 
             #endregion
@@ -142,7 +142,7 @@ namespace WebShop.API.Database
             modelBuilder.Entity<ZipCity>().HasData(
             new ZipCity
             {
-                Zipcode = 2100,
+                Id = 2100,
                 City = "Østerbro"
             });
 

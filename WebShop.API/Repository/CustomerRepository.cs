@@ -11,6 +11,7 @@ namespace WebShop.API.Repository
         Task<List<Customer>> GetAllCustomers();
         Task<Customer> GetCustomerById(int customerId);
         Task<Customer> UpdateCustomer(int costumerId, Customer customer);
+        Task<Customer> CreateCustomer(Customer customer);
     }
 
     public class CustomerRepository : ICustomerRepository
@@ -20,7 +21,6 @@ namespace WebShop.API.Repository
         public CustomerRepository(WebShopContext context)
         {
             _context = context;
-
         }
 
         public async Task<List<Customer>> GetAllCustomers()
@@ -33,6 +33,9 @@ namespace WebShop.API.Repository
         public async Task<Customer> GetCustomerById(int customerId)
         {
             return await _context.Customer
+                .Include(a => a.User)
+                .Include(a => a.Addresses)
+                .ThenInclude(a => a.ZipCity)
                 .FirstOrDefaultAsync(a => a.Id == customerId);
         }
 
@@ -48,6 +51,13 @@ namespace WebShop.API.Repository
 
             }
             return updateCustomer;
+        }
+
+        public async Task<Customer> CreateCustomer(Customer customer)
+        {
+            _context.Customer.Add(customer);
+            await _context.SaveChangesAsync();
+            return customer;
         }
     }
 }
