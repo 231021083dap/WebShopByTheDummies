@@ -53,7 +53,7 @@ namespace WebShop.API.Database
                 StreetName = "Nyborggade",
                 Number = 34,
                 Floor = "2. TV",
-                Zipcode = 2100,
+                ZipCityId = 2100,
                 County = "Danmark"
             });
 

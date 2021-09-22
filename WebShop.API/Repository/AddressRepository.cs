@@ -30,7 +30,7 @@ namespace WebShop.API.Repository
         public async Task<List<Address>> GetAllAddresses()
         {
             return await _context.Address
-                .Include(a => a.Zipcode)
+                .Include(a => a.ZipCityId)
                 .ToListAsync();
         }
         #endregion
@@ -38,7 +38,7 @@ namespace WebShop.API.Repository
         public async Task<Address> GetAddressById(int addressId)
         {
             return await _context.Address
-                .Include(a => a.Zipcode)
+                .Include(a => a.ZipCityId)
                 .FirstOrDefaultAsync(a => a.Id == addressId);
         }
         #endregion
@@ -72,7 +72,7 @@ namespace WebShop.API.Repository
                 updateAddress.StreetName = address.StreetName;
                 updateAddress.Number = address.Number;
                 updateAddress.Floor = address.Floor;
-                updateAddress.Zipcode = address.Zipcode;
+                updateAddress.ZipCityId = address.ZipCityId;
                 updateAddress.County = address.County;
                 await _context.SaveChangesAsync();
 

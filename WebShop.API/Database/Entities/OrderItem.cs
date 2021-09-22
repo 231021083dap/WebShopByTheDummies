@@ -14,6 +14,8 @@ namespace WebShop.API.Database.Entities
         [ForeignKey("Product.Id")]
         public int ProductId { get; set; }
 
+        public Product Product { get; set; }
+
         [Required]
         public int Amount { get; set; }
 

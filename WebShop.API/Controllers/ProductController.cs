@@ -15,9 +15,6 @@ namespace WebShop.API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
-        
-        
-
         public ProductController(IProductService productService)
         {
             _productService = productService;
@@ -99,6 +96,30 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+        #region Get Category By Id
+        [HttpGet("api/Category/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetCategoryById([FromRoute] int categoryId)
+        {
+            try
+            {
+                CategoryResponse category = await _productService.GetCategoryById(categoryId);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        #endregion
         #region Create Product
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -115,6 +136,29 @@ namespace WebShop.API.Controllers
                     return Problem("Product was not created, something went wrong");
                 }
                 return Ok(product);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        #endregion
+        #region Create Category
+        [HttpPost("api/Category")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateCategory([FromBody] NewCategory newCategory)
+        {
+            try
+            {
+                CategoryResponse category = await _productService.CreateCategory(newCategory);
+
+                if (category == null)
+                {
+                    return Problem("Product was not created, something went wrong");
+                }
+                return Ok(category);
             }
             catch (Exception ex)
             {
@@ -168,6 +212,29 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+        #region Update Category
+        [HttpPut("api/Category/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateCategory([FromRoute] int categoryId, [FromBody] UpdateCategory updateCategory)
+        {
+            try
+            {
+                CategoryResponse category = await _productService.UpdateCategory(categoryId, updateCategory);
+
+                if (category == null)
+                {
+                    return Problem("Product was not updated, something went wrong");
+                }
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        #endregion
         #region Delete Product
         [HttpDelete("{productId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -210,6 +277,29 @@ namespace WebShop.API.Controllers
             {
                 return Problem(ex.Message);
                
+            }
+        }
+        #endregion
+        #region Delete Category
+        [HttpDelete("api/Category/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteCategory([FromRoute] int categoryId)
+        {
+            try
+            {
+                bool result = await _productService.DeleteCategory(categoryId);
+                if (!result)
+                {
+                    return Problem("image was not deleted, something went wrong!");
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+
             }
         }
         #endregion
