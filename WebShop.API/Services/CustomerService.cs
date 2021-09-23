@@ -66,19 +66,14 @@ namespace WebShop.API.Services
                     StreetName = address.StreetName,
                     Number = address.Number,
                     Floor = address.Floor,
-
-                    ZipCity = new ZipCityResponse
-                    {
-                        Zipcode = address.ZipCity.Id,
-                        City = address.ZipCity.City
-                    },
-
+                    Zipcode = address.ZipCity.Id,
+                    City = address.ZipCity.City,
                     Country = address.Country
                 }).ToList()
             };
         }
 
-        //USER - UPDATE - name, address, loginInfo
+        //USER - UPDATE - Name & LoginInfo
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
             //Name
@@ -90,7 +85,7 @@ namespace WebShop.API.Services
             };
             customer = await _customerRepository.UpdateCustomer(customerId, customer);
 
-            //Login information
+            //Login
             if (customer != null)
             {
                 User user = new User
@@ -100,47 +95,7 @@ namespace WebShop.API.Services
                 };
                 user = await _userRepository.UpdateUser(customerId, user);
             }
-
-            //Login information
-            if (customer != null)
-            {
-                Address address = new Address
-                {
-                    StreetName = updateCustomer.Address.StreetName,
-                    Number = updateCustomer.Address.Number,
-                    Floor = updateCustomer.Address.Floor,
-                    ZipCityId = updateCustomer.Address.Zipcode,
-                    Country = updateCustomer.Address.Country
-                };
-                address = await _addressRepository.UpdateAddress(customerId, address);
-            }
-
-            return customer == null ? null : new CustomerResponse
-            {
-                User = new CustomerUserResponse
-                {
-                    Id = customer.User.Id,
-                    Email = customer.User.Email
-                },
-                FirstName = customer.FirstName,
-                MiddleName = customer.MiddleName,
-                LastName = customer.LastName,
-                Addresses = customer.Addresses.Select(address => new CustomerAddressResponse
-                {
-                    Id = address.Id,
-                    StreetName = address.StreetName,
-                    Number = address.Number,
-                    Floor = address.Floor,
-
-                    ZipCity = new ZipCityResponse
-                    {
-                        Zipcode = address.ZipCity.Id,
-                        City = address.ZipCity.City
-                    },
-
-                    Country = address.Country
-                }).ToList()
-            };
+            return null;
         }
     }
 }

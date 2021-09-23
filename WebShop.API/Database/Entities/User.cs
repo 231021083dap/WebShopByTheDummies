@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebShop.API.Database.Entities
 {
@@ -17,7 +16,5 @@ namespace WebShop.API.Database.Entities
         public Helpers.Role Role { get; set; }
 
         public Customer Customer { get; set; }
-
-        //public List<Customer> Customers { get; set; } = new();
     }
 }

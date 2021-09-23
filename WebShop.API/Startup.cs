@@ -37,8 +37,10 @@ namespace WebShop.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
 
+            services.AddScoped<IZipCityRepository, ZipCityRepository>();
+
             services.AddScoped<IAddressRepository, AddressRepository>();
-            //services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IAddressService, AddressService>();
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();

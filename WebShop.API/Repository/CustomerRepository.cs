@@ -47,8 +47,10 @@ namespace WebShop.API.Repository
                 updateCustomer.FirstName = customer.FirstName;
                 updateCustomer.MiddleName = customer.MiddleName;
                 updateCustomer.LastName = customer.LastName;
-                await _context.SaveChangesAsync();
 
+                //Mangler at gå igennem user informationen som vi ændre...
+
+                await _context.SaveChangesAsync();
             }
             return updateCustomer;
         }

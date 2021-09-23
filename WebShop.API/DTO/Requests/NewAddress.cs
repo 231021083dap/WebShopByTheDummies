@@ -5,6 +5,9 @@ namespace WebShop.API.DTO.Requests
     public class NewAddress
     {
         [Required]
+        public int CustomerId { get; set; }
+
+        [Required]
         [StringLength(128, ErrorMessage = "Email must be less than 128 chars")]
         public string StreetName { get; set; }
 

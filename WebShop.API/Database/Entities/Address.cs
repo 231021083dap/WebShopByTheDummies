@@ -27,6 +27,7 @@ namespace WebShop.API.Database.Entities
         public string Country { get; set; }
 
         public ZipCity ZipCity { get; set; }
+
         public Customer Customer { get; set; }
     }
 }

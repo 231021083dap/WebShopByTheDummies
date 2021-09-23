@@ -6,7 +6,8 @@
         public string StreetName { get; set; }
         public int Number { get; set; }
         public string Floor { get; set; }
-        public ZipCityResponse ZipCity { get; set; }
+        public int Zipcode { get; set; }
+        public string City { get; set; }
         public string Country { get; set; }
     }
 }

@@ -79,7 +79,7 @@ namespace WebShop.API.Controllers
 
         #region GetAllUsers (ADMIN ONLY)
         /*[Authorize(Role.Admin)]*/ // only admins are allowed entry to this endpoint
-        [HttpGet("Users")]
+        [HttpGet("User/GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -111,7 +111,7 @@ namespace WebShop.API.Controllers
 
         #region GetByUserId (ADMIN ONLY)
         //[Authorize(Role.User, Role.Admin)]
-        [HttpGet("User/{userId}")]
+        [HttpGet("User/GetById/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] int userId)
         {
             try
@@ -141,7 +141,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Delete (User limited)
-        [HttpDelete("User/{userId}")]
+        [HttpDelete("User/Delete/{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -170,7 +170,7 @@ namespace WebShop.API.Controllers
         #region Customer
 
         #region GetAllCustomers (ADMIN ONLY)
-        [HttpGet("Customers")]
+        [HttpGet("User/Customer/GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -203,7 +203,7 @@ namespace WebShop.API.Controllers
 
         #region GetCustomerById (ADMIN ONLY)
         //[Authorize(Role.User, Role.Admin)]
-        [HttpGet("Customer/{userId}")]
+        [HttpGet("User/Customer/GetById/{userId}")]
         public async Task<IActionResult> GetByCustomerId([FromRoute] int userId)
         {
             try
@@ -234,7 +234,7 @@ namespace WebShop.API.Controllers
 
         #region UpdateCustomer
 
-        [HttpPut("{customerId}")]
+        [HttpPut("User/Customer/{customerId}/Update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -259,10 +259,11 @@ namespace WebShop.API.Controllers
 
         #endregion
 
-        #region CreateAddress
+        #region Address
 
+        #region CreateAddress
         [AllowAnonymous]
-        [HttpPost("Create address")]
+        [HttpPost("User/Customer/{customerId}/Address/Create")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -278,11 +279,10 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
-
         #endregion
 
         #region DeleteAddress
-        [HttpDelete("User/Address/{userId}")]
+        [HttpDelete("User/Customer/{customerId}/Address/Delete/{addressId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -307,9 +307,30 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region UpdateAddress
+        [HttpPut("User/Customer/{customerId}/Address/Update/{addressId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Update([FromRoute] int addressId, [FromBody] UpdateAddress updateAddress)
+        {
+            try
+            {
+                AddressResponse Address = await _addressService.UpdateAddress(addressId, updateAddress);
 
+                if (Address == null)
+                {
+                    return Problem("Address was not updated, something went wrong");
+                }
+                return Ok(Address);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
         #endregion
 
+        #endregion
         #endregion
     }
 }

@@ -18,6 +18,5 @@ namespace WebShop.API.DTO.Requests
         public string LastName { get; set; }
 
         public UpdateUser User { get; set; }
-        public UpdateAddress Address { get; set; }
     }
 }
