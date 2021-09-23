@@ -5,6 +5,9 @@ namespace WebShop.API.DTO.Requests
     public class NewAddress
     {
         [Required]
+        public int CustomerId { get; set; }
+
+        [Required]
         [StringLength(128, ErrorMessage = "Email must be less than 128 chars")]
         public string StreetName { get; set; }
 
@@ -13,8 +16,6 @@ namespace WebShop.API.DTO.Requests
 
         public string Floor { get; set; }
 
-        //Zipcode needs to be connected to zipcity if
-        //we want the ablity to drag if from a list
         [Required]
         public int Zipcode { get; set; }
 

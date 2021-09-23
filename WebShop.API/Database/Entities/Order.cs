@@ -9,7 +9,6 @@ namespace WebShop.API.Database.Entities
         [Key]
         public int Id { get; set; }
 
-        //Date maybe needs to be string to allow separator labels
         [Required]
         public int OrdreDate { get; set; }
 

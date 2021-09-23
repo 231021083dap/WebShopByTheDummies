@@ -11,5 +11,8 @@ namespace WebShop.API.DTO.Requests
         [Required]
         [StringLength(32, ErrorMessage = "Password must be less than 32 chars")]
         public string Password { get; set; }
+
+        public NewCustomer Customer { get; set; }
+        public NewAddress Address { get; set; }
     }
 }

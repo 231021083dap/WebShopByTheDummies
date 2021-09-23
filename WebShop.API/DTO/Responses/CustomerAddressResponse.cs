@@ -1,8 +1,7 @@
 ﻿namespace WebShop.API.DTO.Responses
 {
-    public class AddressResponse
+    public class CustomerAddressResponse
     {
-        public AddresseCustomerResponse Customer { get; set; }
         public int Id { get; set; }
         public string StreetName { get; set; }
         public int Number { get; set; }
@@ -10,12 +9,5 @@
         public int Zipcode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-    }
-    public class AddresseCustomerResponse
-    {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public CustomerUserResponse User { get; set; }
     }
 }
