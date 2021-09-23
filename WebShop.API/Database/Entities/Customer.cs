@@ -21,9 +21,6 @@ namespace WebShop.API.Database.Entities
 
         [Required]
         public string LastName { get; set; }
-        
-
-        public User User { get; set; }
 
         public List<Address> Addresses { get; set; } = new();
     }

@@ -48,7 +48,7 @@ namespace WebShop.API.Services
                     return new AddressResponse
                     {
                         Id = address.Id,
-                        Customer = new AddresseCustomerResponse
+                        AddressCustomer = new AddresseCustomerResponse
                         {
                             FirstName = customer.FirstName,
                             MiddleName = customer.MiddleName,

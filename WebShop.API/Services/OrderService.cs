@@ -66,9 +66,9 @@ namespace WebShop.API.Services
                     },
                     StreetName = Shipmentaddress.StreetName,
                     Number = Shipmentaddress.Number,
-                    Zipcode = Shipmentaddress.ZipCity.Zipcode,
+                    Zipcode = Shipmentaddress.ZipCity.Id,
                     City = Shipmentaddress.ZipCity.City,
-                    Country = Shipmentaddress.County,
+                    Country = Shipmentaddress.Country,
 
                 },
                 Email = order.ShippingAddress.Customer.User.Email,
@@ -77,9 +77,9 @@ namespace WebShop.API.Services
                     Id = Billingaddress.Id,
                     StreetName = Billingaddress.StreetName,
                     Number = Billingaddress.Number,
-                    Zipcode = Billingaddress.ZipCity.Zipcode,
+                    Zipcode = Billingaddress.ZipCity.Id,
                     City = Billingaddress.ZipCity.City,
-                    Country = Billingaddress.County
+                    Country = Billingaddress.Country
                     
                 },
                 OrderItems = order.OrderItems.Select(i => new OrderItemOrderResponse
@@ -131,7 +131,7 @@ namespace WebShop.API.Services
                     StreetName = order.ShippingAddress.StreetName,
                     Number = order.ShippingAddress.Number,
                     Floor = order.ShippingAddress.Floor,
-                    Zipcode = order.ShippingAddress.ZipCity.Zipcode,
+                    Zipcode = order.ShippingAddress.ZipCity.Id,
                     City = order.ShippingAddress.ZipCity.City
                 },
                 BillingAddress = new AddressResponse
@@ -139,7 +139,7 @@ namespace WebShop.API.Services
                     StreetName = order.BillingAddress.StreetName,
                     Number = order.BillingAddress.Number,
                     Floor = order.BillingAddress.Floor,
-                    Zipcode = order.BillingAddress.ZipCity.Zipcode,
+                    Zipcode = order.BillingAddress.ZipCity.Id,
                     City = order.BillingAddress.ZipCity.City
                 }
                 

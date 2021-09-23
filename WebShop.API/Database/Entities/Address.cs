@@ -28,6 +28,6 @@ namespace WebShop.API.Database.Entities
         public ZipCity ZipCity { get; set; }
 
         [Required]
-        public string County { get; set; }
+        public string Country { get; set; }
     }
 }

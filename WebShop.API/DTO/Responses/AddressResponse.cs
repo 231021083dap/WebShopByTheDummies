@@ -2,10 +2,9 @@
 {
     public class AddressResponse
     {
-        public AddresseCustomerResponse Customer { get; set; }
+        public AddresseCustomerResponse AddressCustomer { get; set; }
         public CustomerResponse Customer { get; set; }
         public int CustomerId { get; set; }
-        
         public int Id { get; set; }
         public string StreetName { get; set; }
         public int Number { get; set; }

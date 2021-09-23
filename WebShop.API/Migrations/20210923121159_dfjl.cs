@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebShop.API.Migrations
 {
-    public partial class test : Migration
+    public partial class dfjl : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,13 +40,13 @@ namespace WebShop.API.Migrations
                 name: "ZipCity",
                 columns: table => new
                 {
-                    Zipcode = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ZipCity", x => x.Zipcode);
+                    table.PrimaryKey("PK_ZipCity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,14 +100,14 @@ namespace WebShop.API.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    productId = table.Column<int>(type: "int", nullable: false)
+                    ProductId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Image", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Image_Product_productId",
-                        column: x => x.productId,
+                        name: "FK_Image_Product_ProductId",
+                        column: x => x.ProductId,
                         principalTable: "Product",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -121,10 +122,9 @@ namespace WebShop.API.Migrations
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     StreetName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Number = table.Column<int>(type: "int", nullable: false),
-                    Floor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Zipcode = table.Column<int>(type: "int", nullable: false),
-                    ZipCityZipcode = table.Column<int>(type: "int", nullable: true),
-                    County = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Floor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ZipCityId = table.Column<int>(type: "int", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -136,11 +136,11 @@ namespace WebShop.API.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Address_ZipCity_ZipCityZipcode",
-                        column: x => x.ZipCityZipcode,
+                        name: "FK_Address_ZipCity_ZipCityId",
+                        column: x => x.ZipCityId,
                         principalTable: "ZipCity",
-                        principalColumn: "Zipcode",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -149,18 +149,26 @@ namespace WebShop.API.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrdreDate = table.Column<int>(type: "int", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ShipmentAddressId = table.Column<int>(type: "int", nullable: false),
+                    BillingAddressId = table.Column<int>(type: "int", nullable: false),
+                    ShippingAddressId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Order", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Address_AddressId",
-                        column: x => x.AddressId,
+                        name: "FK_Order_Address_BillingAddressId",
+                        column: x => x.BillingAddressId,
                         principalTable: "Address",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Order_Address_ShippingAddressId",
+                        column: x => x.ShippingAddressId,
+                        principalTable: "Address",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,6 +191,12 @@ namespace WebShop.API.Migrations
                         principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderItem_Product_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Product",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -201,7 +215,7 @@ namespace WebShop.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "ZipCity",
-                columns: new[] { "Zipcode", "City" },
+                columns: new[] { "Id", "City" },
                 values: new object[] { 2100, "Østerbro" });
 
             migrationBuilder.InsertData(
@@ -216,18 +230,21 @@ namespace WebShop.API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Address",
-                columns: new[] { "Id", "County", "CustomerId", "Floor", "Number", "StreetName", "ZipCityZipcode", "Zipcode" },
-                values: new object[] { 10, "Danmark", 10, "2. TV", 34, "Nyborggade", null, 2100 });
+                columns: new[] { "Id", "Country", "CustomerId", "Floor", "Number", "StreetName", "ZipCityId" },
+                values: new object[,]
+                {
+                    { 11, "Danmark", 10, "1. TH", 222, "testvej", 2100 },
+                    { 10, "Danmark", 10, "2. TV", 34, "Nyborggade", 2100 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Image",
-                columns: new[] { "Id", "Path", "productId" },
-                values: new object[] { 2, "Someware/Nice", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Image",
-                columns: new[] { "Id", "Path", "productId" },
-                values: new object[] { 1, "Here/Perfect", 1 });
+                columns: new[] { "Id", "Path", "ProductId" },
+                values: new object[,]
+                {
+                    { 1, "Here/Perfect", 1 },
+                    { 2, "Someware/Nice", 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_CustomerId",
@@ -235,29 +252,40 @@ namespace WebShop.API.Migrations
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Address_ZipCityZipcode",
+                name: "IX_Address_ZipCityId",
                 table: "Address",
-                column: "ZipCityZipcode");
+                column: "ZipCityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Customer_UserId",
                 table: "Customer",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Image_productId",
+                name: "IX_Image_ProductId",
                 table: "Image",
-                column: "productId");
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_AddressId",
+                name: "IX_Order_BillingAddressId",
                 table: "Order",
-                column: "AddressId");
+                column: "BillingAddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_ShippingAddressId",
+                table: "Order",
+                column: "ShippingAddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderItem_OrderId",
                 table: "OrderItem",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItem_ProductId",
+                table: "OrderItem",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_CategoryId",
@@ -274,16 +302,16 @@ namespace WebShop.API.Migrations
                 name: "OrderItem");
 
             migrationBuilder.DropTable(
-                name: "Product");
-
-            migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Address");
+
+            migrationBuilder.DropTable(
+                name: "Category");
 
             migrationBuilder.DropTable(
                 name: "Customer");

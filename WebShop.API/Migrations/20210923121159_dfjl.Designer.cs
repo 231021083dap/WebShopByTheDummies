@@ -10,8 +10,8 @@ using WebShop.API.Database;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20210921113319_test")]
-    partial class test
+    [Migration("20210923121159_dfjl")]
+    partial class dfjl
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace WebShop.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("County")
+                    b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -36,7 +36,6 @@ namespace WebShop.API.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Floor")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Number")
@@ -46,30 +45,37 @@ namespace WebShop.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ZipCityZipcode")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Zipcode")
+                    b.Property<int>("ZipCityId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("ZipCityZipcode");
+                    b.HasIndex("ZipCityId");
 
                     b.ToTable("Address");
 
                     b.HasData(
                         new
                         {
+                            Id = 11,
+                            Country = "Danmark",
+                            CustomerId = 10,
+                            Floor = "1. TH",
+                            Number = 222,
+                            StreetName = "testvej",
+                            ZipCityId = 2100
+                        },
+                        new
+                        {
                             Id = 10,
-                            County = "Danmark",
+                            Country = "Danmark",
                             CustomerId = 10,
                             Floor = "2. TV",
                             Number = 34,
                             StreetName = "Nyborggade",
-                            Zipcode = 2100
+                            ZipCityId = 2100
                         });
                 });
 
@@ -125,7 +131,8 @@ namespace WebShop.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Customer");
 
@@ -151,12 +158,12 @@ namespace WebShop.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("productId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("ProductId");
 
                     b.ToTable("Image");
 
@@ -165,13 +172,13 @@ namespace WebShop.API.Migrations
                         {
                             Id = 1,
                             Path = "Here/Perfect",
-                            productId = 1
+                            ProductId = 1
                         },
                         new
                         {
                             Id = 2,
                             Path = "Someware/Nice",
-                            productId = 1
+                            ProductId = 1
                         });
                 });
 
@@ -182,15 +189,23 @@ namespace WebShop.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AddressId")
+                    b.Property<int>("BillingAddressId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrdreDate")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ShipmentAddressId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ShippingAddressId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("BillingAddressId");
+
+                    b.HasIndex("ShippingAddressId");
 
                     b.ToTable("Order");
                 });
@@ -217,6 +232,8 @@ namespace WebShop.API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderItem");
                 });
@@ -300,7 +317,7 @@ namespace WebShop.API.Migrations
 
             modelBuilder.Entity("WebShop.API.Database.Entities.ZipCity", b =>
                 {
-                    b.Property<int>("Zipcode")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -309,64 +326,72 @@ namespace WebShop.API.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Zipcode");
+                    b.HasKey("Id");
 
                     b.ToTable("ZipCity");
 
                     b.HasData(
                         new
                         {
-                            Zipcode = 2100,
+                            Id = 2100,
                             City = "Østerbro"
                         });
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Address", b =>
                 {
-                    b.HasOne("WebShop.API.Database.Entities.Customer", "customer")
-                        .WithMany()
+                    b.HasOne("WebShop.API.Database.Entities.Customer", "Customer")
+                        .WithMany("Addresses")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("WebShop.API.Database.Entities.ZipCity", "ZipCity")
-                        .WithMany()
-                        .HasForeignKey("ZipCityZipcode");
+                        .WithMany("Addresses")
+                        .HasForeignKey("ZipCityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("customer");
+                    b.Navigation("Customer");
 
                     b.Navigation("ZipCity");
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Customer", b =>
                 {
-                    b.HasOne("WebShop.API.Database.Entities.User", "user")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.HasOne("WebShop.API.Database.Entities.User", "User")
+                        .WithOne("Customer")
+                        .HasForeignKey("WebShop.API.Database.Entities.Customer", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Image", b =>
                 {
                     b.HasOne("WebShop.API.Database.Entities.Product", null)
-                        .WithMany("Image")
-                        .HasForeignKey("productId")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Order", b =>
                 {
-                    b.HasOne("WebShop.API.Database.Entities.Address", "address")
+                    b.HasOne("WebShop.API.Database.Entities.Address", "BillingAddress")
                         .WithMany()
-                        .HasForeignKey("AddressId")
+                        .HasForeignKey("BillingAddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("address");
+                    b.HasOne("WebShop.API.Database.Entities.Address", "ShippingAddress")
+                        .WithMany()
+                        .HasForeignKey("ShippingAddressId");
+
+                    b.Navigation("BillingAddress");
+
+                    b.Navigation("ShippingAddress");
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.OrderItem", b =>
@@ -376,6 +401,14 @@ namespace WebShop.API.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("WebShop.API.Database.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Product", b =>
@@ -394,6 +427,11 @@ namespace WebShop.API.Migrations
                     b.Navigation("products");
                 });
 
+            modelBuilder.Entity("WebShop.API.Database.Entities.Customer", b =>
+                {
+                    b.Navigation("Addresses");
+                });
+
             modelBuilder.Entity("WebShop.API.Database.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
@@ -401,7 +439,17 @@ namespace WebShop.API.Migrations
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Product", b =>
                 {
-                    b.Navigation("Image");
+                    b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("WebShop.API.Database.Entities.User", b =>
+                {
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("WebShop.API.Database.Entities.ZipCity", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 #pragma warning restore 612, 618
         }
