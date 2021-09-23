@@ -21,7 +21,7 @@ namespace WebShop.API.Database.Entities
         [Required]
         public string Description { get; set; }
 
-        public List<Image> Image { get; set; } = new();
+        public List<Image> Images { get; set; } = new();
 
         public Category Category { get; set; }
 

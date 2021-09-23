@@ -24,18 +24,21 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
+        #region Get All Products
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
                 .Include(a => a.Category)
-                .Include(b => b.Image)
+                .Include(b => b.Images)
                 .ToListAsync();
         }
-
+        #endregion
+        #region Get Products By Id
         public async Task<Product> GetProductById(int productId)
         {
             return await _context.Product
-                //.Include(a => a.CategoryId)
+                .Include(p => p.Category)
+                .Include(p => p.Images)
                 .FirstOrDefaultAsync(a => a.Id == productId);
         }
         public async Task<Product> CreateProduct(Product product)
@@ -44,7 +47,8 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return product;
         }
-
+        #endregion
+        #region Delete Product
         public async Task<Product> DeleteProduct(int productId)
         {
             Product product = await _context.Product.FirstOrDefaultAsync(a => a.Id == productId);
@@ -55,8 +59,11 @@ namespace WebShop.API.Repository
             }
             return product;
         }
+        #endregion
+        #region Delete image
 
-
+        #endregion
+        #region Update Product
         public async Task<Product> UpdateProduct(int productId, Product product)
         {
             Product updateProduct = await _context.Product.FirstOrDefaultAsync(a => a.Id == productId);
@@ -71,5 +78,6 @@ namespace WebShop.API.Repository
             }
             return updateProduct;
         }
+        #endregion
     }
 }

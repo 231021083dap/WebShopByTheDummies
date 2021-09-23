@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebShop.API.DTO.Responses;
 
 namespace WebShop.API.DTO.Responses
 {
@@ -13,14 +14,15 @@ namespace WebShop.API.DTO.Responses
     }
     public class ProductImageResponse
     {
-        public int imageId { get; set; }
-        public int productId { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
         public string Path { get; set; }
     }
+}
 
     public class ProductCategoryResponse
     {
         public int Id { get; set; }
         public string Name { get; set; }
     }
-}
+

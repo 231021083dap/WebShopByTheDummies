@@ -53,7 +53,7 @@ namespace WebShop.API.Database
                 StreetName = "Nyborggade",
                 Number = 34,
                 Floor = "2. TV",
-                Zipcode = 2100,
+                ZipCityId = 2100,
                 County = "Danmark"
             });
 
@@ -61,13 +61,13 @@ namespace WebShop.API.Database
 
             #region Category
 
-            //modelBuilder.Entity<Category>().HasData(
-            //new Category
-            //{
-            //    Id = 1,
-            //    Name = "Test category",
-            //    Picture = ""
-            //});
+            modelBuilder.Entity<Category>().HasData(
+            new Category
+            {
+                Id = 1,
+                Name = "Test category",
+                Picture = ""
+            });
 
             #endregion
 
@@ -87,12 +87,19 @@ namespace WebShop.API.Database
 
             #region Image
 
-            //modelBuilder.Entity<Image>().HasData(
-            //new Image
-            //{
-            //    Id = 1,
-            //    Path = ""
-            //});
+            modelBuilder.Entity<Image>().HasData(
+            new Image
+            {
+                Id = 1,
+                ProductId = 1,
+                Path = "Here/Perfect"
+            },
+            new Image
+            {
+                Id = 2,
+                ProductId = 1,
+                Path = "Someware/Nice"
+            });
 
             #endregion
 
@@ -132,7 +139,7 @@ namespace WebShop.API.Database
                 CategoryId = 1,
                 Price = 100,
                 Description = "MAKE TESTS GREAT AGIAN",
-                ImageId = 1
+                
             });
 
             #endregion

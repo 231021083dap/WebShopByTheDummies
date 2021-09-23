@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
 using WebShop.API.DTO.Responses;
+using WebShop.API.Repository;
 using WebShop.API.Services;
 using Xunit;
 using static WebShop.API.Repository.CategoryRepository;
@@ -16,10 +17,11 @@ namespace WebShop.Tests
     {
         private readonly CategoryService _sut;
         private readonly Mock<ICategoryRepository> _categoryRepository = new();
+        private readonly Mock<IProductRepository> _productRapository = new();
 
         public CategoryServiceTest()
         {
-            _sut = new CategoryService(_categoryRepository.Object);
+            _sut = new CategoryService(_categoryRepository.Object, _productRapository.Object);
         }
 
         [Fact]
@@ -58,3 +60,4 @@ namespace WebShop.Tests
     }
 
 }
+

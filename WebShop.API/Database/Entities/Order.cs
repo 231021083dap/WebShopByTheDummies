@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,14 +12,17 @@ namespace WebShop.API.Database.Entities
 
         //Date maybe needs to be string to allow separator labels
         [Required]
-        public int OrdreDate { get; set; }
+        public DateTime OrderDate { get; set; }
 
         [ForeignKey("Address.Id")]
-        public int AddressId { get; set; }
+        public int ShipmentAddressId { get; set; }
 
-        [Required]
-        public List<OrderItem> OrderItems { get; set; }
+        [ForeignKey("Address.Id")]
+        public int BillingAddressId { get; set; }
 
-        public Address address { get; set; }
-    }
+        public List<OrderItem> OrderItems { get; set; } = new();
+
+        public Address ShippingAddress { get; set; }
+        public Address BillingAddress { get; set; }
+    } 
 }

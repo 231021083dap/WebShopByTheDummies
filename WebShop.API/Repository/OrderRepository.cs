@@ -31,14 +31,17 @@ namespace WebShop.API.Repository
         public async Task<List<Order>> GetAllOrders()
         {
             return await _context.Order
-                .Include(a => a.OrderItems)
+                .Include(o => o.OrderItems)
+                .Include(o => o.ShippingAddress)
                 .ToListAsync();
         }
 
         public async Task<Order> GetOrderById(int orderId)
         {
             return await _context.Order
-                .Include(a => a.OrderItems)
+                .Include(o => o.ShippingAddress)
+                .Include(o => o.OrderItems)
+                .ThenInclude(o => o.Product)
                 .FirstOrDefaultAsync(a => a.Id == orderId);
         }
 
@@ -65,8 +68,8 @@ namespace WebShop.API.Repository
             Order updateOrder = await _context.Order.FirstOrDefaultAsync(a => a.Id == orderId);
             if (updateOrder != null)
             {
-                updateOrder.OrdreDate = order.OrdreDate;
-                updateOrder.AddressId = order.AddressId;
+                updateOrder.OrderDate = order.OrderDate;
+                updateOrder.ShipmentAddressId = order.ShipmentAddressId;
                 await _context.SaveChangesAsync();
 
             }

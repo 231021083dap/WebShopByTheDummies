@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
 using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
-using static WebShop.API.Repository.CategoryRepository;
+using WebShop.API.Repository;
 
 namespace WebShop.API.Services
 {
@@ -20,10 +20,12 @@ namespace WebShop.API.Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IProductRepository productRepository)
         {
-            categoryRepository = _categoryRepository;
+            _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
         }
         #region Get All Categories
         public async Task<List<CategoryResponse>> GetAllCategories()
@@ -49,21 +51,45 @@ namespace WebShop.API.Services
             };
         }
 
-        public Task<CategoryResponse> CreateCategory(NewCategory newCategory)
+        public async Task<CategoryResponse> CreateCategory(NewCategory newCategory)
         {
-            throw new NotImplementedException();
+            Category category = new Category
+            {
+                Name = newCategory.Name,
+                Picture = newCategory.Picture
+            };
+            category = await _categoryRepository.CreateCategory(category);
+            return category == null ? null : new CategoryResponse
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Picture = category.Picture
+            };
         }
 
-        public Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory)
+        public async Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory)
         {
-            throw new NotImplementedException();
+            Category category = new Category
+            {
+                Name = updateCategory.Name,
+                Picture = updateCategory.Picture
+            };
+            category = await _categoryRepository.UpdateCategory(categoryId, category);
+
+            return category == null ? null : new CategoryResponse
+            {
+                Id = category.Id,
+                Name = category.Name,
+                Picture = category.Picture
+            };
         }
 
-        public Task<bool> DeleteCategory(int categoryId)
+        public async Task<bool> DeleteCategory(int categoryId)
         {
-            throw new NotImplementedException();
+            var result = await _categoryRepository.DeleteCategory(categoryId);
+            return true;
         }
 
-        
+
     }
 }
