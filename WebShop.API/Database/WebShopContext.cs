@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebShop.API.Database.Entities;
 
-
 namespace WebShop.API.Database
 {
     public class WebShopContext : DbContext
@@ -49,12 +48,23 @@ namespace WebShop.API.Database
             new Address
             {
                 CustomerId = 10,
+                Id = 11,
+                StreetName = "testvej",
+                Number = 222,
+                Floor = "1. TH",
+                ZipCityId = 2100,
+                Country = "Danmark"
+            },
+
+            new Address
+            {
+                CustomerId = 10,
                 Id = 10,
                 StreetName = "Nyborggade",
                 Number = 34,
                 Floor = "2. TV",
                 ZipCityId = 2100,
-                County = "Danmark"
+                Country = "Danmark"
             });
 
             #endregion
@@ -149,7 +159,7 @@ namespace WebShop.API.Database
             modelBuilder.Entity<ZipCity>().HasData(
             new ZipCity
             {
-                Zipcode = 2100,
+                Id = 2100,
                 City = "Østerbro"
             });
 

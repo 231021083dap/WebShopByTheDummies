@@ -2,6 +2,7 @@
 {
     public class AddressResponse
     {
+        public AddresseCustomerResponse Customer { get; set; }
         public CustomerResponse Customer { get; set; }
         public int CustomerId { get; set; }
         
@@ -12,5 +13,12 @@
         public int Zipcode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+    }
+    public class AddresseCustomerResponse
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public CustomerUserResponse User { get; set; }
     }
 }

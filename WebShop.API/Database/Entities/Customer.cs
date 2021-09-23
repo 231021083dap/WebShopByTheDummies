@@ -23,7 +23,8 @@ namespace WebShop.API.Database.Entities
         public string LastName { get; set; }
         
 
-        //Needs service to work if needed
-        //public List<User> Users { get; set; }
+        public User User { get; set; }
+
+        public List<Address> Addresses { get; set; } = new();
     }
 }
