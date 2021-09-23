@@ -12,7 +12,7 @@ namespace WebShop.API.DTO.Requests
            
         [Required]
         public List<NewOrderItem> OrderItems { get; set; }
-        public User user { get; set; }
+        public Customer Customer { get; set; }
 
         [Required]
         public int ShipmentAddressId { get; set; }

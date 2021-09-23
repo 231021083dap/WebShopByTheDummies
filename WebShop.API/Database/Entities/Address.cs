@@ -8,7 +8,7 @@ namespace WebShop.API.Database.Entities
         [ForeignKey("Customer.Id")]
         public int CustomerId { get; set; }
 
-        public Customer customer { get; set; }
+        public Customer Customer { get; set; }
 
         [Key]
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace WebShop.API.Database.Entities
         [Required]
         public int Number { get; set; }
 
-        [Required]
+        
         public string Floor { get; set; }
 
         //Unsure if this would work?
