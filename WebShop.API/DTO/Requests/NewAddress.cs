@@ -13,8 +13,6 @@ namespace WebShop.API.DTO.Requests
 
         public string Floor { get; set; }
 
-        //Zipcode needs to be connected to zipcity if
-        //we want the ablity to drag if from a list
         [Required]
         public int Zipcode { get; set; }
 

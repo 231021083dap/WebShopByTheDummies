@@ -12,8 +12,6 @@ namespace WebShop.API.DTO.Requests
         [StringLength(32, ErrorMessage = "Username must be less than 32 chars")]
         public string Password { get; set; }
 
-        //Should only be possibel by admin user i
-        //think this will make it possibel for anyone
         [Required]
         public Role Role { get; set; }
     }

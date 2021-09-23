@@ -16,5 +16,8 @@ namespace WebShop.API.DTO.Requests
         [StringLength(32, ErrorMessage = "LastName must be less than 32 chars")]
         [MinLength(1, ErrorMessage = "LastName must contain atleast 1 char")]
         public string LastName { get; set; }
+
+        public UpdateUser User { get; set; }
+        public UpdateAddress Address { get; set; }
     }
 }

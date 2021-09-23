@@ -19,11 +19,13 @@ namespace WebShop.API.Controllers
     {
         private readonly IUserService _userService;
         private readonly ICustomerService _customerService;
+        private readonly IAddressService _addressService;
 
-        public LoginSectionController(IUserService userService, ICustomerService customerService)
+        public LoginSectionController(IUserService userService, ICustomerService customerService, IAddressService addressService)
         {
             _userService = userService;
             _customerService = customerService;
+            _addressService = addressService;
         }
 
         #region User
@@ -67,7 +69,6 @@ namespace WebShop.API.Controllers
             {
                 UserResponse user = await _userService.Register(newUser);
                 return Ok(user);
-
             }
             catch (Exception ex)
             {
@@ -255,6 +256,57 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        #endregion
+
+        #region CreateAddress
+
+        [AllowAnonymous]
+        [HttpPost("Create address")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateAddress([FromBody] NewAddress newAddress)
+        {
+            try
+            {
+                AddressResponse address = await _addressService.Create(newAddress);
+                return Ok(address);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+
+        #endregion
+
+        #region DeleteAddress
+        [HttpDelete("User/Address/{userId}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteAddress([FromRoute] int addressId)
+        {
+            try
+            {
+                bool result = await _addressService.Delete(addressId);
+
+                if (!result)
+                {
+                    return Problem("Address was not deleted, something went wrong");
+                }
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        #endregion
+
+        #region UpdateAddress
 
         #endregion
 

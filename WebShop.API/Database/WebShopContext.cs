@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebShop.API.Database.Entities;
 
-
 namespace WebShop.API.Database
 {
     public class WebShopContext : DbContext
@@ -46,6 +45,17 @@ namespace WebShop.API.Database
             #region Address
 
             modelBuilder.Entity<Address>().HasData(
+            new Address
+            {
+                CustomerId = 10,
+                Id = 11,
+                StreetName = "testvej",
+                Number = 222,
+                Floor = "1. TH",
+                ZipCityId = 2100,
+                Country = "Danmark"
+            },
+
             new Address
             {
                 CustomerId = 10,

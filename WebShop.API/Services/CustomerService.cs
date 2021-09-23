@@ -18,9 +18,13 @@ namespace WebShop.API.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _customerRepository;
-        public CustomerService(ICustomerRepository customerRepository)
+        private readonly IAddressRepository _addressRepository;
+        private readonly IUserRepository _userRepository;
+        public CustomerService(ICustomerRepository customerRepository, IUserRepository userRepository, IAddressRepository addressRepository)
         {
+            _addressRepository = addressRepository;
             _customerRepository = customerRepository;
+            _userRepository = userRepository;
         }
 
         //ADMIN
@@ -74,23 +78,68 @@ namespace WebShop.API.Services
             };
         }
 
-        //USER - Update - name, address, loginInfo
+        //USER - UPDATE - name, address, loginInfo
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
+            //Name
             Customer customer = new Customer
             {
                 FirstName = updateCustomer.FirstName,
                 MiddleName = updateCustomer.MiddleName,
                 LastName = updateCustomer.LastName
             };
-
             customer = await _customerRepository.UpdateCustomer(customerId, customer);
+
+            //Login information
+            if (customer != null)
+            {
+                User user = new User
+                {
+                    Email = updateCustomer.User.Email,
+                    Password = updateCustomer.User.Password
+                };
+                user = await _userRepository.UpdateUser(customerId, user);
+            }
+
+            //Login information
+            if (customer != null)
+            {
+                Address address = new Address
+                {
+                    StreetName = updateCustomer.Address.StreetName,
+                    Number = updateCustomer.Address.Number,
+                    Floor = updateCustomer.Address.Floor,
+                    ZipCityId = updateCustomer.Address.Zipcode,
+                    Country = updateCustomer.Address.Country
+                };
+                address = await _addressRepository.UpdateAddress(customerId, address);
+            }
 
             return customer == null ? null : new CustomerResponse
             {
+                User = new CustomerUserResponse
+                {
+                    Id = customer.User.Id,
+                    Email = customer.User.Email
+                },
                 FirstName = customer.FirstName,
                 MiddleName = customer.MiddleName,
-                LastName = customer.LastName
+                LastName = customer.LastName,
+                Addresses = customer.Addresses.Select(address => new CustomerAddressResponse
+                {
+                    Id = address.Id,
+                    StreetName = address.StreetName,
+                    Number = address.Number,
+                    Floor = address.Floor,
+
+                    ZipCity = new ZipCityResponse
+                    {
+                        Zipcode = address.ZipCity.Id,
+                        City = address.ZipCity.City
+                    },
+
+                    Country = address.Country
+                }).ToList()
             };
         }
     }
