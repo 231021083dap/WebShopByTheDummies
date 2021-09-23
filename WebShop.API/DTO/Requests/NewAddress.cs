@@ -20,8 +20,5 @@ namespace WebShop.API.DTO.Requests
 
         [Required]
         public string Country { get; set; }
-
-        [Required]
-        public int UserId { get; set; }
     }
 }
