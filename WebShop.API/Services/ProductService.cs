@@ -73,6 +73,7 @@ namespace WebShop.API.Services
             }).ToList();
         }
         #endregion
+
         #region Get Product By Id
         public async Task<ProductResponse> GetProductById(int productId)
         {
@@ -116,13 +117,10 @@ namespace WebShop.API.Services
         {
             Product product = new Product
             {
-
                 Name = newProduct.Name,
                 Price = newProduct.Price,
                 Description = newProduct.Description,
                 CategoryId = newProduct.CategoryId,
-
-
             };
 
             product = await _productRepository.CreateProduct(product);
@@ -149,7 +147,6 @@ namespace WebShop.API.Services
                     {
                         Id = category.Id,
                         Name = category.Name
-
                     },
                     Images = product.Images.Select(a => new ProductImageResponse
                     {
@@ -157,9 +154,8 @@ namespace WebShop.API.Services
                         Path = a.Path
                     }).ToList()
                 };
-            } return null;
-
-
+            } 
+            return null;
         }
         #endregion
         #region Create Category
@@ -202,7 +198,6 @@ namespace WebShop.API.Services
                 };
             }
             return null;
-
         }
         #endregion
 
@@ -237,7 +232,6 @@ namespace WebShop.API.Services
                 Price = updateProduct.Price,
                 Description = updateProduct.Description,
                 CategoryId = updateProduct.CategoryId,
-
             };
             product = await _productRepository.UpdateProduct(productId, product);
             return product == null ? null : new ProductResponse
@@ -246,9 +240,7 @@ namespace WebShop.API.Services
                 Name = product.Name,
                 Price = product.Price,
                 Description = product.Description
-
             };
-
         }
         #endregion
         #region Update Category
