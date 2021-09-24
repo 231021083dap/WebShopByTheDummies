@@ -34,9 +34,9 @@ namespace WebShop.API.Database
             //USER - (CUSTOMER)
             new User
             {
-                Id = 10,
+                Id = 2,
                 Email = "user@user.dk",
-                Password = "test",
+                Password = "user",
                 Role = Helpers.Role.User
             });
 
@@ -47,8 +47,8 @@ namespace WebShop.API.Database
             modelBuilder.Entity<Address>().HasData(
             new Address
             {
-                CustomerId = 10,
-                Id = 11,
+                CustomerId = 2,
+                Id = 1,
                 StreetName = "testvej",
                 Number = 222,
                 Floor = "1. TH",
@@ -58,8 +58,8 @@ namespace WebShop.API.Database
 
             new Address
             {
-                CustomerId = 10,
-                Id = 10,
+                CustomerId = 2,
+                Id = 2,
                 StreetName = "Nyborggade",
                 Number = 34,
                 Floor = "2. TV",
@@ -75,6 +75,20 @@ namespace WebShop.API.Database
             new Category
             {
                 Id = 1,
+                Name = "Test category",
+                Picture = ""
+            },
+
+            new Category
+            {
+                Id = 2,
+                Name = "Test category",
+                Picture = ""
+            },
+
+            new Category
+            {
+                Id = 3,
                 Name = "Test category",
                 Picture = ""
             });
@@ -148,8 +162,25 @@ namespace WebShop.API.Database
                 Name = "TestProduct",
                 CategoryId = 1,
                 Price = 100,
-                Description = "MAKE TESTS GREAT AGIAN",
-                
+                Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 2,
+                Name = "TestProduct",
+                CategoryId = 2,
+                Price = 100,
+                Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 3,
+                Name = "TestProduct",
+                CategoryId = 3,
+                Price = 100,
+                Description = "MAKE TESTS GREAT AGIAN"
             });
 
             #endregion
@@ -157,6 +188,12 @@ namespace WebShop.API.Database
             #region ZipCity
 
             modelBuilder.Entity<ZipCity>().HasData(
+            new ZipCity
+            {
+                Id = 2000,
+                City = "Frederiksberg"
+            },
+            
             new ZipCity
             {
                 Id = 2100,
