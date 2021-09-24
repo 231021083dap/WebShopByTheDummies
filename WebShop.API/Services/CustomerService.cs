@@ -76,7 +76,7 @@ namespace WebShop.API.Services
         }
         #endregion
 
-        #region Update Customer (Includes User)
+        #region Update Customer (Includes User Info)
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
             //Name
