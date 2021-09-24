@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using WebShop.API.DTO.Responses;
 
 namespace WebShop.API.DTO.Responses
 {

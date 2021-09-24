@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -19,21 +17,15 @@ namespace WebShop.API.Repository
     public class ImageRepository : IImageRepository
     {
         private readonly WebShopContext _context;
-
         public ImageRepository(WebShopContext context)
         {
             _context = context;
-
         }
-
-        #region Get All Images
         public async Task<List<Image>> GetAllImages()
         {
             return await _context.Image
                 .ToListAsync();
         }
-        #endregion
-        #region Get Image By Id
         public async Task<Image> GetImageById(int imageId)
         {
             return await _context.Image
@@ -55,8 +47,6 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return image;
         }
-        #endregion
-        #region Delete Image
         public async Task<Image> DeleteImage(int imageId)
         {
             Image image = await _context.Image.FirstOrDefaultAsync(i => i.Id == imageId);
@@ -67,7 +57,5 @@ namespace WebShop.API.Repository
             }
             return image;
         }
-        #endregion
     }
-
 }

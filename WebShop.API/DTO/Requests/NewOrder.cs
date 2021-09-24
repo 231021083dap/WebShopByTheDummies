@@ -9,9 +9,9 @@ namespace WebShop.API.DTO.Requests
 {
     public class NewOrder
     {
-           
         [Required]
         public List<NewOrderItem> OrderItems { get; set; }
+
         public Customer Customer { get; set; }
 
         [Required]

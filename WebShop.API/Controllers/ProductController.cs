@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
@@ -20,6 +19,7 @@ namespace WebShop.API.Controllers
             _productService = productService;
            
         }
+
         #region Get All Products
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -72,6 +72,7 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+
         #region Get Product By Id
         [HttpGet("{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -120,6 +121,7 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+
         #region Create Product
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -189,6 +191,7 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+
         #region Update Product
         [HttpPut("{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -235,6 +238,7 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+
         #region Delete Product
         [HttpDelete("{productId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
@@ -9,7 +8,6 @@ using WebShop.API.Repository;
 
 namespace WebShop.API.Services
 {
-    #region IProductService Interface
     public interface IProductService
     {
         Task<List<ProductResponse>> GetAllProducts();
@@ -25,18 +23,20 @@ namespace WebShop.API.Services
         Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory);
         Task<bool> DeleteCategory(int categoryId);
     }
-    #endregion
+
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepository;
         private readonly IImageRepository _imageRepository;
         private readonly ICategoryRepository _categoryRepository;
+
         public ProductService(IProductRepository productRepository, IImageRepository imageRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
             _imageRepository = imageRepository;
             _categoryRepository = categoryRepository;
         }
+
         #region Get All Products
         public async Task<List<ProductResponse>> GetAllProducts()
         {
@@ -270,5 +270,4 @@ namespace WebShop.API.Services
         }
         #endregion
     }
-
 }

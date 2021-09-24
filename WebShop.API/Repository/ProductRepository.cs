@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -19,12 +17,10 @@ namespace WebShop.API.Repository
     public class ProductRepository : IProductRepository
     {
         private readonly WebShopContext _context;
-
         public ProductRepository(WebShopContext context)
         {
             _context = context;
         }
-        #region Get All Products
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
@@ -32,8 +28,6 @@ namespace WebShop.API.Repository
                 .Include(b => b.Images)
                 .ToListAsync();
         }
-        #endregion
-        #region Get Products By Id
         public async Task<Product> GetProductById(int productId)
         {
             return await _context.Product
@@ -47,8 +41,6 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return product;
         }
-        #endregion
-        #region Delete Product
         public async Task<Product> DeleteProduct(int productId)
         {
             Product product = await _context.Product.FirstOrDefaultAsync(a => a.Id == productId);
@@ -59,11 +51,6 @@ namespace WebShop.API.Repository
             }
             return product;
         }
-        #endregion
-        #region Delete image
-
-        #endregion
-        #region Update Product
         public async Task<Product> UpdateProduct(int productId, Product product)
         {
             Product updateProduct = await _context.Product.FirstOrDefaultAsync(a => a.Id == productId);
@@ -78,6 +65,5 @@ namespace WebShop.API.Repository
             }
             return updateProduct;
         }
-        #endregion
     }
 }

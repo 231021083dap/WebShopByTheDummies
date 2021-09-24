@@ -34,6 +34,7 @@ namespace WebShop.API.Services
             _jwtUtils = jwtUtils;
         }
 
+        #region Get All Users
         public async Task<List<UserResponse>> GetAllUsers()
         {
             List<User> users = await _userRepository.GetAllUsers();
@@ -45,13 +46,17 @@ namespace WebShop.API.Services
                 Role = u.Role
             }).ToList();
         }
+        #endregion
 
+        #region Get User By Id
         public async Task<UserResponse> GetByUserId(int userId)
         {
             User user = await _userRepository.GetByUserId(userId);
             return userResponse(user);
         }
+        #endregion
 
+        #region Authenticate (Login)
         public async Task<LoginResponse> Authenticate(LoginRequest login)
         {
 
@@ -76,7 +81,9 @@ namespace WebShop.API.Services
 
             return null;
         }
+        #endregion
 
+        #region Register User (SignUp)
         public async Task<UserResponse> Register(RegisterUser newUser)
         {
             //Add login
@@ -117,7 +124,18 @@ namespace WebShop.API.Services
             }
             return userResponse(user);
         }
+        private UserResponse userResponse(User user)
+        {
+            return user == null ? null : new UserResponse
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Role = user.Role
+            };
+        }
+        #endregion
 
+        #region Update User
         public async Task<UserResponse> Update(int userId, UpdateUser updateUser)
         {
             User user = new User
@@ -131,21 +149,14 @@ namespace WebShop.API.Services
 
             return userResponse(user);
         }
+        #endregion
 
+        #region Delete User
         public async Task<bool> Delete(int userId)
         {
             var result = await _userRepository.DeleteUser(userId);
             return true;
         }
-
-        private UserResponse userResponse(User user)
-        {
-            return user == null ? null : new UserResponse
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Role = user.Role
-            };
-        }
+        #endregion
     }
 }

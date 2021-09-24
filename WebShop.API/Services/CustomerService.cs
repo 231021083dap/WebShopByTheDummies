@@ -20,6 +20,7 @@ namespace WebShop.API.Services
         private readonly ICustomerRepository _customerRepository;
         private readonly IAddressRepository _addressRepository;
         private readonly IUserRepository _userRepository;
+
         public CustomerService(ICustomerRepository customerRepository, IUserRepository userRepository, IAddressRepository addressRepository)
         {
             _addressRepository = addressRepository;
@@ -27,7 +28,7 @@ namespace WebShop.API.Services
             _userRepository = userRepository;
         }
 
-        //ADMIN
+        #region Get All Customers
         public async Task<List<CustomerResponse>> GetAllCustomers()
         {
             List<Customer> customers = await _customerRepository.GetAllCustomers();
@@ -43,8 +44,9 @@ namespace WebShop.API.Services
                 MiddleName = customer.MiddleName,
             }).ToList();
         }
+        #endregion
 
-        //ADMIN
+        #region Get Customer By Id
         public async Task<CustomerResponse> GetCustomerById(int userId)
         {
             Customer customer = await _customerRepository.GetCustomerById(userId);
@@ -72,8 +74,9 @@ namespace WebShop.API.Services
                 }).ToList()
             };
         }
+        #endregion
 
-        //USER - UPDATE - Name & LoginInfo
+        #region Update Customer (Includes User)
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
             //Name
@@ -97,5 +100,6 @@ namespace WebShop.API.Services
             }
             return null;
         }
+        #endregion
     }
 }

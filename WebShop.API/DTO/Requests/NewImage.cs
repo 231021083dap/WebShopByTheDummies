@@ -10,6 +10,5 @@ namespace WebShop.API.DTO.Requests
     {
         [Required]
         public List<string> Path { get; set; }
-        
     }
 }

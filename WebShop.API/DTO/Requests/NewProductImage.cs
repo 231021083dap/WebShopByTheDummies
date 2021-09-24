@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-
 namespace WebShop.API.DTO.Requests
 {
     public class NewProductImage

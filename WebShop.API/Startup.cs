@@ -46,6 +46,7 @@ namespace WebShop.API
             services.AddScoped<ICustomerService, CustomerService>();
             
             services.AddScoped<IImageRepository, ImageRepository>();
+
             services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             services.AddCors(options =>

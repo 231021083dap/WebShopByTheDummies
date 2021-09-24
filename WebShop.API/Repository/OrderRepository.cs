@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -21,13 +19,11 @@ namespace WebShop.API.Repository
     public class OrderRepository : IOrderRepository
     {
         private readonly WebShopContext _context;
-
         public OrderRepository(WebShopContext context)
         {
             _context = context;
 
         }
-
         public async Task<List<Order>> GetAllOrders()
         {
             return await _context.Order
@@ -36,7 +32,6 @@ namespace WebShop.API.Repository
                 .Include(o => o.BillingAddress)
                 .ToListAsync();
         }
-
         public async Task<Order> GetOrderById(int orderId)
         {
             return await _context.Order
@@ -46,7 +41,6 @@ namespace WebShop.API.Repository
                 .ThenInclude(o => o.Product)
                 .FirstOrDefaultAsync(a => a.Id == orderId);
         }
-
         public async Task<Order> CreateOrder(Order order)
         {
             _context.Order.Add(order);
@@ -78,5 +72,4 @@ namespace WebShop.API.Repository
             return updateOrder;
         }
     }
-
 }
