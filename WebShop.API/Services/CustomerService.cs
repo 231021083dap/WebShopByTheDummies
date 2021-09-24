@@ -76,7 +76,7 @@ namespace WebShop.API.Services
         }
         #endregion
 
-        #region Update Customer (Includes User)
+        #region Update Customer (Includes User Info)
         public async Task<CustomerResponse> UpdateCustomer(int customerId, UpdateCustomer updateCustomer)
         {
             //Name
@@ -95,6 +95,8 @@ namespace WebShop.API.Services
                 {
                     Email = updateCustomer.User.Email,
                     Password = updateCustomer.User.Password
+                    //Role will be visable but not change anything.
+                    //Change this by making a new response instead of using User.
                 };
                 user = await _userRepository.UpdateUser(customerId, user);
             }

@@ -63,9 +63,7 @@ namespace WebShop.API.Repository
             {
                 updateUser.Email = user.Email;
                 updateUser.Password = user.Password;
-                //updateUser.Role = user.Role;
                 await _context.SaveChangesAsync();
-
             }
             return updateUser;
         }
@@ -83,6 +81,5 @@ namespace WebShop.API.Repository
             return user;
         }
         #endregion
-
     }
 }
