@@ -38,12 +38,15 @@ namespace WebShop.API.Repository
                 .FirstOrDefaultAsync(a => a.Id == imageId);
         }
         #endregion
+
+        #region Get Image By Product Id
         public async Task<List<Image>> GetImageByProductId(int productId)
         {
             return await _context.Image
                 .Include(a => a.Product)
                 .ToListAsync();
         }
+        #endregion
 
         #region Create Image
         public async Task<Image> CreateImage(Image image)
