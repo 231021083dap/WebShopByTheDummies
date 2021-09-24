@@ -95,6 +95,8 @@ namespace WebShop.API.Services
                 {
                     Email = updateCustomer.User.Email,
                     Password = updateCustomer.User.Password
+                    //Role will be visable but not change anything.
+                    //Change this by making a new response instead of using User.
                 };
                 user = await _userRepository.UpdateUser(customerId, user);
             }
