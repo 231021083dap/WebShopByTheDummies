@@ -17,15 +17,21 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
+
+        #region Get All Zipcodes
         public async Task<List<ZipCity>> GetAllZipCodes()
         {
             return await _context.ZipCity
                 .ToListAsync();
         }
+        #endregion
+
+        #region Get ZipCity By Id
         public async Task<ZipCity> GetZipCityById(int Id)
         {
             return await _context.ZipCity
                 .FirstOrDefaultAsync(a => a.Id == Id);
         }
+        #endregion
     }
 }

@@ -22,23 +22,34 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
+
+        #region Get All Categories
         public async Task<List<Category>> GetAllCategories()
         {
             return await _context.Category
                 .ToListAsync();
         }
+        #endregion
+
+        #region Get Category By Id
         public async Task<Category> GetCategoryById(int categoryId)
         {
             return await _context.Category
                 .Include(a => a.products)
                 .FirstOrDefaultAsync(a => a.Id == categoryId);
         }
+        #endregion
+
+        #region Create Category
         public async Task<Category> CreateCategory(Category category)
         {
             _context.Category.Add(category);
             await _context.SaveChangesAsync();
             return category;
         }
+        #endregion
+
+        #region Delete Category
         public async Task<Category> DeleteCategory(int categoryId)
         {
             Category category = await _context.Category.FirstOrDefaultAsync(a => a.Id == categoryId);
@@ -49,6 +60,9 @@ namespace WebShop.API.Repository
             }
             return category;
         }
+        #endregion
+
+        #region Update Category
         public async Task<Category> UpdateCategory(int categoryId, Category category)
         {
             Category updateCategory = await _context.Category.FirstOrDefaultAsync(a => a.Id == categoryId);
@@ -61,5 +75,6 @@ namespace WebShop.API.Repository
             }
             return updateCategory;
         }
+        #endregion
     }
 }
