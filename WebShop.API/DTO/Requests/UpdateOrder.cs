@@ -7,7 +7,7 @@ using WebShop.API.Database.Entities;
 
 namespace WebShop.API.DTO.Requests
 {
-    public class NewOrder
+    public class UpdateOrder
     {
         [Required]
         public List<NewOrderItem> OrderItems { get; set; }
@@ -18,6 +18,4 @@ namespace WebShop.API.DTO.Requests
         [Required]
         public int BillingAddressId { get; set; }
     }
-
 }
-

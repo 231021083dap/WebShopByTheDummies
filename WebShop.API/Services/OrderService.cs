@@ -14,8 +14,8 @@ namespace WebShop.API.Services
         Task<List<OrderResponse>> GetAllOrders();
         Task<OrderResponse> GetOrderById(int orderId);
         Task<OrderResponse> CreateOrder(NewOrder newOrder);
-        
-        Task<OrderResponse> UpdateOrder(int orderId, UpdateProduct updateProduct);
+        Task<OrderItemResponse> UpdateOrderItem(int orderItemId, UpdateOrderItem updateOrderItem);
+        Task<OrderResponse> UpdateOrder(int orderId, UpdateOrder updateOrder);
     }
     public class OrderService : IOrderService
     {
@@ -34,7 +34,8 @@ namespace WebShop.API.Services
         {
             Order order = new Order
             {
-                OrderDate = DateTime.Now,
+                CreateDate = DateTime.Now,
+                UpdatedDate = DateTime.Now,
                 ShipmentAddressId = newOrder.ShipmentAddressId,
                 BillingAddressId = newOrder.BillingAddressId,
 
@@ -53,7 +54,7 @@ namespace WebShop.API.Services
             return order == null ? null : new OrderResponse
             {
                 Id = order.Id,
-                OrderDate = order.OrderDate,
+                OrderDate = order.CreateDate,
                 ShipmentAddress = new AddressResponse
                 {
                     Id = Shipmentaddress.Id,
@@ -100,7 +101,7 @@ namespace WebShop.API.Services
             return orders == null ? null : orders.Select(o => new OrderResponse
             {
                 Id = o.Id,
-                OrderDate = o.OrderDate,
+                OrderDate = o.CreateDate,
                 CustomerName = $"{o.ShippingAddress.Customer.FirstName} {o.ShippingAddress.Customer.MiddleName} {o.ShippingAddress.Customer.LastName}",
                 Email = o.ShippingAddress.Customer.User.Email
             }).ToList();
@@ -114,7 +115,7 @@ namespace WebShop.API.Services
             return order == null ? null : new OrderResponse
             {
                 Id = order.Id,
-                OrderDate = order.OrderDate,
+                OrderDate = order.CreateDate,
                 CustomerId = order.ShippingAddress.Customer.Id,
                 CustomerName = $"{order.ShippingAddress.Customer.FirstName} {order.ShippingAddress.Customer.MiddleName} {order.ShippingAddress.Customer.LastName}",
                 Email = order.ShippingAddress.Customer.User.Email,
@@ -147,9 +148,44 @@ namespace WebShop.API.Services
             };
         }
 
-        public Task<OrderResponse> UpdateOrder(int orderId, UpdateProduct updateProduct)
+        public async Task<OrderResponse> UpdateOrder(int orderId, UpdateOrder updateOrder)
         {
-            throw new NotImplementedException();
+            Order order = new()
+            {
+                UpdatedDate = DateTime.Now,
+                ShipmentAddressId = updateOrder.ShipmentAddressId,
+                BillingAddressId = updateOrder.BillingAddressId
+                
+            };
+            order = await _orderRepository.UpdateOrder(orderId, order);
+            return order == null ? null : new OrderResponse
+            {
+                Id = order.Id,
+                BillingAddress = new AddressResponse
+                {
+                    Id = order.BillingAddressId
+                },
+                ShipmentAddress = new AddressResponse
+                {
+                    Id = order.ShipmentAddressId
+                }
+            };
         }
+        public async Task<OrderItemResponse> UpdateOrderItem(int orderItemId, UpdateOrderItem updateOrderItem)
+        {
+            OrderItem orderItem = new()
+            {
+                Amount = updateOrderItem.Amount,
+                CurrentPrice = updateOrderItem.CurrentPrice
+            };
+            orderItem = await _orderItemRepository.UpdateOrderItem(orderItemId, orderItem);
+            return orderItem == null ? null : new OrderItemResponse
+            {
+                Id = orderItem.Id,
+                Amount = orderItem.Amount,
+                CurrentPrice = orderItem.CurrentPrice
+            };
+        }
+
     }
 }

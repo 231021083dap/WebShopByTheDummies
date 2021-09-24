@@ -8,7 +8,7 @@ namespace WebShop.API.Repository
 {
     public interface IOrderItemRepository
     {
-        Task<OrderItem> CreateOrderItem(OrderItem orderItem);
+        //Task<OrderItem> CreateOrderItem(OrderItem orderItem);
         Task<List<OrderItem>> CreateOrderItem(List<OrderItem> items);
         Task<OrderItem> UpdateOrderItem(int orderItemId, OrderItem orderItem);
         Task<OrderItem> DeleteOrderItem(int orderItemId);
@@ -20,12 +20,12 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
-        public async Task<OrderItem> CreateOrderItem(OrderItem orderItem)
-        {
-            _context.OrderItem.Add(orderItem);
-            await _context.SaveChangesAsync();
-            return orderItem;
-        }
+        //public async Task<OrderItem> CreateOrderItem(OrderItem orderItem)
+        //{
+        //    _context.OrderItem.Add(orderItem);
+        //    await _context.SaveChangesAsync();
+        //    return orderItem;
+        //}
         public async Task<List<OrderItem>> CreateOrderItem(List<OrderItem> orderItems)
         {
             

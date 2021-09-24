@@ -7,6 +7,7 @@ namespace WebShop.API.DTO.Responses
     {
         public int Id { get; set; }
         public DateTime OrderDate { get; set; }
+        public DateTime UpdateDate { get; set; }
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string Email { get; set; }

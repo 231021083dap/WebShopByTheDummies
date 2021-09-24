@@ -3,21 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using WebShop.API.Database.Entities;
 
 namespace WebShop.API.DTO.Requests
 {
-    public class NewOrder
+    public class UpdateOrderItem
     {
         [Required]
-        public List<NewOrderItem> OrderItems { get; set; }
+        public int ProductId { get; set; }
 
         [Required]
-        public int ShipmentAddressId { get; set; }
+        public int CurrentPrice { get; set; }
 
         [Required]
-        public int BillingAddressId { get; set; }
+        public int Amount { get; set; }
     }
-
 }
-

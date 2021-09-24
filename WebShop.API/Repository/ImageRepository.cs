@@ -26,6 +26,7 @@ namespace WebShop.API.Repository
             return await _context.Image
                 .ToListAsync();
         }
+        #region Get Image By Id
         public async Task<Image> GetImageById(int imageId)
         {
             return await _context.Image
@@ -47,6 +48,7 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return image;
         }
+        #endregion
         public async Task<Image> DeleteImage(int imageId)
         {
             Image image = await _context.Image.FirstOrDefaultAsync(i => i.Id == imageId);

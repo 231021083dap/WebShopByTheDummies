@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebShop.API.Database;
@@ -64,8 +65,11 @@ namespace WebShop.API.Repository
             Order updateOrder = await _context.Order.FirstOrDefaultAsync(a => a.Id == orderId);
             if (updateOrder != null)
             {
-                updateOrder.OrderDate = order.OrderDate;
+                
+                updateOrder.UpdatedDate = DateTime.Now;
+                updateOrder.BillingAddress = order.BillingAddress;
                 updateOrder.ShipmentAddressId = order.ShipmentAddressId;
+                
                 await _context.SaveChangesAsync();
 
             }

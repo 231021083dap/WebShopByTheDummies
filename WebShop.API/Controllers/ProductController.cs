@@ -98,7 +98,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Get Category By Id
-        [HttpGet("api/Category/{categoryId}")]
+        [HttpGet("/api/Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -146,7 +146,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Create Category
-        [HttpPost("api/Category")]
+        [HttpPost("/api/Category")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -216,7 +216,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Update Category
-        [HttpPut("api/Category/{categoryId}")]
+        [HttpPut("/api/Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -285,7 +285,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Delete Category
-        [HttpDelete("api/Category/{categoryId}")]
+        [HttpDelete("/api/Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -133,6 +133,10 @@ namespace WebShop.API.Services
                 {
                     foreach (var item in images)
                     {
+                        NewImage newImage = new()
+                        {
+                            Path = newProduct.Image.Path,
+                        };
                         await _imageRepository.CreateImage(item);
                     }
                 }
@@ -245,7 +249,12 @@ namespace WebShop.API.Services
                 Id = product.Id,
                 Name = product.Name,
                 Price = product.Price,
-                Description = product.Description
+                Description = product.Description,
+                Category = new ProductCategoryResponse
+                {
+                    Id = product.CategoryId,
+                    Name = product.Category.Name
+                }
 
             };
 

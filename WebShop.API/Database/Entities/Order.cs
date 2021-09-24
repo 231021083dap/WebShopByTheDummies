@@ -11,7 +11,8 @@ namespace WebShop.API.Database.Entities
         public int Id { get; set; }
 
         [Required]
-        public DateTime OrderDate { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime UpdatedDate { get; set; }
 
         [ForeignKey("Address.Id")]
         public int ShipmentAddressId { get; set; }
