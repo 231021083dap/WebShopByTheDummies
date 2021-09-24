@@ -87,25 +87,15 @@ namespace WebShop.API.Services
             };
 
             address = await _addressRepository.UpdateAddress(addressId, address);
-
-            //if (address != null)
-            //{
-            //    Address address1 = await _addressRepository.GetAddressById(addressId);
-            //    return new BookResponse
-            //    {
-            //        Id = book.Id,
-            //        Title = book.Title,
-            //        Pages = book.Pages,
-            //        Author = new BookAuthorResponse
-            //        {
-            //            Id = book.Author.Id,
-            //            FirstName = book.Author.FirstName,
-            //            MiddleName = book.Author.MiddleName,
-            //            LastName = book.Author.LastName
-            //        }
-            //    };
-            //}
-            return null;
+            return address == null ? null : new AddressResponse
+            {
+                Id = address.Id,
+                StreetName = address.StreetName,
+                Number = address.Number,
+                Floor = address.Floor,
+                Zipcode = address.ZipCityId,
+                Country = address.Country
+            };
         }
         #endregion
 

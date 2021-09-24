@@ -87,8 +87,7 @@ namespace WebShop.API.Controllers
         #region Get All Customers
         [HttpGet("User/Customer/GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAllCustomers()
         {
@@ -149,6 +148,10 @@ namespace WebShop.API.Controllers
         #region Get Customer By Id
         //[Authorize(Role.User, Role.Admin)]
         [HttpGet("User/Customer/GetById/{userId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetByCustomerId([FromRoute] int userId)
         {
             try

@@ -14,7 +14,6 @@ namespace WebShop.API.Services
         Task<List<OrderResponse>> GetAllOrders();
         Task<OrderResponse> GetOrderById(int orderId);
         Task<OrderResponse> CreateOrder(NewOrder newOrder);
-        
         Task<OrderResponse> UpdateOrder(int orderId, UpdateProduct updateProduct);
     }
     public class OrderService : IOrderService
@@ -89,8 +88,6 @@ namespace WebShop.API.Services
                     Amount = i.Amount,
                     CurrentPrice = i.CurrentPrice,
                 }).ToList()
-            
-                
             };
         }
 
@@ -104,7 +101,6 @@ namespace WebShop.API.Services
                 CustomerName = $"{o.ShippingAddress.Customer.FirstName} {o.ShippingAddress.Customer.MiddleName} {o.ShippingAddress.Customer.LastName}",
                 Email = o.ShippingAddress.Customer.User.Email
             }).ToList();
-
         }
 
         public async Task<OrderResponse> GetOrderById(int orderId)
@@ -142,8 +138,6 @@ namespace WebShop.API.Services
                     Zipcode = order.BillingAddress.ZipCity.Id,
                     City = order.BillingAddress.ZipCity.City
                 }
-                
-
             };
         }
 
