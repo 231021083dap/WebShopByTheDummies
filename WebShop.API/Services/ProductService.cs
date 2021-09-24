@@ -87,7 +87,7 @@ namespace WebShop.API.Services
                 {
                     Id = product.Category.Id,
                     Name = product.Category.Name
-                    
+
                 },
                 Images = product.Images.Select(p => new ProductImageResponse
                 {
@@ -110,7 +110,7 @@ namespace WebShop.API.Services
             };
         }
         #endregion
-        
+
         #region Create Product
         public async Task<ProductResponse> CreateProduct(NewProduct newProduct)
         {
@@ -122,29 +122,44 @@ namespace WebShop.API.Services
                 Description = newProduct.Description,
                 CategoryId = newProduct.CategoryId,
 
+
             };
-            
+
             product = await _productRepository.CreateProduct(product);
-            Category category = await _categoryRepository.GetCategoryById(product.CategoryId);
-            return product == null ? null : new ProductResponse
+            if (product != null)
             {
-                Id = product.Id,
-                Name = product.Name,
-                Price = product.Price,
-                Description = product.Description,
-                Category = new ProductCategoryResponse
+                List<Image> images = new();
+                if (newProduct.Image !=null && newProduct.Image.Path.Count > 0)
                 {
-                    Id = category.Id,
-                    Name = category.Name
-                    
-                },
-                Images = product.Images.Select(a => new ProductImageResponse
+                    foreach (var item in images)
+                    {
+                        await _imageRepository.CreateImage(item);
+                    }
+                }
+                product.Images = images;
+                Category category = await _categoryRepository.GetCategoryById(product.CategoryId);
+
+                return new ProductResponse
                 {
-                    Id = a.Id,
-                    ProductId = product.Id,
-                    Path = a.Path
-                }).ToList()
-            };
+                    Id = product.Id,
+                    Name = product.Name,
+                    Price = product.Price,
+                    Description = product.Description,
+                    Category = new ProductCategoryResponse
+                    {
+                        Id = category.Id,
+                        Name = category.Name
+
+                    },
+                    Images = product.Images.Select(a => new ProductImageResponse
+                    {
+                        Id = a.Id,
+                        Path = a.Path
+                    }).ToList()
+                };
+            } return null;
+
+
         }
         #endregion
         #region Create Category
@@ -190,7 +205,7 @@ namespace WebShop.API.Services
 
         }
         #endregion
-        
+
         #region Delete Product
         public async Task<bool> DeleteProduct(int productId)
         {
@@ -212,7 +227,7 @@ namespace WebShop.API.Services
             return true;
         }
         #endregion
-        
+
         #region Update Product
         public async Task<ProductResponse> UpdateProduct(int productId, UpdateProduct updateProduct)
         {

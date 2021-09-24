@@ -33,6 +33,7 @@ namespace WebShop.API.Repository
             return await _context.Order
                 .Include(o => o.OrderItems)
                 .Include(o => o.ShippingAddress)
+                .Include(o => o.BillingAddress)
                 .ToListAsync();
         }
 
@@ -40,6 +41,7 @@ namespace WebShop.API.Repository
         {
             return await _context.Order
                 .Include(o => o.ShippingAddress)
+                .Include(o => o.BillingAddress)
                 .Include(o => o.OrderItems)
                 .ThenInclude(o => o.Product)
                 .FirstOrDefaultAsync(a => a.Id == orderId);

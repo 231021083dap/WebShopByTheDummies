@@ -12,6 +12,7 @@ namespace WebShop.API.Repository
     {
         Task<List<Image>> GetAllImages();
         Task<Image> GetImageById(int imageId);
+        Task<List<Image>> GetImageByProductId(int productId);
         Task<Image> CreateImage(Image image);
         Task<Image> DeleteImage(int imageId);
     }
@@ -40,6 +41,13 @@ namespace WebShop.API.Repository
                 .FirstOrDefaultAsync(a => a.Id == imageId);
         }
         #endregion
+        public async Task<List<Image>> GetImageByProductId(int productId)
+        {
+            return await _context.Image
+                .Include(a => a.Product)
+                .ToListAsync();
+        }
+
         #region Create Image
         public async Task<Image> CreateImage(Image image)
         {
