@@ -13,6 +13,7 @@ namespace WebShop.API.DTO.Requests
         public string Password { get; set; }
 
         public NewCustomer Customer { get; set; }
+
         public NewAddress Address { get; set; }
     }
 }

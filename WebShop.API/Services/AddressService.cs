@@ -12,6 +12,7 @@ namespace WebShop.API.Services
         Task<AddressResponse> UpdateAddress(int addressId, UpdateAddress updateAddress);
         Task<bool> Delete(int addressId);
     }
+
     public class AddressService : IAddressService
     {
         private readonly IAddressRepository _addressRepository;
@@ -25,7 +26,7 @@ namespace WebShop.API.Services
             _customerRepository = customerRepository;
         }
 
-        //USER - CREATE - Address
+        #region Create Address
         public async Task<AddressResponse> Create(NewAddress newAddress)
         {
             Address address = new Address
@@ -70,8 +71,9 @@ namespace WebShop.API.Services
             }
             return null;
         }
+        #endregion
 
-        //USER - UPDATE - Address
+        #region Update Address
         public async Task<AddressResponse> UpdateAddress(int addressId, UpdateAddress updateAddress)
         {
             Address address = new Address
@@ -105,12 +107,14 @@ namespace WebShop.API.Services
             //}
             return null;
         }
+        #endregion
 
-        //USER - DELETE - Address
+        #region Delete Address
         public async Task<bool> Delete(int addressId)
         {
             var result = await _addressRepository.DeleteAddress(addressId);
             return true;
         }
+        #endregion
     }
 }

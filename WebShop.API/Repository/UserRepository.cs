@@ -22,7 +22,6 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
-
         public async Task<List<User>> GetAllUsers()
         {
             return await _context.User

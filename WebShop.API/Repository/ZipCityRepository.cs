@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -19,7 +17,6 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
-
         public async Task<List<ZipCity>> GetAllZipCodes()
         {
             return await _context.ZipCity

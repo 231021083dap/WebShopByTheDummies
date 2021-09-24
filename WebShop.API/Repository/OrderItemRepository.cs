@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -10,24 +8,18 @@ namespace WebShop.API.Repository
 {
     public interface IOrderItemRepository
     {
-        
         Task<OrderItem> CreateOrderItem(OrderItem orderItem);
         Task<List<OrderItem>> CreateOrderItem(List<OrderItem> items);
         Task<OrderItem> UpdateOrderItem(int orderItemId, OrderItem orderItem);
         Task<OrderItem> DeleteOrderItem(int orderItemId);
     }
-
     public class OrderItemRepository : IOrderItemRepository
     {
         private readonly WebShopContext _context;
-
         public OrderItemRepository(WebShopContext context)
         {
             _context = context;
-
         }
-
-
         public async Task<OrderItem> CreateOrderItem(OrderItem orderItem)
         {
             _context.OrderItem.Add(orderItem);
@@ -42,7 +34,6 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return orderItems;
         }
-
         public async Task<OrderItem> DeleteOrderItem(int orderItemId)
         {
             OrderItem orderItem = await _context.OrderItem.FirstOrDefaultAsync(a => a.Id == orderItemId);
@@ -53,7 +44,6 @@ namespace WebShop.API.Repository
             }
             return orderItem;
         }
-
         public async Task<OrderItem> UpdateOrderItem(int orderItemId, OrderItem orderItem)
         {
             OrderItem updateOrderItem = await _context.OrderItem.FirstOrDefaultAsync(a => a.Id == orderItemId);

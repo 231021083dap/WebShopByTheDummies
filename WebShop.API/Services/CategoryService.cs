@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.Database.Entities;
@@ -17,6 +16,7 @@ namespace WebShop.API.Services
         Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory);
         Task<bool> DeleteCategory(int categoryId);
     }
+
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -27,6 +27,7 @@ namespace WebShop.API.Services
             _categoryRepository = categoryRepository;
             _productRepository = productRepository;
         }
+
         #region Get All Categories
         public async Task<List<CategoryResponse>> GetAllCategories()
         {
@@ -40,6 +41,7 @@ namespace WebShop.API.Services
         }
         #endregion
 
+        #region Get Category By Id
         public async Task<CategoryResponse> GetCategoryById(int categoryId)
         {
             Category category = await _categoryRepository.GetCategoryById(categoryId);
@@ -50,7 +52,9 @@ namespace WebShop.API.Services
                 Picture = category.Picture
             };
         }
+        #endregion
 
+        #region Create Category
         public async Task<CategoryResponse> CreateCategory(NewCategory newCategory)
         {
             Category category = new Category
@@ -66,7 +70,9 @@ namespace WebShop.API.Services
                 Picture = category.Picture
             };
         }
+        #endregion
 
+        #region Update Category
         public async Task<CategoryResponse> UpdateCategory(int categoryId, UpdateCategory updateCategory)
         {
             Category category = new Category
@@ -83,13 +89,14 @@ namespace WebShop.API.Services
                 Picture = category.Picture
             };
         }
+        #endregion
 
+        #region Delete Category
         public async Task<bool> DeleteCategory(int categoryId)
         {
             var result = await _categoryRepository.DeleteCategory(categoryId);
             return true;
         }
-
-
+        #endregion
     }
 }
