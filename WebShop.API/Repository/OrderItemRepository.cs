@@ -34,6 +34,9 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return orderItems;
         }
+        #endregion
+
+        #region Delete OrderItem
         public async Task<OrderItem> DeleteOrderItem(int orderItemId)
         {
             OrderItem orderItem = await _context.OrderItem.FirstOrDefaultAsync(a => a.Id == orderItemId);
@@ -44,6 +47,9 @@ namespace WebShop.API.Repository
             }
             return orderItem;
         }
+        #endregion
+
+        #region Update OrderItem
         public async Task<OrderItem> UpdateOrderItem(int orderItemId, OrderItem orderItem)
         {
             OrderItem updateOrderItem = await _context.OrderItem.FirstOrDefaultAsync(a => a.Id == orderItemId);
@@ -57,5 +63,6 @@ namespace WebShop.API.Repository
             }
             return updateOrderItem;
         }
+        #endregion
     }
 }

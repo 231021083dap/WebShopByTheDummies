@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -8,7 +7,6 @@ namespace WebShop.API.Repository
 {
     public interface IAddressRepository
     {
-        Task<List<Address>> GetAllAddresses();
         Task<Address> GetAddressById(int addressId);
         Task<Address> CreateAddress(Address address);
         Task<Address> UpdateAddress(int addressId, Address address);
@@ -20,26 +18,27 @@ namespace WebShop.API.Repository
         public AddressRepository(WebShopContext context)
         {
             _context = context;
+        }
 
-        }
-        public async Task<List<Address>> GetAllAddresses()
-        {
-            return await _context.Address
-                .Include(a => a.ZipCity)
-                .ToListAsync();
-        }
+        #region Get Address By Id
         public async Task<Address> GetAddressById(int addressId)
         {
             return await _context.Address
                 .Include(a => a.ZipCity)
                 .FirstOrDefaultAsync(a => a.Id == addressId);
         }
+        #endregion
+
+        #region Create Address
         public async Task<Address> CreateAddress(Address address)
         {
             _context.Address.Add(address);
             await _context.SaveChangesAsync();
             return address;
         }
+        #endregion
+
+        #region Delete Address
         public async Task<Address> DeleteAddress(int addressId)
         {
             Address address = await _context.Address.FirstOrDefaultAsync(a => a.Id == addressId);
@@ -50,6 +49,9 @@ namespace WebShop.API.Repository
             }
             return address;
         }
+        #endregion
+
+        #region Update Address
         public async Task<Address> UpdateAddress(int addressId, Address address)
         {
             Address updateAddress = await _context.Address.FirstOrDefaultAsync(a => a.Id == addressId);
@@ -65,5 +67,6 @@ namespace WebShop.API.Repository
             }
             return updateAddress;
         }
+        #endregion
     }
 }

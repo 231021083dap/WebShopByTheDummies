@@ -20,12 +20,17 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
+
+        #region Get All Customers
         public async Task<List<Customer>> GetAllCustomers()
         {
             return await _context.Customer
                 .Include(a => a.User)
                 .ToListAsync();
         }
+        #endregion
+
+        #region Get Customer By Id
         public async Task<Customer> GetCustomerById(int customerId)
         {
             return await _context.Customer
@@ -34,6 +39,9 @@ namespace WebShop.API.Repository
                 .ThenInclude(a => a.ZipCity)
                 .FirstOrDefaultAsync(a => a.Id == customerId);
         }
+        #endregion
+
+        #region Update Customer
         public async Task<Customer> UpdateCustomer(int customerId, Customer customer)
         {
             Customer updateCustomer = await _context.Customer.FirstOrDefaultAsync(a => a.Id == customerId);
@@ -49,11 +57,15 @@ namespace WebShop.API.Repository
             }
             return updateCustomer;
         }
+        #endregion
+
+        #region Create Customer
         public async Task<Customer> CreateCustomer(Customer customer)
         {
             _context.Customer.Add(customer);
             await _context.SaveChangesAsync();
             return customer;
         }
+        #endregion
     }
 }

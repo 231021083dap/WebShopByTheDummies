@@ -25,6 +25,8 @@ namespace WebShop.API.Repository
             _context = context;
 
         }
+
+        #region Get All Orders
         public async Task<List<Order>> GetAllOrders()
         {
             return await _context.Order
@@ -33,6 +35,9 @@ namespace WebShop.API.Repository
                 .Include(o => o.BillingAddress)
                 .ToListAsync();
         }
+        #endregion
+
+        #region Get Order By Id
         public async Task<Order> GetOrderById(int orderId)
         {
             return await _context.Order
@@ -42,6 +47,9 @@ namespace WebShop.API.Repository
                 .ThenInclude(o => o.Product)
                 .FirstOrDefaultAsync(a => a.Id == orderId);
         }
+        #endregion
+
+        #region Create Order
         public async Task<Order> CreateOrder(Order order)
         {
             _context.Order.Add(order);
@@ -59,7 +67,9 @@ namespace WebShop.API.Repository
         //    }
         //    return order;
         //}
+        #endregion
 
+        #region Update Order
         public async Task<Order> UpdateOrder(int orderId, Order order)
         {
             Order updateOrder = await _context.Order.FirstOrDefaultAsync(a => a.Id == orderId);
@@ -75,5 +85,6 @@ namespace WebShop.API.Repository
             }
             return updateOrder;
         }
+        #endregion
     }
 }
