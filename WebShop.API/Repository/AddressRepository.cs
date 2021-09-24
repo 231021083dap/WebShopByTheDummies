@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -8,7 +7,6 @@ namespace WebShop.API.Repository
 {
     public interface IAddressRepository
     {
-        Task<List<Address>> GetAllAddresses();
         Task<Address> GetAddressById(int addressId);
         Task<Address> CreateAddress(Address address);
         Task<Address> UpdateAddress(int addressId, Address address);
@@ -20,17 +18,7 @@ namespace WebShop.API.Repository
         public AddressRepository(WebShopContext context)
         {
             _context = context;
-
         }
-
-        #region Get All Addresses
-        public async Task<List<Address>> GetAllAddresses()
-        {
-            return await _context.Address
-                .Include(a => a.ZipCity)
-                .ToListAsync();
-        }
-        #endregion
 
         #region Get Address By Id
         public async Task<Address> GetAddressById(int addressId)
