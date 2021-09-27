@@ -9,10 +9,12 @@ namespace WebShop.Tests
     {
         private readonly AddressService _sut;
         private readonly Mock<IAddressRepository> _addressRepository = new Mock<IAddressRepository>();
+        private readonly Mock<IZipCityRepository> _zipcityRepository = new Mock<IZipCityRepository>();
+        private readonly Mock<ICustomerRepository> _customerRepository = new Mock<ICustomerRepository>();
 
         public AddressServiceTests()
         {
-            _sut = new AddressService(_addressRepository.object);
+            _sut = new AddressService(_addressRepository.Object, _customerRepository.Object, _zipcityRepository.Object);
         }
 
         #region Create

@@ -5,14 +5,16 @@ using Xunit;
 
 namespace WebShop.Tests
 {
-    class CustomerServiceTests
+    public class CustomerServiceTests
     {
         private readonly CustomerService _sut;
         private readonly Mock<ICustomerRepository> _customerRepository = new Mock<ICustomerRepository>();
-    
+        private readonly Mock<IUserRepository> _userRepository = new Mock<IUserRepository>();
+        private readonly Mock<IAddressRepository> _addressRepository = new Mock<IAddressRepository>();
+
         public CustomerServiceTests()
         {
-            _sut = new CustomerService(_customerRepository.Object);
+            _sut = new CustomerService(_customerRepository.Object, _userRepository.Object, _addressRepository.Object);
         }
 
         #region GetAll

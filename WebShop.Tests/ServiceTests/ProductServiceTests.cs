@@ -5,14 +5,16 @@ using Xunit;
 
 namespace WebShop.Tests
 {
-    class ProductServiceTests
+    public class ProductServiceTests
     {
         private readonly ProductService _sut;
         private readonly Mock<IProductRepository> _productRepository = new Mock<IProductRepository>();
+        private readonly Mock<IImageRepository> _imageRepository = new Mock<IImageRepository>();
+        private readonly Mock<ICategoryRepository> _categoryRepository = new Mock<ICategoryRepository>();
 
         public ProductServiceTests()
         {
-            _sut = new ProductService(_productRepository.Object);
+            _sut = new ProductService(_productRepository.Object, _imageRepository.Object, _categoryRepository.Object);
         }
 
         #region Product

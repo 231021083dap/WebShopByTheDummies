@@ -1,18 +1,22 @@
 ﻿using Moq;
+using WebShop.API.Authorization;
 using WebShop.API.Repository;
 using WebShop.API.Services;
 using Xunit;
 
 namespace WebShop.Tests
 {
-    class UserServiceTests
+    public class UserServiceTests
     {
         private readonly UserService _sut;
         private readonly Mock<IUserRepository> _userRepository = new Mock<IUserRepository>();
+        private readonly Mock<IJwtUtils> _jwtUtils = new Mock<IJwtUtils>();
+        private readonly Mock<ICustomerRepository> _customerRepository = new Mock<ICustomerRepository>();
+        private readonly Mock<IAddressRepository> _addressRepository = new Mock<IAddressRepository>();
 
         public UserServiceTests()
         {
-            _sut = new UserService(_userRepository.Object);
+            _sut = new UserService(_userRepository.Object, _jwtUtils.Object, _customerRepository.Object, _addressRepository.Object);
         }
 
         #region GetAll
