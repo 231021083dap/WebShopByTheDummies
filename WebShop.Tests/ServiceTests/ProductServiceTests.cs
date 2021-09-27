@@ -1,4 +1,5 @@
 ﻿using Moq;
+using WebShop.API.Database.Entities;
 using WebShop.API.Repository;
 using WebShop.API.Services;
 using Xunit;
@@ -136,12 +137,26 @@ namespace WebShop.Tests
         public async void DeleteProductImage_ShouldReturnTrue_WhenDeleteIsSuccess()
         {
             #region Arrange
+            int imageId = 1;
+
+            Image image = new Image
+            {
+                Id = imageId,
+                ProductId = 1,
+                Path = "test"
+            };
+
+            _imageRepository
+                .Setup(a => a.DeleteImage(It.IsAny<int>()))
+                .ReturnsAsync(image);
             #endregion
 
             #region Act
+            var result = await _sut.DeleteProduct(imageId);
             #endregion
 
             #region Assert
+            Assert.True(result);
             #endregion
         }
 
@@ -149,12 +164,35 @@ namespace WebShop.Tests
         public async void DeleteProduct_ShouldReturnTrue_WhenDeleteIsSuccess()
         {
             #region Arrange
+            int productId = 1;
+
+            Image image = new Image
+            {
+                Id = 1,
+                ProductId = productId,
+                Path = "test"
+            };
+
+            Product product = new Product
+            {
+                Id = productId,
+                Name = "test",
+                CategoryId = 1,
+                Price = 123,
+                Description = "test"
+            };
+
+            _productRepository
+                .Setup(a => a.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(product);
             #endregion
 
             #region Act
+            var result = await _sut.DeleteProduct(productId);
             #endregion
 
             #region Assert
+            Assert.True(result);
             #endregion
         }
         #endregion
@@ -266,12 +304,26 @@ namespace WebShop.Tests
         public async void DeleteCategory_ShouldReturnTrue_WhenDeleteIsSuccess()
         {
             #region Arrange
+            int categoryId = 1;
+
+            Category category = new Category
+            {
+                Id = categoryId,
+                Name = "test",
+                Picture = "test"
+            };
+
+            _categoryRepository
+                .Setup(a => a.DeleteCategory(It.IsAny<int>()))
+                .ReturnsAsync(category);
             #endregion
 
             #region Act
+            var result = await _sut.DeleteCategory(categoryId);
             #endregion
 
             #region Assert
+            Assert.True(result);
             #endregion
         }
         #endregion

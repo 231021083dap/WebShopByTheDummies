@@ -11,6 +11,6 @@ namespace WebShop.API.Database.Entities
         [Required]
         public string City { get; set; }
 
-        public List<Address> Addresses { get; set; }
+        //public List<Address> Addresses { get; set; }
     }
 }

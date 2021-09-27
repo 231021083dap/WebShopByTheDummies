@@ -1,4 +1,8 @@
 ﻿using Moq;
+using System;
+using WebShop.API.Database.Entities;
+using WebShop.API.DTO.Requests;
+using WebShop.API.DTO.Responses;
 using WebShop.API.Repository;
 using WebShop.API.Services;
 using Xunit;
@@ -78,12 +82,44 @@ namespace WebShop.Tests
         public async void Create_ShouldReturnOrderResponse_WhenCreateIsSuccess()
         {
             #region Arrange
+            int orderId = 1;
+
+            NewOrder newOrder = new NewOrder
+            {
+                ShipmentAddressId = 1,
+                BillingAddressId = 1
+            };
+
+            Order order = new Order
+            {
+                Id = orderId,
+                CreateDate = DateTime.Now,
+                //UpdatedDate = 
+                //OrderItems = 
+                //ShippingAddress = 
+                ShipmentAddressId = 1,
+                BillingAddressId = 1
+            };
+
+            _orderRepository
+                .Setup(a => a.CreateOrder(It.IsAny<Order>()))
+                .ReturnsAsync(order);
             #endregion
 
             #region Act
+            var result = await _sut.CreateOrder(newOrder);
             #endregion
 
             #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<OrderResponse>(result);
+            Assert.Equal(orderId, result.Id);
+            Assert.Equal(newOrder.ShipmentAddressId, result.ShipmentAddress);
+            Assert.Equal(newOrder.Number, result.Number);
+            Assert.Equal(newOrder.Floor, result.Floor);
+            Assert.Equal(newOrder.Zipcode, result.Zipcode);
+            Assert.Equal(newOrder.Country, result.Country);
+            //Assert.Equal(newAddress.CustomerId, result.Customer.Id); // TODO* Fejler på Customer.Id
             #endregion
         }
         #endregion

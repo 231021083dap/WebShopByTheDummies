@@ -1,5 +1,6 @@
 ﻿using Moq;
 using WebShop.API.Authorization;
+using WebShop.API.Database.Entities;
 using WebShop.API.Repository;
 using WebShop.API.Services;
 using Xunit;
@@ -79,7 +80,7 @@ namespace WebShop.Tests
 
         #endregion
 
-        #region Register (MISSING (TODO))
+        #region Create/Register (MISSING (TODO))
 
         #endregion
 
@@ -116,12 +117,46 @@ namespace WebShop.Tests
         public async void Delete_ShouldReturnTrue_WhenDeleteIsSuccess()
         {
             #region Arrange
+            int userId = 1;
+
+            Address address = new Address
+            {
+                CustomerId = 1,
+                Id = 1,
+                StreetName = "test",
+                Number = 123,
+                Floor = "1. TV",
+                ZipCity = new ZipCity { Id = 2100, City = "Østerbro"},
+                ZipCityId = 2100,
+                Country = "Denmark"
+            };
+
+            User user = new User
+            {
+                Id = userId,
+                Email = "test",
+                Password = "test",
+                Customer = new Customer 
+                { 
+                    UserId = userId, 
+                    Id = 1, 
+                    FirstName = "test",
+                    MiddleName = "test", 
+                    LastName = "test"
+                }
+            };
+
+            _userRepository
+                .Setup(a => a.DeleteUser(It.IsAny<int>()))
+                .ReturnsAsync(user);
             #endregion
 
             #region Act
+            var result = await _sut.Delete(userId);
             #endregion
 
             #region Assert
+            Assert.True(result);
             #endregion
         }
         #endregion
