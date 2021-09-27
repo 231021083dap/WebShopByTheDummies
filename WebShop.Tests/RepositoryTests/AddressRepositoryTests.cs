@@ -159,8 +159,8 @@ namespace WebShop.Tests.RepositoryTests
                 StreetName = "UpdatedStreet",
                 Number = 21,
                 Floor = "update 3th",
-                ZipCity = new ZipCity { Id = 4200, City = "TestBronx" },
-                ZipCityId = 4200,
+                ZipCity = new ZipCity { Id = 2400, City = "TestBronx" },
+                ZipCityId = 2400,
                 Country = "Update",
                 Customer = new Customer { Id = 2 },
                 CustomerId = 2
