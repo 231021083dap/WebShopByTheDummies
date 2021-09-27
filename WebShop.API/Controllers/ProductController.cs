@@ -9,7 +9,7 @@ using WebShop.API.Services;
 
 namespace WebShop.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("API/")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace WebShop.API.Controllers
         }
 
         #region Get All Products
-        [HttpGet]
+        [HttpGet("Product/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -47,7 +47,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Get All Categories
-        [HttpGet("/api/Category")]
+        [HttpGet("Category/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -74,7 +74,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Get Product By Id
-        [HttpGet("{productId}")]
+        [HttpGet("Product/{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -98,7 +98,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Get Category By Id
-        [HttpGet("/api/Category/{categoryId}")]
+        [HttpGet("Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -123,7 +123,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Create Product
-        [HttpPost]
+        [HttpPost("Product/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -145,31 +145,8 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
-        #region Create Category
-        [HttpPost("/api/Category")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateCategory([FromBody] NewCategory newCategory)
-        {
-            try
-            {
-                CategoryResponse category = await _productService.CreateCategory(newCategory);
-
-                if (category == null)
-                {
-                    return Problem("Product was not created, something went wrong");
-                }
-                return Ok(category);
-            }
-            catch (Exception ex)
-            {
-                return Problem(ex.Message);
-            }
-        }
-        #endregion
         #region Create Image
-        [HttpPost("image/{productId}")]
+        [HttpPost("Product/Image/{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -191,9 +168,32 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+        #region Create Category
+        [HttpPost("Category/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CreateCategory([FromBody] NewCategory newCategory)
+        {
+            try
+            {
+                CategoryResponse category = await _productService.CreateCategory(newCategory);
+
+                if (category == null)
+                {
+                    return Problem("Product was not created, something went wrong");
+                }
+                return Ok(category);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+        }
+        #endregion
 
         #region Update Product
-        [HttpPut("{productId}")]
+        [HttpPut("Product/{productId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -216,7 +216,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Update Category
-        [HttpPut("/api/Category/{categoryId}")]
+        [HttpPut("Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -240,7 +240,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Delete Product
-        [HttpDelete("{productId}")]
+        [HttpDelete("Product/{productId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -262,7 +262,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Delete Image
-        [HttpDelete("image/{imageId}")]
+        [HttpDelete("Product/Image/{imageId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -285,7 +285,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Delete Category
-        [HttpDelete("/api/Category/{categoryId}")]
+        [HttpDelete("Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

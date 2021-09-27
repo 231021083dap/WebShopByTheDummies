@@ -20,14 +20,7 @@ namespace WebShop.API.Repository
         {
             _context = context;
         }
-
-        //public async Task<OrderItem> CreateOrderItem(OrderItem orderItem)
-        //{
-        //    _context.OrderItem.Add(orderItem);
-        //    await _context.SaveChangesAsync();
-        //    return orderItem;
-        //}
-
+        #region Create Order Item
         public async Task<List<OrderItem>> CreateOrderItem(List<OrderItem> orderItems)
         {
             
@@ -36,6 +29,7 @@ namespace WebShop.API.Repository
             await _context.SaveChangesAsync();
             return orderItems;
         }
+        #endregion
 
         #region Delete OrderItem
         public async Task<OrderItem> DeleteOrderItem(int orderItemId)
