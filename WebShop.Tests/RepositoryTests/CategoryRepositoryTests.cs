@@ -74,7 +74,7 @@ namespace WebShop.Tests.RepositoryTests
         }
 
         [Fact]
-        public async Task GetCategoryById_ShouldReturnTheAddress_IfCategoryExists()
+        public async Task GetCategoryById_ShouldReturnTheCategory_IfCategoryExists()
         {
             #region Arrange
             await _context.Database.EnsureDeletedAsync();

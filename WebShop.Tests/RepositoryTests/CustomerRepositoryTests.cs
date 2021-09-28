@@ -30,7 +30,7 @@ namespace WebShop.Tests.RepositoryTests
         [Fact]
         public async Task GetAllCustomers_ShouldReturnAListOfCustomers_WhenCustomersExists()
         {
-        #region Arrange
+            #region Arrange
             await _context.Database.EnsureDeletedAsync();
             _context.Customer.Add(new Customer
             {
@@ -38,7 +38,7 @@ namespace WebShop.Tests.RepositoryTests
                 FirstName = "Testen",
                 MiddleName = "Test",
                 LastName = "Testesen",
-                User = new User { Id = 1, Email = "Test@Test.test"},
+                User = new User { Id = 1, Email = "Test@Test.test" },
                 UserId = 1
             });
             _context.Customer.Add(new Customer
@@ -51,9 +51,9 @@ namespace WebShop.Tests.RepositoryTests
                 UserId = 2
             });
             await _context.SaveChangesAsync();
-        #endregion
-        #region Act
-        var result = await _sut.GetAllCustomers();
+            #endregion
+            #region Act
+            var result = await _sut.GetAllCustomers();
             #endregion
             #region Assert
             Assert.NotNull(result);
@@ -61,7 +61,186 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Equal(2, result.Count);
             #endregion
         }
-}
+        [Fact]
+        public async Task GetAllCustomers_ShouldReturnEmptyListOfCustomers_WhenNoCustomersExists()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            #endregion
+            #region Act
+            var result = await _sut.GetAllCustomers();
+            #endregion
+            #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<List<Customer>>(result);
+            Assert.Empty(result);
+            #endregion
+        }
+        [Fact]
+        public async Task GetCustomerById_ShouldReturnTheCustomer_IfCustomerExists()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+            int customerId = 1;
+            _context.Customer.Add(new Customer
+            {
+                Id = customerId,
+                FirstName = "Testen",
+                MiddleName = "Test",
+                LastName = "Testesen",
+                User = new User { Id = 1, Email = "Test@Test.test" },
+                UserId = 1
+
+            });
+            await _context.SaveChangesAsync();
+            #endregion
+            #region Act
+            var result = await _sut.GetCustomerById(customerId);
+            #endregion
+            #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<Customer>(result);
+            Assert.Equal(customerId, result.Id);
+            #endregion
+        }
+        [Fact]
+        public async Task GetCustomerById_ShouldReturnNull_IfCustomerDoesNotExists()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+            int customerId = 1;
+            #endregion
+            #region Act
+            var result = await _sut.GetCustomerById(customerId);
+            #endregion
+            #region Assert
+            Assert.Null(result);
+            #endregion
+        }
+        [Fact]
+        public async Task CreateCustomer_ShouldAddIdToCustomer_WhenSavingToDatebase()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+            int expectedId = 1;
+            Customer customer = new()
+            {
+                FirstName = "Testen",
+                MiddleName = "Test",
+                LastName = "Testesen",
+                User = new User { Id = 1, Email = "Test@Test.test" },
+                UserId = 1
+            };
+            #endregion
+            #region Act
+            var result = await _sut.CreateCustomer(customer);
+            #endregion
+            #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<Customer>(result);
+            Assert.Equal(expectedId, result.Id);
+            #endregion
+        }
+        [Fact]
+        public async Task CreateCustomer_ShouldFailToAddNewCustomer_WhenAddingCustomerWithExistingId()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+
+            Customer customer = new()
+            {
+                Id = 1,
+                FirstName = "Testen",
+                MiddleName = "Test",
+                LastName = "Testesen",
+                User = new User { Id = 1, Email = "Test@Test.test" },
+                UserId = 1
+            };
+
+            _context.Customer.Add(customer);
+            await _context.SaveChangesAsync();
+            #endregion
+            #region Act
+            Func<Task> action = async () => await _sut.CreateCustomer(customer);
+            #endregion
+            #region Assert
+            var ex = await Assert.ThrowsAsync<ArgumentException>(action);
+            Assert.Contains("already been added", ex.Message);
+            #endregion
+        }
+        [Fact]
+        public async Task UpdateCustomer_ShouldChangeValuesOnCustomer_WhenCustomerExists()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+            int customerId = 1;
+            Customer customer = new()
+            {
+                Id = customerId,
+                FirstName = "Tester",
+                MiddleName = "Test",
+                LastName = "Testesen",
+                User = new User { Id = 1, Email = "Test@Test.test" },
+                UserId = 1
+
+            };
+            _context.Customer.Add(customer);
+            await _context.SaveChangesAsync();
+
+            Customer updateCustomer = new()
+            {
+                Id = customerId,
+                FirstName = "Tester2",
+                MiddleName = "Test12",
+                LastName = "Testesen2",
+                User = new User { Id = 1, Email = "Test@Test.test" },
+                UserId = 1
+            };
+            #endregion
+            #region Act
+            var result = await _sut.UpdateCustomer(customerId, updateCustomer);
+            #endregion
+            #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<Customer>(result);
+            Assert.Equal(customerId, result.Id);
+            Assert.Equal(updateCustomer.FirstName, result.FirstName);
+            Assert.Equal(updateCustomer.MiddleName, result.MiddleName);
+            Assert.Equal(updateCustomer.LastName, result.LastName);
+            Assert.Equal(updateCustomer.UserId, result.UserId);
+
+            #endregion
+        }
+        [Fact]
+        public async Task UpdateCustomer_ShouldReturnNull_WhenCustomerDoesNotExists()
+        {
+            #region Arrange
+            await _context.Database.EnsureDeletedAsync();
+            int customerId = 1;
+            Customer updateCustomer = new()
+            {
+                Id = customerId,
+                FirstName = "Tester2",
+                MiddleName = "Test12",
+                LastName = "Testesen2",
+                User = new User { Id = 1, Email = "Test@Test.test" },
+                UserId = 1
+            };
+            #endregion
+            #region Act
+            var result = await _sut.UpdateCustomer(customerId, updateCustomer);
+            #endregion
+            #region Assert
+            Assert.Null(result);
+            #endregion
+
+        }
+        
+
+
+
+    }
 
 
 
