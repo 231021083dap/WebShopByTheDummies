@@ -1,5 +1,5 @@
 ﻿using Moq;
-using System;
+using System.Collections.Generic;
 using WebShop.API.Database.Entities;
 using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
@@ -26,12 +26,32 @@ namespace WebShop.Tests
         public async void GetAll_ShouldReturnListOfOrderResponses_WhenOrdersExist()
         {
             #region Arrange
+            List<Order> Orders = new List<Order>();
+            Orders.Add(new Order
+            {
+                Id = 1,
+                CreateDate = DateTime.Now(),
+
+            });
+
+            Orders.Add(new Order
+            {
+
+            });
+
+            _orderRepository
+                .Setup(a => a.GetOrderById())
+                .ReturnsAsync(Orders);
             #endregion
 
             #region Act
+            var result = await _sut.GetAllOrders();
             #endregion
 
             #region Assert
+            Assert.NotNull(result);
+            Assert.Equal(2, result.Count);
+            Assert.IsType<List<OrderResponse>>(result);
             #endregion
         }
 
@@ -39,12 +59,21 @@ namespace WebShop.Tests
         public async void GetAll_ShouldReturnEmptyListOfOrderResponses_WhenNoOrdersExists()
         {
             #region Arrange
+            List<Order> Orders = new List<Order>();
+
+            _orderRepository
+                .Setup(a => a.GetAllOrders())
+                .ReturnsAsync(Orders);
             #endregion
 
             #region Act
+            var result = await _sut.GetAllOrders();
             #endregion
 
             #region Assert
+            Assert.NotNull(result);
+            Assert.Empty(result);
+            Assert.IsType<List<OrderResponse>>(result);
             #endregion
         }
         #endregion
@@ -66,14 +95,23 @@ namespace WebShop.Tests
         [Fact]
         public async void GetById_ShouldReturnNull_WhenOrderDoesNotExist()
         {
-            #region Arrange
-            #endregion
+            {
+                #region Arrange
+                int orderId = 1;
 
-            #region Act
-            #endregion
+                _orderRepository
+                    .Setup(a => a.GetOrderById(It.IsAny<int>()))
+                    .ReturnsAsync(() => null);
+                #endregion
 
-            #region Assert
-            #endregion
+                #region Act
+                var result = await _sut.GetOrderById(orderId);
+                #endregion
+
+                #region Assert
+                Assert.Null(result);
+                #endregion
+            }
         }
         #endregion
 

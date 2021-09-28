@@ -126,19 +126,19 @@ namespace WebShop.API.Services
             product = await _productRepository.CreateProduct(product);
             if (product != null)
             {
-                List<Image> images = new();
-                if (newProduct.Image !=null && newProduct.Image.Path.Count > 0)
-                {
-                    foreach (var item in images)
-                    {
-                        NewImage newImage = new()
-                        {
-                            Path = newProduct.Image.Path,
-                        };
-                        await _imageRepository.CreateImage(item);
-                    }
-                }
-                product.Images = images;
+                //List<Image> images = new();
+                //if (newProduct.Image !=null && newProduct.Image.Path.Count > 0)
+                //{
+                //    foreach (var item in images)
+                //    {
+                //        NewImage newImage = new()
+                //        {
+                //            Path = newProduct.Image.Path,
+                //        };
+                //        await _imageRepository.CreateImage(item);
+                //    }
+                //}
+                //product.Images = images;
                 Category category = await _categoryRepository.GetCategoryById(product.CategoryId);
 
                 return new ProductResponse
@@ -152,11 +152,11 @@ namespace WebShop.API.Services
                         Id = category.Id,
                         Name = category.Name
                     },
-                    Images = product.Images.Select(a => new ProductImageResponse
-                    {
-                        Id = a.Id,
-                        Path = a.Path
-                    }).ToList()
+                    //Images = product.Images.Select(a => new ProductImageResponse
+                    //{
+                    //    Id = a.Id,
+                    //    Path = a.Path
+                    //}).ToList()
                 };
             } 
             return null;

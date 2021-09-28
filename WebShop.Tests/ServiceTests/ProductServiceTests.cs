@@ -9,8 +9,8 @@ using Xunit;
 
 namespace WebShop.Tests
 {
-    /*TODO:
-     * Create_ShouldReturnProductResponse (Issue with newImage path string list)
+    /*
+     * Create_ShouldReturnProductImageResponse (This was removed do to Jack's input regarding images and product correlation)
      */
     public class ProductServiceTests
     {
@@ -33,21 +33,12 @@ namespace WebShop.Tests
             #region Arrange
             List<Product> Products = new List<Product>();
 
-            //List<Image> images = new List<Image>();
-            //images.Add(new Image
-            //{
-            //    Id = 1,
-            //    Path = "test",
-            //    ProductId = 1
-            //});
-
             Products.Add(new Product
             {
                 Id = 1,
                 CategoryId = 1,
                 Category = new Category { Id = 1, Name = "test", products = new(), Picture = "test" },
                 Name = "test",
-                Images = new (),
                 Description = "test",
                 Price = 123
             });
@@ -58,7 +49,6 @@ namespace WebShop.Tests
                 CategoryId = 2,
                 Category = new Category { Id = 2, Name = "test", products = new(), Picture = "test" },
                 Name = "test",
-                Images = new(),
                 Description = "test",
                 Price = 123
             });
@@ -116,8 +106,7 @@ namespace WebShop.Tests
                 Category = new Category { Id = 1, Name = "test", products = new(), Picture = "test" },
                 Name = "test",
                 Description = "test",
-                Price = 123,
-                Images = new()
+                Price = 123
             };
 
             _productRepository
@@ -164,74 +153,56 @@ namespace WebShop.Tests
         [Fact]
         public async void Create_ShouldReturnProductResponse_WhenCreateIsSuccess()
         {
-            //#region Arrange
-            //int productId = 1;
-
-            //List<NewImage> paths = new List<NewImage>();
-            //paths.Add(new NewImage
-            //{
-            //    Path = "test"
-                
-            //    });
-
-            ////List<Image> images = new List<Image>();
-            ////images.Add(new Image
-            ////{
-            ////    Id = 1,
-            ////    Path = "test",
-            ////    ProductId = 1
-            ////});
-
-            //NewProduct newProduct = new NewProduct
-            //{
-            //    Name = "test",
-            //    Description = "test",
-            //    Price = 123,
-            //    CategoryId = 1,
-            //    Image = new NewImage { Path = "test" }
-            //};
-
-            //Product product = new Product
-            //{
-            //    Id = productId,
-            //    CategoryId = 1,
-            //    Name = "test",
-            //    Description = "test",
-            //    Price = 123,
-            //    Category = new Category { Id = 1, Name = "test", products = new(), Picture = "test" },
-            //    Images = images
-            //};
-
-            //_productRepository
-            //    .Setup(a => a.CreateProduct(It.IsAny<Product>()))
-            //    .ReturnsAsync(product);
-            //#endregion
-
-            //#region Act
-            //var result = await _sut.CreateProduct(newProduct);
-            //#endregion
-
-            //#region Assert
-            //Assert.NotNull(result);
-            //Assert.IsType<ProductResponse>(result);
-            //Assert.Equal(productId, result.Id);
-            //Assert.Equal(newProduct.Name, result.Name);
-            //Assert.Equal(newProduct.Description, result.Description);
-            //Assert.Equal(newProduct.Price, result.Price);
-            //Assert.Equal(newProduct.CategoryId, result.Category.Id);
-            //#endregion
-        }
-
-        [Fact]
-        public async void Create_ShouldReturnProductImageResponse_WhenCreateIsSuccess()
-        {
             #region Arrange
+            int productId = 1;
+
+            NewProduct newProduct = new NewProduct
+            {
+                Name = "test",
+                Description = "test",
+                Price = 123,
+                CategoryId = 1
+            };
+
+            Category category = new Category
+            {
+                Id = 1,
+                Name = "test",
+                products = new(),
+                Picture = "test"
+            };
+
+            Product product = new Product
+            {
+                Id = productId,
+                CategoryId = 1,
+                Name = "test",
+                Description = "test",
+                Price = 123,
+                Category = category
+            };
+
+            _productRepository
+                .Setup(a => a.CreateProduct(It.IsAny<Product>()))
+                .ReturnsAsync(product);
+
+            _categoryRepository
+                .Setup(a => a.GetCategoryById(It.IsAny<int>()))
+                .ReturnsAsync(category);
             #endregion
 
             #region Act
+            var result = await _sut.CreateProduct(newProduct);
             #endregion
 
             #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<ProductResponse>(result);
+            Assert.Equal(productId, result.Id);
+            Assert.Equal(newProduct.Name, result.Name);
+            Assert.Equal(newProduct.Description, result.Description);
+            Assert.Equal(newProduct.Price, result.Price);
+            Assert.Equal(newProduct.CategoryId, result.Category.Id);
             #endregion
         }
         #endregion
@@ -241,12 +212,44 @@ namespace WebShop.Tests
         public async void Update_ShouldReturnUpdateProductResponse_WhenUpdateIsSuccess()
         {
             #region Arrange
+            int productId = 1;
+
+            UpdateProduct updateProduct = new UpdateProduct
+            {
+                CategoryId = 1,
+                Name = "test",
+                Description = "test",
+                Price = 123
+            };
+
+            Product product = new Product
+            {
+                Id = productId,
+                CategoryId = 1,
+                Name = "test",
+                Description = "test",
+                Price = 123,
+                Category = new Category { Id = 1, Name = "test", Picture = "test" }
+            };
+
+            _productRepository
+                .Setup(a => a.UpdateProduct(It.IsAny<int>(), It.IsAny<Product>()))
+                .ReturnsAsync(product);
             #endregion
 
             #region Act
+            var result = await _sut.UpdateProduct(productId, updateProduct);
             #endregion
 
             #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<ProductResponse>(result);
+            Assert.Equal(productId, result.Id);
+            Assert.Equal(updateProduct.CategoryId, result.Category.Id);
+            Assert.Equal(updateProduct.Name, result.Name);
+            Assert.Equal(updateProduct.Description, result.Description);
+            Assert.Equal(updateProduct.Price, result.Price);
+
             #endregion
         }
 
@@ -259,7 +262,6 @@ namespace WebShop.Tests
                 CategoryId = 1,
                 Name = "test",
                 Description = "test",
-                ImageId = 1,
                 Price = 123
             };
 
