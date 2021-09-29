@@ -1,6 +1,15 @@
 <nav>
-    <a routerLink="/"></a>
-    <a routerLink="/"></a>
+    <a routerLink="/">Home</a>
+    <div style="display:inline-block">
+      <div style="display:inline-block">
+        <a routerLink="" routerLinkActive="active-link">Produkter</a>
+        <a routerLink="" routerLinkActive="active-link">Kategorier</a>
+        <a routerLink="" routerLinkActive="active-link">Søg</a>
+        <a routerLink="" routerLinkActive="active-link">Kurv</a>
+      </div>
+      <!-- <a style="cursor: pointer" (click)="logout()">Logout</a> -->
+    </div>
+    <!-- <a routerLink="/login" routerLinkActive="active-link" *ngIf="currentUser == null">Login</a> -->
 </nav>
 
 <router-outlet></router-outlet>
