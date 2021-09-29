@@ -42,32 +42,32 @@ namespace WebShop.API.Database
 
             #endregion
 
-            #region Address
+            //#region Address
 
-            modelBuilder.Entity<Address>().HasData(
-            new Address
-            {
-                CustomerId = 2,
-                Id = 1,
-                StreetName = "testvej",
-                Number = 222,
-                Floor = "1. TH",
-                ZipCityId = 2100,
-                Country = "Danmark"
-            },
+            //modelBuilder.Entity<Address>().HasData(
+            //new Address
+            //{
+            //    CustomerId = 2,
+            //    Id = 1,
+            //    StreetName = "testvej",
+            //    Number = 222,
+            //    Floor = "1. TH",
+            //    ZipCityId = 2100,
+            //    Country = "Danmark"
+            //},
 
-            new Address
-            {
-                CustomerId = 2,
-                Id = 2,
-                StreetName = "Nyborggade",
-                Number = 34,
-                Floor = "2. TV",
-                ZipCityId = 2100,
-                Country = "Danmark"
-            });
+            //new Address
+            //{
+            //    CustomerId = 2,
+            //    Id = 2,
+            //    StreetName = "Nyborggade",
+            //    Number = 34,
+            //    Floor = "2. TV",
+            //    ZipCityId = 2100,
+            //    Country = "Danmark"
+            //});
 
-            #endregion
+            //#endregion
 
             #region Category
 

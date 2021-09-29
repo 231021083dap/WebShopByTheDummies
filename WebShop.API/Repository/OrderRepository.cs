@@ -57,16 +57,7 @@ namespace WebShop.API.Repository
             return order;
         }
         // Delete Order should not be an option!!!
-        //public async Task<Order> DeleteOrder(int bookId)
-        //{
-        //    Order order = await _context.Order.FirstOrDefaultAsync(a => a.Id == orderId);
-        //    if (order != null)
-        //    {
-        //        _context.Order.Remove(order);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    return order;
-        //}
+       
         #endregion
 
         #region Update Order
