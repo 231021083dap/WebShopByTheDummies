@@ -1,1 +1,7 @@
 <p>category works!</p>
+<div style="display: flex; justify-content: center;">
+    <div *ngFor="let category of categories" style="height: 300; width: 200;">
+        <a href="" style="z-index: 10; position:absolute; color: lawngreen; background-color: darkgray; align-self: center; "> {{ category.name }}</a>
+        <img src="{{ category.picturePath }}" alt="{{ category.name }}" width="200" height="300" style="display: flex; z-index: -1;"/>
+    </div>
+</div>

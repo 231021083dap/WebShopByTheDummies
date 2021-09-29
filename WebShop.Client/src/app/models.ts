@@ -4,10 +4,12 @@
 export interface Category{
   id : number;
   name : string;
-  picture : string;
-  products : Product[];
+  picturePath : string;
+  products? : Product[];
 
 }
+
+
 export interface Product{
   id : number;
   categoryId: number;

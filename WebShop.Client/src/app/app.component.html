@@ -2,8 +2,8 @@
     <a routerLink="/">Home</a>
     <div>
       <div>
-        <a routerLink="" routerLinkActive="active-link">Produkter</a>
-        <a routerLink="" routerLinkActive="active-link">Kategorier</a>
+        <a routerLink="product" routerLinkActive="active-link">Produkter</a>
+        <a routerLink="category" routerLinkActive="active-link">Kategorier</a>
         <a routerLink="" routerLinkActive="active-link">Søg</a>
         <a routerLink="" routerLinkActive="active-link">Kurv</a>
       </div>
@@ -12,4 +12,5 @@
     <!-- <a routerLink="/login" routerLinkActive="active-link" *ngIf="currentUser == null">Login</a> -->
 </nav>
 
+<app-category></app-category>
 <router-outlet></router-outlet>
