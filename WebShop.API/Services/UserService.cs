@@ -65,7 +65,6 @@ namespace WebShop.API.Services
             {
                 return null;
             }
-
             if (user.Password == login.Password)
             {
                 LoginResponse response = new LoginResponse
@@ -78,7 +77,6 @@ namespace WebShop.API.Services
                 };
                 return response;
             }
-
             return null;
         }
         #endregion
