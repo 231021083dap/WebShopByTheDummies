@@ -11,7 +11,7 @@ import { AuthenticationService } from './_services/authentication.service';
 })
 export class AppComponent {
   title = 'WebShop-Client';
-  currentUser: User = { id: 0, email: '', username: '' };
+  currentUser: User = { id: 0, email: '', /*username: ''*/ };
 
   constructor(
     private router: Router,
