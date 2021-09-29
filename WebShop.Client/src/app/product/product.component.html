@@ -1,1 +1,26 @@
 <p>product works!</p>
+
+<div class="ProductContainer">
+    <a href="" style="text-decoration: none; color: black;">
+        <div class="ProductCard">
+            <div class="ProductCardHead">
+                <img src="../assets/cow4.jpg" alt="">
+            </div>
+            <div class="ProductCardBody">
+                <div class="ProductDescription">
+                    <span class="ProductTitle">
+                        <b>{{ Product.name }}</b>
+                    </span>
+                    <span class="ProductCaption">
+                        {{ Product.description }}
+                    </span>
+                </div>
+                <div>
+                    <span class="ProductPrice">
+                        {{ Product.price }} <b>KR</b>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </a>    
+</div>
