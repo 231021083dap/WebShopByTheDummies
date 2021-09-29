@@ -25,34 +25,34 @@ namespace WebShop.Tests
         [Fact]
         public async void GetAll_ShouldReturnListOfOrderResponses_WhenOrdersExist()
         {
-            #region Arrange
-            List<Order> Orders = new List<Order>();
-            Orders.Add(new Order
-            {
-                Id = 1,
-                CreateDate = DateTime.Now(),
+            //#region Arrange
+            //List<Order> Orders = new List<Order>();
+            //Orders.Add(new Order
+            //{
+            //    Id = 1,
+            //    CreateDate = DateTime.Now(),
 
-            });
+            //});
 
-            Orders.Add(new Order
-            {
+            //Orders.Add(new Order
+            //{
 
-            });
+            //});
 
-            _orderRepository
-                .Setup(a => a.GetOrderById())
-                .ReturnsAsync(Orders);
-            #endregion
+            //_orderRepository
+            //    .Setup(a => a.GetOrderById())
+            //    .ReturnsAsync(Orders);
+            //#endregion
 
-            #region Act
-            var result = await _sut.GetAllOrders();
-            #endregion
+            //#region Act
+            //var result = await _sut.GetAllOrders();
+            //#endregion
 
-            #region Assert
-            Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
-            Assert.IsType<List<OrderResponse>>(result);
-            #endregion
+            //#region Assert
+            //Assert.NotNull(result);
+            //Assert.Equal(2, result.Count);
+            //Assert.IsType<List<OrderResponse>>(result);
+            //#endregion
         }
 
         [Fact]

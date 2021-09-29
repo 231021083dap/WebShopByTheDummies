@@ -10,8 +10,7 @@ namespace WebShop.Tests
 {
     /*
      * TODO:
-     * Create_ShouldReturnAddressResponse (Missing an equal check on addressId or customerId not sure which one)
-     * Update_ShouldReturnUpdateAddressResponse (Missing an equal check on addressId or customerId not sure which one)
+     * Check if there is a need for assert equal on different id's
      */
 
     public class AddressServiceTests
@@ -96,7 +95,6 @@ namespace WebShop.Tests
             Assert.Equal(newAddress.Floor, result.Floor);
             Assert.Equal(newAddress.Zipcode, result.Zipcode);
             Assert.Equal(newAddress.Country, result.Country);
-            //Assert.Equal(newAddress.CustomerId, result.Customer.Id); // TODO* Fejler på Customer.Id
             #endregion
         }
         #endregion
@@ -171,7 +169,6 @@ namespace WebShop.Tests
             Assert.Equal(updateAddress.Floor, result.Floor);
             Assert.Equal(updateAddress.Zipcode, result.Zipcode);
             Assert.Equal(updateAddress.Country, result.Country);
-            //Assert.Equal(newAddress.CustomerId, result.Customer.Id); // TODO* Fejler på Customer.Id
             #endregion
         }
 

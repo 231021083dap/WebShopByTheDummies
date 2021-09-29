@@ -92,75 +92,70 @@ namespace WebShop.Tests
         [Fact]
         public async void GetById_ShouldReturnAnCustomerResponse_WhenCustomerExists()
         {
+            #region Arrange
+            int customerId = 1;
 
-            //#region Arrange
-            //int userId = 1;
+            User user = new User
+            {
+                Id = 1,
+                Email = "test"
+            };
 
-            //User user = new User
-            //{
-            //    Id = userId,
-            //    Email = "test"
-            //};
-
-            //Customer customer = new Customer
+            //List<Address> addresses = new List<Address>();
+            //addresses.Add(new Address
             //{
             //    Id = 1,
-            //    UserId = userId,
-            //    FirstName = "test",
-            //    MiddleName = "test",
-            //    LastName = "test",
-            //    Addresses = new()
-            //};
+            //    //CustomerId = 1,
+            //    StreetName = "test",
+            //    Number = 123,
+            //    Floor = "1. TV",
+            //    //ZipCity
+            //    ZipCityId = 2100,
+            //    Country = "Denmark"
+            //});
 
+            Customer customer = new Customer
+            {
+                Id = customerId,
+                UserId = 1,
+                FirstName = "test",
+                MiddleName = "test",
+                LastName = "test",
+                User = user,
+                Addresses = new()
+                //Addresses = addresses
+            };
 
-            ////List<Address> addresses = new List<Address>();
-            ////addresses.Add(new Address
-            ////{
-            ////    Id = 1,
-            ////    CustomerId = customerId,
-            ////    StreetName = "test",
-            ////    Number = 123,
-            ////    Floor = "1. TV",
-            ////    ZipCity = { Id = 2100, City = "Østerbro" },
-            ////    ZipCityId = 2100,
-            ////    Country = "Denmark"
-            ////});
-
-            ////Address address = new Address
-            ////{
-            ////    Id = 1,
-            ////    StreetName = "test",
-            ////    Number = 123,
-            ////    Floor = "1. TV",
-            ////    ZipCity = { Id = 2100, City = "Østerbro" },
-            ////    ZipCityId = 2100,
-            ////    Country = "Denmark"
-            ////};
+            _customerRepository
+                .Setup(a => a.GetCustomerById(It.IsAny<int>()))
+                .ReturnsAsync(customer);
 
             //_userRepository
             //    .Setup(a => a.GetByUserId(It.IsAny<int>()))
             //    .ReturnsAsync(user);
 
-            //_customerRepository
-            //    .Setup(a => a.GetCustomerById(It.IsAny<int>()))
-            //    .ReturnsAsync(customer);
+            //_addressRepository
+            //    .Setup(a => a.GetAddressById(It.IsAny<int>()))
+            //    .ReturnsAsync(address);
+            #endregion
 
-            ////_addressRepository
-            ////    .Setup(a => a.GetAddressById(It.IsAny<int>()))
-            ////    .ReturnsAsync(address);
+            #region Act
+            var result = await _sut.GetCustomerById(customerId);
+            #endregion
 
-            //#endregion
+            #region Assert
+            Assert.NotNull(result);
+            Assert.IsType<CustomerResponse>(result);
+            Assert.Equal(customerId, result.Id);
+            Assert.Equal(customer.FirstName, result.FirstName);
+            Assert.Equal(customer.MiddleName, result.MiddleName);
+            Assert.Equal(customer.LastName, result.LastName);
 
-            //#region Act
-            //var result = await _sut.GetCustomerById(userId);
-            //#endregion
+            Assert.Equal(customer.User.Id, result.User.Id);
+            Assert.Equal(customer.User.Email, result.User.Email);
 
-            //#region Assert
-            //Assert.NotNull(result);
-            //Assert.IsType<CustomerResponse>(result);
-            //Assert.Equal(userId, result.Id);
-
-            //#endregion
+            //coll(customer.Addresses, result.Addresses);
+            #endregion
         }
 
         [Fact]
@@ -188,65 +183,7 @@ namespace WebShop.Tests
         [Fact]
         public async void Update_ShouldReturnUpdateCustomerResponse_WhenUpdateIsSuccess()
         {
-            //MISSING ID!
 
-            //#region Arrange
-            
-            //int customerId = 1;
-
-            //User user = new User
-            //{
-            //    Id = 1,
-            //    Customer = new Customer { Id = 1, FirstName = "test", MiddleName = "test", LastName = "test" },
-            //    Email = "test",
-            //    Password = "test",
-            //    Role = API.Helpers.Role.User
-            //};
-
-            //Customer customer = new Customer
-            //{
-            //    UserId = 1,
-            //    Id = customerId,
-            //    FirstName = "test",
-            //    MiddleName = "test",
-            //    LastName = "test",
-            //    User = new User { Id = 1, Email = "test" }
-            //};
-
-            //UpdateCustomer updateCustomer = new UpdateCustomer
-            //{
-            //    FirstName = "test",
-            //    MiddleName = "test",
-            //    LastName = "test",
-            //    User =
-            //    {
-            //        Email = "test",
-            //        Password = "test"
-            //    }
-            //};
-
-            //_customerRepository
-            //    .Setup(a => a.UpdateCustomer(It.IsAny<int>(), It.IsAny<Customer>()))
-            //    .ReturnsAsync(customer);
-
-
-            //_userRepository
-            //    .Setup(a => a.GetByUserId(It.IsAny<int>()))
-            //    .ReturnsAsync(user);
-            //#endregion
-
-            //#region Act
-            //var result = await _sut.UpdateCustomer(customerId, updateCustomer);
-            //#endregion
-
-            //#region Assert
-            //Assert.NotNull(result);
-            //Assert.IsType<CustomerResponse>(result);
-            //Assert.Equal(customerId, result.Id);
-            //Assert.Equal(updateCustomer.FirstName, result.FirstName);
-            //Assert.Equal(updateCustomer.LastName, result.LastName);
-            //Assert.Equal(updateCustomer.MiddleName, result.MiddleName);
-            //#endregion
         }
 
         [Fact]

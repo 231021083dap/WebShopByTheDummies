@@ -304,7 +304,7 @@ namespace WebShop.Tests
             #region Act
             var result = await _sut.DeleteProduct(imageId);
             #endregion
-
+            
             #region Assert
             Assert.True(result);
             #endregion
