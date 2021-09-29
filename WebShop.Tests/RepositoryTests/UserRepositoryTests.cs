@@ -22,7 +22,7 @@ namespace WebShop.Tests.RepositoryTests
         public UserRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
-                .UseInMemoryDatabase(databaseName: "WebShopTest")
+                .UseInMemoryDatabase(databaseName: "WebShopTestUser")
                 .Options;
 
             _context = new WebShopContext(_options);
