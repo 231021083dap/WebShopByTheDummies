@@ -58,6 +58,7 @@ namespace WebShop.API.Services
                     Email = customer.User.Email
                 },
 
+                Id = customer.Id,
                 FirstName = customer.FirstName,
                 MiddleName = customer.MiddleName,
                 LastName = customer.LastName,

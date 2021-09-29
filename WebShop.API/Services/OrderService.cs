@@ -35,7 +35,7 @@ namespace WebShop.API.Services
             Order order = new Order
             {
                 CreateDate = DateTime.Now,
-                UpdatedDate = DateTime.Now,
+                //UpdatedDate = DateTime.Now,
                 ShipmentAddressId = newOrder.ShipmentAddressId,
                 BillingAddressId = newOrder.BillingAddressId,
 

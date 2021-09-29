@@ -52,12 +52,12 @@ namespace WebShop.API
             services.AddCors(options =>
             {
                 options.AddPolicy(name: CORSRules,
-                builder =>
-                {
-                    builder.WithOrigins("http://localhost:4200")
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
-                });
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:4200")
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod();
+                    });
             });
 
             services.Configure<AppSettings>(_configuration.GetSection("AppSettings"));

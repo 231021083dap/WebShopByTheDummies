@@ -15,7 +15,7 @@ namespace WebShop.API.DTO.Requests
         [Required]
         public int CategoryId { get; set; }
 
-        [Required]
-        public int ImageId { get; set; }
+        //[Required]
+        //public int ImageId { get; set; }
     }
 }
