@@ -21,7 +21,7 @@ namespace WebShop.Tests.RepositoryTests
         public ImageRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
-                .UseInMemoryDatabase(databaseName: "WebShopTest")
+                .UseInMemoryDatabase(databaseName: "WebShopTestImage")
                 .Options;
 
             _context = new WebShopContext(_options);
