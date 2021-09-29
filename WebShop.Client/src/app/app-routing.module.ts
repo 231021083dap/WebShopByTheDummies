@@ -2,8 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 
+import { LoginComponent } from './login/login.component';
+import { Role } from './models';
+import { AuthGuard } from './_helpers/auth.guard';
+
 const routes: Routes = [
   { path: '', component: FrontpageComponent }
+//  { path: 'login', component: LoginComponent },
+//  { path: 'admin/authors', component: AuthorComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
 ];
 
 @NgModule({

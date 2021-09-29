@@ -6,12 +6,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { CategoryComponent } from './category/category.component';
+import { ProductComponent } from './product/product.component';
+import { SearchComponent } from './search/search.component';
+import { ProductImageComponent } from './product-image/product-image.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontpageComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
+    CategoryComponent,
+    ProductComponent,
+    SearchComponent,
+    ProductImageComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
