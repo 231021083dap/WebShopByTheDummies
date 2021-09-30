@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { User } from './models';
+import { Role, User } from './models';
 import { AuthenticationService } from './_services/authentication.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AuthenticationService } from './_services/authentication.service';
 })
 export class AppComponent {
   title = 'WebShop-Client';
-  currentUser: User = { id: 0, email: '', /*username: ''*/ };
+  currentUser: User = { id: 0, email: '', role: Role.Admin /*username: ''*/ };
 
   constructor(
     private router: Router,

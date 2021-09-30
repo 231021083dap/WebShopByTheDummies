@@ -8,7 +8,7 @@ import { Category } from '../models';
 })
 export class CategoryService {
 
-  private apiUrl = 'https://localhost:5001/api/Category';
+  private apiUrl = 'https://localhost:5001/API/Category';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -18,7 +18,7 @@ export class CategoryService {
   ) { }
 
   getCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(this.apiUrl);
+    return this.http.get<Category[]>(`${this.apiUrl}/`);
   }
   getCategory(categoryId: number): Observable<Category> {
     return this.http.get<Category>(`${this.apiUrl}/${categoryId}`);

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminCategoryComponent } from './admin/category/category.component';
 import { CategoryComponent } from './category/category.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent },
+  { path: 'admin/category', component: AdminCategoryComponent} // canActivate: [AuthGuard], data: { roles: [Role.Admin]} },
 
 //  { path: 'admin/authors', component: AuthorComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
 ];

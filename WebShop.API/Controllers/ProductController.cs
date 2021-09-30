@@ -47,7 +47,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Get All Categories
-        [HttpGet("Category/")]
+        [HttpGet("Category")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -169,7 +169,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Create Category
-        [HttpPost("Category/")]
+        [HttpPost("Category")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

@@ -12,13 +12,14 @@ export class AdminCategoryComponent implements OnInit {
   
 
   categories: Category[] = [];
-  category: Category = { id: 0, name: '', picturePath: '' };
+  category: Category = { id: 0, name: '', picture: '' };
 
   constructor(
     private categoryService: CategoryService
   ) { }
 
   ngOnInit(): void {
+    this.getCategories();
   }
   getCategories(): void {
     this.categoryService.getCategories()
@@ -36,19 +37,19 @@ export class AdminCategoryComponent implements OnInit {
     }
   }
   cancel(): void {
-    this.category = { id: 0, name: '', picturePath: '' }
+    this.category = { id: 0, name: '', picture: '' }
   }
   save(): void{
     if (this.category.id == 0){
       this.categoryService.addCategory(this.category)
       .subscribe(c => {
         this.categories.push(c)
-        this.category = { id: 0, name: '', picturePath: ''}
+        this.category = { id: 0, name: '', picture: ''}
       });
     }else {
       this.categoryService.updateCategory(this.category.id, this.category)
       .subscribe(() => {
-        this.category = { id: 0, name: '', picturePath: ''}
+        this.category = { id: 0, name: '', picture: ''}
       })
     }
   }
