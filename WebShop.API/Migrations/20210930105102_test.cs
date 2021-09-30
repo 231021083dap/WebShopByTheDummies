@@ -238,9 +238,9 @@ namespace WebShop.API.Migrations
                 columns: new[] { "Id", "CategoryId", "Description", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 1, 1, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 },
-                    { 2, 2, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 },
-                    { 3, 3, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 }
+                    { 1, 1, "MAKE TESTS GREAT AGIAN", "TestProduct1", 100 },
+                    { 2, 2, "MAKE TESTS GREAT AGIAN", "TestProduct2", 200 },
+                    { 3, 3, "MAKE TESTS GREAT AGIAN", "TestProduct3", 300 }
                 });
 
             migrationBuilder.InsertData(

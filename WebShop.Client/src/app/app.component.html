@@ -2,18 +2,20 @@
     <div>
       <div>
         <a routerLink="/">Home</a>
-        <a routerLink="product" routerLinkActive="active-link">Produkter</a>
-        <a routerLink="category" routerLinkActive="active-link">Kategorier</a>
-        <a routerLink="" routerLinkActive="active-link">Søg</a>
-        <a routerLink="" routerLinkActive="active-link">Kurv</a>
+        <a routerLink="Product" routerLinkActive="active-link">Produkter</a>
+        <a routerLink="Category" routerLinkActive="active-link">Kategorier</a>
+        <a routerLink="Search" routerLinkActive="active-link">Søg</a>
+        <a routerLink="Cart" routerLinkActive="active-link">Kurv</a>
       </div>
       <!-- <div *ngIf="currentUser != null && currentUser.role == 'Admin'"> -->
       <div>
         <label>Admin controls</label>
-        <a routerLink="" routerLinkActive="active-link">Produkter</a>
-        <a routerLink="admin/category" routerLinkActive="active-link">Kategorier</a>
-        <a routerLink="" routerLinkActive="active-link">Søg</a>
-        <a routerLink="" routerLinkActive="active-link">Kurv</a>
+
+        <a routerLink="Admin/Product" routerLinkActive="active-link">Produkter</a>
+        <a routerLink="Admin/Category" routerLinkActive="active-link">Kategorier</a>
+        <a routerLink="Admin/Search" routerLinkActive="active-link">Søg</a>
+        <a routerLink="Admin/Cart" routerLinkActive="active-link">Kurv</a>
+
       </div>
       <!-- <a style="cursor: pointer" (click)="logout()">Logout</a> -->
     </div>
@@ -21,5 +23,4 @@
 </nav>
 
 <router-outlet></router-outlet>
-
 
