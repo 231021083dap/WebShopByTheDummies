@@ -1,5 +1,7 @@
-<p>Admin product works!</p>
-
-<div>
-    
-</div>
+<ul>
+    <li *ngFor="let product of products">
+        <button (click)="edit(product)">Edit</button>
+        <button (click)="delete(product)">Delete</button>
+        <label>{{ product.name }} </label>
+    </li>
+</ul>
