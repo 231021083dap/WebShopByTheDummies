@@ -1,1 +1,26 @@
 <p>product works!</p>
+
+<div class="ProductContainer">
+    <a href="" style="text-decoration: none; color: black;">
+        <div *ngFor="let product of products" class="ProductCard">
+            <div class="ProductCardHead">
+                <img src="../assets/cow4.jpg" alt="">
+            </div>
+            <div class="ProductCardBody">
+                <div class="ProductDescription">
+                    <span class="ProductTitle">
+                        <b>{{ product.name }}</b>
+                    </span>
+                    <span class="ProductCaption">
+                        {{ product.description }}
+                    </span>
+                </div>
+                <div>
+                    <span class="ProductPrice">
+                        {{ product.price }} <b>KR</b>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </a>    
+</div>
