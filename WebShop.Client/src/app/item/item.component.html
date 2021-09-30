@@ -1,1 +1,16 @@
-<p>item works!</p>
+<div class="ItemTitle">
+    <p>{{ Item.name }}</p>
+</div>
+
+<div>
+    <p>{{ Item.categoryId }}</p>
+</div>
+
+<div class="ItemContainer">
+    <img src="../assets/cow4.jpg" alt="">
+    <div class="ItemDescriptionAndPriceContainer">
+        <p>{{ Item.description }}</p>
+        <p>{{ Item.price }} <b>KR</b></p>
+        <button>Buy</button>
+    </div>
+</div>

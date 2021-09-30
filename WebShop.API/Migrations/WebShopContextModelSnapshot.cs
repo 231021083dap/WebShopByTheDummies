@@ -284,7 +284,7 @@ namespace WebShop.API.Migrations
                             Id = 1,
                             CategoryId = 1,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct",
+                            Name = "TestProduct1",
                             Price = 100
                         },
                         new
@@ -292,16 +292,16 @@ namespace WebShop.API.Migrations
                             Id = 2,
                             CategoryId = 2,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct",
-                            Price = 100
+                            Name = "TestProduct2",
+                            Price = 200
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct",
-                            Price = 100
+                            Name = "TestProduct3",
+                            Price = 300
                         });
                 });
 

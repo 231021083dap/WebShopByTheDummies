@@ -18,14 +18,12 @@ const routes: Routes = [
   { path: 'AdminCategory', component: AdminCategoryComponent},
 
   { path: 'Product', component: ProductComponent},
-  { path: 'item/:id', component: ItemComponent },
+  { path: 'item/:itemId', component: ItemComponent },
   { path: 'AdminProduct', component: AdminProductComponent},
 
   { path: 'Register', component: RegisterComponent},
 
   { path: 'Login', component: LoginComponent },
-
-
 
 //  { path: 'admin/authors', component: AuthorComponent, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
 ];
