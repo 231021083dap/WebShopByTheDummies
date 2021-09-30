@@ -211,11 +211,6 @@ namespace WebShop.API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Customer",
-                columns: new[] { "Id", "FirstName", "LastName", "MiddleName", "UserId" },
-                values: new object[] { 10, "Christian", "Jørgensen", "Møller", 10 });
-
-            migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Email", "Password", "Role" },
                 values: new object[,]
@@ -234,29 +229,37 @@ namespace WebShop.API.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Product",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Price" },
-                values: new object[] { 1, 1, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 });
+                table: "Customer",
+                columns: new[] { "Id", "FirstName", "LastName", "MiddleName", "UserId" },
+                values: new object[] { 1, "Christian", "Jørgensen", "Møller", 2 });
 
             migrationBuilder.InsertData(
                 table: "Product",
                 columns: new[] { "Id", "CategoryId", "Description", "Name", "Price" },
-                values: new object[] { 2, 2, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 });
+                values: new object[,]
+                {
+                    { 1, 1, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 },
+                    { 2, 2, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 },
+                    { 3, 3, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 }
+                });
 
             migrationBuilder.InsertData(
-                table: "Product",
-                columns: new[] { "Id", "CategoryId", "Description", "Name", "Price" },
-                values: new object[] { 3, 3, "MAKE TESTS GREAT AGIAN", "TestProduct", 100 });
+                table: "Address",
+                columns: new[] { "Id", "Country", "CustomerId", "Floor", "Number", "StreetName", "ZipCityId" },
+                values: new object[,]
+                {
+                    { 1, "Danmark", 1, "1. TH", 222, "testvej", 2100 },
+                    { 2, "Danmark", 1, "2. TV", 34, "Nyborggade", 2100 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Image",
                 columns: new[] { "Id", "Path", "ProductId" },
-                values: new object[] { 1, "Here/Perfect", 1 });
-
-            migrationBuilder.InsertData(
-                table: "Image",
-                columns: new[] { "Id", "Path", "ProductId" },
-                values: new object[] { 2, "Someware/Nice", 1 });
+                values: new object[,]
+                {
+                    { 1, "Here/Perfect", 1 },
+                    { 2, "Someware/Nice", 1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Address_CustomerId",

@@ -10,7 +10,7 @@ using WebShop.API.Database;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20210929120821_test")]
+    [Migration("20210930070435_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,6 +55,28 @@ namespace WebShop.API.Migrations
                     b.HasIndex("ZipCityId");
 
                     b.ToTable("Address");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Country = "Danmark",
+                            CustomerId = 1,
+                            Floor = "1. TH",
+                            Number = 222,
+                            StreetName = "testvej",
+                            ZipCityId = 2100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Country = "Danmark",
+                            CustomerId = 1,
+                            Floor = "2. TV",
+                            Number = 34,
+                            StreetName = "Nyborggade",
+                            ZipCityId = 2100
+                        });
                 });
 
             modelBuilder.Entity("WebShop.API.Database.Entities.Category", b =>
@@ -129,11 +151,11 @@ namespace WebShop.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 10,
+                            Id = 1,
                             FirstName = "Christian",
                             LastName = "Jørgensen",
                             MiddleName = "Møller",
-                            UserId = 10
+                            UserId = 2
                         });
                 });
 
