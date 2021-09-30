@@ -1,6 +1,6 @@
 <div class="ProductContainer">
-    <a href="" style="text-decoration: none; color: black;">
         <div *ngFor="let product of products" class="ProductCard">
+            <a routerLink="/item/{{ product.id }}" style="text-decoration: none; color: black;">
             <div class="ProductCardHead">
                 <img src="../assets/cow4.jpg" alt="">
             </div>
@@ -18,7 +18,7 @@
                         {{ product.price }} <b>KR</b>
                     </span>
                 </div>
-            </div>
-        </div>
-    </a>    
+            </div>    
+        </a>    
+    </div>
 </div>
