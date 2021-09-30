@@ -8,7 +8,7 @@ import { Category } from '../models';
 })
 export class CategoryService {
 
-  private apiUrl = 'https://localhost:5001/api/Category';
+  private apiUrl = 'https://localhost:5001/API/Category';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
