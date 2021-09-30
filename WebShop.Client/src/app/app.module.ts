@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+
 import { CategoryComponent } from './category/category.component'; 
 import { ProductComponent } from './product/product.component';
 import { AdminCategoryComponent } from './admin/category/category.component';
