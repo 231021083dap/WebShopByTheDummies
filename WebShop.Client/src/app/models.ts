@@ -16,7 +16,7 @@ export interface Product{
   name : string;
   price : number;          //CurrencyPipe
   description : string;
-  images : Image[];
+  images? : Image[];
 }
 export interface Image{
   id : number;

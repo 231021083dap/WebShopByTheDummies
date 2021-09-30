@@ -44,28 +44,28 @@ namespace WebShop.API.Database
 
             //#region Address
 
-            //modelBuilder.Entity<Address>().HasData(
-            //new Address
-            //{
-            //    CustomerId = 2,
-            //    Id = 1,
-            //    StreetName = "testvej",
-            //    Number = 222,
-            //    Floor = "1. TH",
-            //    ZipCityId = 2100,
-            //    Country = "Danmark"
-            //},
+            modelBuilder.Entity<Address>().HasData(
+            new Address
+            {
+                CustomerId = 1,
+                Id = 1,
+                StreetName = "testvej",
+                Number = 222,
+                Floor = "1. TH",
+                ZipCityId = 2100,
+                Country = "Danmark"
+            },
 
-            //new Address
-            //{
-            //    CustomerId = 2,
-            //    Id = 2,
-            //    StreetName = "Nyborggade",
-            //    Number = 34,
-            //    Floor = "2. TV",
-            //    ZipCityId = 2100,
-            //    Country = "Danmark"
-            //});
+            new Address
+            {
+                CustomerId = 1,
+                Id = 2,
+                StreetName = "Nyborggade",
+                Number = 34,
+                Floor = "2. TV",
+                ZipCityId = 2100,
+                Country = "Danmark"
+            });
 
             //#endregion
 
@@ -100,8 +100,8 @@ namespace WebShop.API.Database
             modelBuilder.Entity<Customer>().HasData(
             new Customer
             {
-                UserId = 10,
-                Id = 10,
+                UserId = 2,
+                Id = 1,
                 FirstName = "Christian",
                 MiddleName = "Møller",
                 LastName = "Jørgensen"
