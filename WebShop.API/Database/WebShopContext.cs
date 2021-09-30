@@ -44,28 +44,28 @@ namespace WebShop.API.Database
 
             //#region Address
 
-            modelBuilder.Entity<Address>().HasData(
-            new Address
-            {
-                CustomerId = 1,
-                Id = 1,
-                StreetName = "testvej",
-                Number = 222,
-                Floor = "1. TH",
-                ZipCityId = 2100,
-                Country = "Danmark"
-            },
+            //modelBuilder.Entity<Address>().HasData(
+            //new Address
+            //{
+            //    CustomerId = 2,
+            //    Id = 1,
+            //    StreetName = "testvej",
+            //    Number = 222,
+            //    Floor = "1. TH",
+            //    ZipCityId = 2100,
+            //    Country = "Danmark"
+            //},
 
-            new Address
-            {
-                CustomerId = 1,
-                Id = 2,
-                StreetName = "Nyborggade",
-                Number = 34,
-                Floor = "2. TV",
-                ZipCityId = 2100,
-                Country = "Danmark"
-            });
+            //new Address
+            //{
+            //    CustomerId = 2,
+            //    Id = 2,
+            //    StreetName = "Nyborggade",
+            //    Number = 34,
+            //    Floor = "2. TV",
+            //    ZipCityId = 2100,
+            //    Country = "Danmark"
+            //});
 
             //#endregion
 
@@ -75,22 +75,28 @@ namespace WebShop.API.Database
             new Category
             {
                 Id = 1,
-                Name = "Test category",
-                Picture = ""
+                Name = "Sport",
+                Picture = "jakob-owens-j5kEQ1JLqZk-unsplash.jpg"
             },
 
             new Category
             {
                 Id = 2,
-                Name = "Test category",
-                Picture = ""
+                Name = "Party",
+                Picture = "michael-discenza-MxfcoxycH_Y-unsplash.jpg"
             },
 
             new Category
             {
                 Id = 3,
-                Name = "Test category",
-                Picture = ""
+                Name = "Housekeeping",
+                Picture = "ashwini-chaudhary-Iu6parQAO-U-unsplash.jpg"
+            },
+            new Category
+            {
+                Id = 2,
+                Name = "Hangout",
+                Picture = "nathan-dumlao-71u2fOofI-U-unsplash.jpg"
             });
 
             #endregion
@@ -100,8 +106,8 @@ namespace WebShop.API.Database
             modelBuilder.Entity<Customer>().HasData(
             new Customer
             {
-                UserId = 2,
-                Id = 1,
+                UserId = 10,
+                Id = 10,
                 FirstName = "Christian",
                 MiddleName = "Møller",
                 LastName = "Jørgensen"
@@ -159,7 +165,7 @@ namespace WebShop.API.Database
             new Product
             {
                 Id = 1,
-                Name = "TestProduct1",
+                Name = "TestProduct",
                 CategoryId = 1,
                 Price = 100,
                 Description = "MAKE TESTS GREAT AGIAN"
@@ -168,18 +174,18 @@ namespace WebShop.API.Database
             new Product
             {
                 Id = 2,
-                Name = "TestProduct2",
+                Name = "TestProduct",
                 CategoryId = 2,
-                Price = 200,
+                Price = 100,
                 Description = "MAKE TESTS GREAT AGIAN"
             },
 
             new Product
             {
                 Id = 3,
-                Name = "TestProduct3",
+                Name = "TestProduct",
                 CategoryId = 3,
-                Price = 300,
+                Price = 100,
                 Description = "MAKE TESTS GREAT AGIAN"
             });
 
