@@ -13,7 +13,7 @@ export class AuthenticationService {
 
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private apiUrl = 'https://localhost:5001/api/user';
+  private apiUrl = 'https://localhost:5001/API/User';
 
   constructor(private router: Router, private http: HttpClient) {
     // fake login durring testing

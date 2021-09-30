@@ -8,7 +8,7 @@ import { AuthenticationService } from '../_services/authentication.service';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  private apiUrl = 'https://localhost:5001/api';
+  private apiUrl = 'https://localhost:5001/API';
 
   constructor(private authenticationService: AuthenticationService) { }
 
