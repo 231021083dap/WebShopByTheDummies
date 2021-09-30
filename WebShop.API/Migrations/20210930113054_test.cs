@@ -205,9 +205,10 @@ namespace WebShop.API.Migrations
                 columns: new[] { "Id", "Name", "Picture" },
                 values: new object[,]
                 {
-                    { 1, "Test category", "" },
-                    { 2, "Test category", "" },
-                    { 3, "Test category", "" }
+                    { 1, "Sport", "jakob-owens-j5kEQ1JLqZk-unsplash.jpg" },
+                    { 2, "Party", "michael-discenza-MxfcoxycH_Y-unsplash.jpg" },
+                    { 3, "Housekeeping", "ashwini-chaudhary-Iu6parQAO-U-unsplash.jpg" },
+                    { 4, "Hangout", "nathan-dumlao-71u2fOofI-U-unsplash.jpg" }
                 });
 
             migrationBuilder.InsertData(

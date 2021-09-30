@@ -1,7 +1,7 @@
 <div style="display: flex; justify-content: center;">
     <div *ngFor="let category of categories" style="height: 400; width: 300;">
         <div style="display: flex; justify-content: center;">
-        <a href="" style="z-index: 10; position:fixed; top: 17em; color: lawngreen; background-color: darkgray; align-self: center; ">{{ category.name }}</a>
+        <a href="" style="z-index: 10; position:absolute; top: 15em; color: lawngreen; background-color: darkgray; align-self: center; ">{{ category.name }}</a>
         </div>
         <img src="/assets/images/{{ category.picture }}" alt="{{ category.name }}" width="200" height="300" style="display: flex; z-index: -1; position: relative;"/>
     </div>

@@ -10,7 +10,7 @@ using WebShop.API.Database;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20210930105102_test")]
+    [Migration("20210930113054_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,20 +102,26 @@ namespace WebShop.API.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Test category",
-                            Picture = ""
+                            Name = "Sport",
+                            Picture = "jakob-owens-j5kEQ1JLqZk-unsplash.jpg"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Test category",
-                            Picture = ""
+                            Name = "Party",
+                            Picture = "michael-discenza-MxfcoxycH_Y-unsplash.jpg"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Test category",
-                            Picture = ""
+                            Name = "Housekeeping",
+                            Picture = "ashwini-chaudhary-Iu6parQAO-U-unsplash.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Hangout",
+                            Picture = "nathan-dumlao-71u2fOofI-U-unsplash.jpg"
                         });
                 });
 
