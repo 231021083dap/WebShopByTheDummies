@@ -65,3 +65,9 @@ export interface OrderItem{
   amount : number;
   currentPrice : number;    //CurrencyPipe
 }
+
+export interface CartProduct{
+  productId: number;
+  amount: number;
+  
+}
