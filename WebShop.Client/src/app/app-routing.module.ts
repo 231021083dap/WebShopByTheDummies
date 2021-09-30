@@ -4,6 +4,7 @@ import { AdminCategoryComponent } from './admin/category/category.component';
 import { AdminProductComponent } from './admin/product/product.component';
 import { CategoryComponent } from './category/category.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
+import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
 import { Role } from './models';
 import { ProductComponent } from './product/product.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'AdminCategory', component: AdminCategoryComponent},
 
   { path: 'Product', component: ProductComponent},
+  { path: 'item/:id', component: ItemComponent },
   { path: 'AdminProduct', component: AdminProductComponent},
 
   { path: 'Register', component: RegisterComponent},
