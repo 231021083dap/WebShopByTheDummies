@@ -308,6 +308,46 @@ namespace WebShop.API.Migrations
                             Description = "MAKE TESTS GREAT AGIAN",
                             Name = "TestProduct3",
                             Price = 300
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
                         });
                 });
 

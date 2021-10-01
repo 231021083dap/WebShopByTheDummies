@@ -187,6 +187,51 @@ namespace WebShop.API.Database
                 CategoryId = 3,
                 Price = 300,
                 Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 4,
+                Name = "TestProduct3",
+                CategoryId = 3,
+                Price = 300,
+                Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 5,
+                Name = "TestProduct3",
+                CategoryId = 3,
+                Price = 300,
+                Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 6,
+                Name = "TestProduct3",
+                CategoryId = 3,
+                Price = 300,
+                Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 7,
+                Name = "TestProduct3",
+                CategoryId = 3,
+                Price = 300,
+                Description = "MAKE TESTS GREAT AGIAN"
+            },
+
+            new Product
+            {
+                Id = 8,
+                Name = "TestProduct3",
+                CategoryId = 3,
+                Price = 300,
+                Description = "MAKE TESTS GREAT AGIAN"
             });
 
             #endregion

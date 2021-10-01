@@ -6,13 +6,13 @@ img {
 
 //This may have to change do to more products side by side.
 .ProductContainer {
-    width: 280px;
-    height: 500px;
-    margin: 30px auto;
+    margin: 30px;
+    display: flex;
 }
 
 .ProductCard {
     border-radius: 25px;
+    margin: 0 40px 0 0;
 }
 
 .ProductCardHead {
@@ -73,7 +73,7 @@ img {
     font-size: 24px;
     border-radius: 7px;
     margin-top: 140px;
-    margin-left: 75px;
+    margin-left: 35px;
 }
   
 .ProductPrice {
@@ -81,3 +81,16 @@ img {
         margin-left: 5px;
     }
 }
+
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 0 0 40px;
+  }
+
+  .child {
+    /* percent per item in row. 
+    33% = limit to 3 per row. */
+    flex: 1 0 20%; 
+    margin: 5px;
+  }

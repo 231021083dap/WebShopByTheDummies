@@ -10,7 +10,7 @@ using WebShop.API.Database;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20210930113948_test")]
+    [Migration("20211001081931_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -306,6 +306,46 @@ namespace WebShop.API.Migrations
                         new
                         {
                             Id = 3,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 3,
+                            Description = "MAKE TESTS GREAT AGIAN",
+                            Name = "TestProduct3",
+                            Price = 300
+                        },
+                        new
+                        {
+                            Id = 8,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
                             Name = "TestProduct3",
