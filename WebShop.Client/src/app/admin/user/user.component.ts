@@ -34,19 +34,19 @@ export class AdminUserComponent implements OnInit {
     }
   }
   cancel(): void {
-    // this.user = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] }
+    this.user = { id: 0, email: '' }
   }
   save(): void{
     if (this.user.id == 0){
       this.userService.addUser(this.user)
       .subscribe(c => {
         this.users.push(c)
-        // this.user = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] }
+        this.user = { id: 0, email: '' }
       });
     }else {
       this.userService.updateUser(this.user.id, this.user)
       .subscribe(() => {
-        // this.user = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] }
+        this.user = { id: 0, email: '' }
       })
     }
   }

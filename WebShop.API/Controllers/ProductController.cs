@@ -17,7 +17,6 @@ namespace WebShop.API.Controllers
         public ProductController(IProductService productService)
         {
             _productService = productService;
-           
         }
 
         #region Get All Products
