@@ -1,14 +1,12 @@
 //import { CurrencyPipe } from "@angular/common";
-
 //import { EmailValidator } from "@angular/forms";
+
 export interface Category{
   id : number;
   name : string;
   picture : string;
   products? : Product[];
-
 }
-
 
 export interface Product{
   id : number;
@@ -18,6 +16,7 @@ export interface Product{
   description : string;
   images? : Image[];
 }
+
 export interface Image{
   id : number;
   path : string;

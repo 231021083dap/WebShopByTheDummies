@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/_services/product.service';
 export class AdminProductComponent implements OnInit {
 
   products: Product[] = [];
-  product: Product = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: []  };
+  product: Product = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] };
 
   constructor(
     private productService: ProductService
@@ -31,6 +31,23 @@ export class AdminProductComponent implements OnInit {
       this.productService.deleteProduct(product.id)
       .subscribe(() => {
         this.getProducts();
+      })
+    }
+  }
+  cancel(): void {
+    this.product = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] }
+  }
+  save(): void{
+    if (this.product.id == 0){
+      this.productService.addProduct(this.product)
+      .subscribe(c => {
+        this.products.push(c)
+        this.product = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] }
+      });
+    }else {
+      this.productService.updateProduct(this.product.id, this.product)
+      .subscribe(() => {
+        this.product = { id: 0, categoryId: 0, name: '', price: 0, description: '', images: [] }
       })
     }
   }

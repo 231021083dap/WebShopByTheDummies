@@ -9,8 +9,6 @@ import { CategoryService } from 'src/app/_services/category.service';
 })
 export class AdminCategoryComponent implements OnInit {
   
-  
-
   categories: Category[] = [];
   category: Category = { id: 0, name: '', picture: '' };
 

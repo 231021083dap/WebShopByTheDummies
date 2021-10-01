@@ -50,7 +50,7 @@ namespace WebShop.API.Services
                 Category = new ProductCategoryResponse
                 {
                     Id = p.Category.Id,
-                    Name = p.Category.Name
+                    //Name = p.Category.Name
                 },
                 Images = p.Images.Select(i => new ProductImageResponse
                 {
@@ -87,7 +87,7 @@ namespace WebShop.API.Services
                 Category = new ProductCategoryResponse
                 {
                     Id = product.Category.Id,
-                    Name = product.Category.Name
+                    //Name = product.Category.Name
 
                 },
                 Images = product.Images.Select(p => new ProductImageResponse
@@ -150,7 +150,7 @@ namespace WebShop.API.Services
                     Category = new ProductCategoryResponse
                     {
                         Id = category.Id,
-                        Name = category.Name
+                        //Name = category.Name
                     },
                     //Images = product.Images.Select(a => new ProductImageResponse
                     //{
@@ -247,9 +247,8 @@ namespace WebShop.API.Services
                 Category = new ProductCategoryResponse
                 {
                     Id = product.CategoryId,
-                    Name = product.Category.Name
+                    //Name = product.Category.Name
                 }
-
             };
         }
         #endregion
