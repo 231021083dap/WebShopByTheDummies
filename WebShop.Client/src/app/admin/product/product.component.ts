@@ -27,7 +27,7 @@ export class AdminProductComponent implements OnInit {
     this.product = product;
   }
   delete(product: Product): void {
-    if (confirm('Er du sikker på at du vil slette denne Kategori')){
+    if (confirm('Er du sikker på at du vil slette dette produkt?')){
       this.productService.deleteProduct(product.id)
       .subscribe(() => {
         this.getProducts();

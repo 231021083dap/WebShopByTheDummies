@@ -55,7 +55,7 @@ namespace WebShop.API.Controllers
 
         #region Get All Users
         /*[Authorize(Role.Admin)]*/ // only admins are allowed entry to this endpoint
-        [HttpGet("User/GetAll")]
+        [HttpGet("User/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -85,7 +85,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Get All Customers
-        [HttpGet("User/Customer/GetAll")]
+        [HttpGet("User/Customer/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -117,7 +117,7 @@ namespace WebShop.API.Controllers
 
         #region Get User By Id
         //[Authorize(Role.User, Role.Admin)]
-        [HttpGet("User/GetById/{userId}")]
+        [HttpGet("User/{userId}")]
         public async Task<IActionResult> GetByUserId([FromRoute] int userId)
         {
             try
@@ -147,7 +147,7 @@ namespace WebShop.API.Controllers
         #endregion
         #region Get Customer By Id
         //[Authorize(Role.User, Role.Admin)]
-        [HttpGet("User/Customer/GetById/{userId}")]
+        [HttpGet("User/Customer/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -182,7 +182,7 @@ namespace WebShop.API.Controllers
         
         #region Register (SIGNUP)
         [AllowAnonymous]
-        [HttpPost("Register")]
+        [HttpPost("Register/")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -201,7 +201,7 @@ namespace WebShop.API.Controllers
         #endregion
         #region Create Address
         [AllowAnonymous]
-        [HttpPost("User/Customer/{customerId}/Address/Create")]
+        [HttpPost("User/Customer/{customerId}/Address")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -220,7 +220,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Update Customer
-        [HttpPut("User/Customer/{customerId}/Update")]
+        [HttpPut("User/Customer/{customerId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -244,7 +244,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Update Address
-        [HttpPut("User/Customer/{customerId}/Address/Update/{addressId}")]
+        [HttpPut("User/Customer/Address/{addressId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -268,7 +268,7 @@ namespace WebShop.API.Controllers
         #endregion
 
         #region Delete User
-        [HttpDelete("User/Delete/{userId}")]
+        [HttpDelete("User/{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -292,7 +292,7 @@ namespace WebShop.API.Controllers
         }
         #endregion
         #region Delete Address
-        [HttpDelete("User/Customer/{customerId}/Address/Delete/{addressId}")]
+        [HttpDelete("User/Customer/Address/{addressId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]

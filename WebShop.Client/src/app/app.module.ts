@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 
 import { CategoryComponent } from './category/category.component'; 
 import { ProductComponent } from './product/product.component';
@@ -17,13 +16,13 @@ import { SearchComponent } from './search/search.component';
 import { ProductImageComponent } from './product-image/product-image.component';
 import { CartComponent } from './cart/cart.component';
 import { ItemComponent } from './item/item.component';
+import { AdminUserComponent } from './admin/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontpageComponent,
     LoginComponent,
-    RegisterComponent,
     CategoryComponent,
     ProductComponent,
     SearchComponent,
@@ -31,7 +30,8 @@ import { ItemComponent } from './item/item.component';
     CartComponent,
     AdminCategoryComponent,
     AdminProductComponent,
-    ItemComponent
+    ItemComponent,
+    AdminUserComponent
   ],
   imports: [
     BrowserModule,
