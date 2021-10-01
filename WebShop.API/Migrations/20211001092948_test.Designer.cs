@@ -10,7 +10,7 @@ using WebShop.API.Database;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20211001081931_test")]
+    [Migration("20211001092948_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -316,7 +316,7 @@ namespace WebShop.API.Migrations
                             Id = 4,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct3",
+                            Name = "TestProduct4",
                             Price = 300
                         },
                         new
@@ -324,7 +324,7 @@ namespace WebShop.API.Migrations
                             Id = 5,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct3",
+                            Name = "TestProduct5",
                             Price = 300
                         },
                         new
@@ -332,7 +332,7 @@ namespace WebShop.API.Migrations
                             Id = 6,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct3",
+                            Name = "TestProduct6",
                             Price = 300
                         },
                         new
@@ -340,7 +340,7 @@ namespace WebShop.API.Migrations
                             Id = 7,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct3",
+                            Name = "TestProduct7",
                             Price = 300
                         },
                         new
@@ -348,7 +348,7 @@ namespace WebShop.API.Migrations
                             Id = 8,
                             CategoryId = 3,
                             Description = "MAKE TESTS GREAT AGIAN",
-                            Name = "TestProduct3",
+                            Name = "TestProduct8",
                             Price = 300
                         });
                 });
