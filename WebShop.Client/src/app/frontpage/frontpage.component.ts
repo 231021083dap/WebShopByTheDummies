@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from '../models';
+import { ProductService } from '../_services/product.service';
 
 @Component({
   selector: 'app-frontpage',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FrontpageComponent implements OnInit {
 
-  constructor() { }
+  products: Product[] = [];
+
+  constructor(
+    private productService: ProductService
+  ) { }
 
   ngOnInit(): void {
+    this.productService.getProducts()
+    .subscribe(a => this.products = a);
   }
-
 }
