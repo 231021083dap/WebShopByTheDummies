@@ -10,7 +10,7 @@ using WebShop.API.Database;
 namespace WebShop.API.Migrations
 {
     [DbContext(typeof(WebShopContext))]
-    [Migration("20211001112443_test")]
+    [Migration("20211003074730_test")]
     partial class test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
