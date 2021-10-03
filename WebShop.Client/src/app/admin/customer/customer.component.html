@@ -1,0 +1,27 @@
+<div>
+    <label>FirstName:</label>
+    <input type="text" [(ngModel)]="customer.firstName">
+</div>
+<div> 
+    <label>MiddleName</label>
+    <input type="text" [(ngModel)]="customer.middleName">
+</div>
+<div> 
+    <label>LastName</label>
+    <input type="text" [(ngModel)]="customer.lastName">
+</div>
+<!-- <div> 
+    <label>Email</label>
+    <input type="text" [(ngModel)]="customer.user.email">
+</div> -->
+
+<button (click)="save()">Save/Create</button>
+<button (click)="cancel()">Cancel</button>
+
+<ul>
+    <li *ngFor="let customer of customers">
+        <button (click)="edit(customer)">Edit</button>
+        <button (click)="delete(customer)">Delete</button>
+        <label>{{ customer.firstName }} {{ customer.middleName }} {{ customer.lastName }}</label>
+    </li>
+</ul>

@@ -37,6 +37,7 @@ export enum Role {
 export interface Customer {
   id : number;
   userId : number;
+  // user : User[];
   firstName : string;
   middleName : string;
   lastName : string;
