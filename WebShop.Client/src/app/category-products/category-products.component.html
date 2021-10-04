@@ -1,0 +1,30 @@
+
+
+<h2 class="CatName"><a routerLink="/Category"> <<< </a> Kategori: {{ category.name }}</h2>
+
+<div class="parent ">
+    <div *ngFor="let item of Items" class="ProductContainer child">
+        <div class="ProductCard">
+                <a routerLink="/item/{{ item.id }}" style="text-decoration: none; color: black;">
+                <div class="ProductCardHead">
+                    <img src="../assets/cow4.jpg" alt="">
+                </div>
+                <div class="ProductCardBody">
+                    <div class="ProductDescription">
+                        <span class="ProductTitle">
+                            <b>{{ item.name }}</b>
+                        </span>
+                        <span class="ProductCaption">
+                            {{ item.description }}
+                        </span>
+                    </div>
+                    <div>
+                        <span class="ProductPrice">
+                            {{ item.price }} <b>KR</b>
+                        </span>
+                    </div>
+                </div>    
+            </a>    
+        </div>
+    </div>
+</div>

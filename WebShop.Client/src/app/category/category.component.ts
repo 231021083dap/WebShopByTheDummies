@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../models';
+import { Category, Product } from '../models';
 import { CategoryService } from '../_services/category.service';
+import { ProductService } from '../_services/product.service';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -9,17 +10,24 @@ import { CategoryService } from '../_services/category.service';
 export class CategoryComponent implements OnInit {
 
   categories: Category[] = [];
-  
+  products: Product[] = [];
+    
   
   constructor(
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
+    
   ) { }
 
   ngOnInit(): void {
     this.categoryService.getCategories()    
-    .subscribe(c => this.categories = c);
+    .subscribe(c => {
+      this.categories = c
+      console.log(this.categories);
+    });
     
-   
+        
+  
+    
   }
 
 }

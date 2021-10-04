@@ -96,6 +96,35 @@ namespace WebShop.API.Controllers
             }
         }
         #endregion
+        #region Get Products by CategoryId
+        [HttpGet("Category/Products/{categoryId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetProductByCategoryId([FromRoute] int categoryId)
+        {
+            try
+            {
+                List<ProductResponse> products = await _productService.GetProductsByCategoryId(categoryId);
+                if (products == null)
+                {
+                    return Problem("No Data is available to products, not even an empty list!");
+                }
+                if (products.Count == 0)
+                {
+                    return NoContent();
+                }
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
+
+        #endregion
         #region Get Category By Id
         [HttpGet("Category/{categoryId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -11,6 +11,7 @@ namespace WebShop.API.Services
     public interface IProductService
     {
         Task<List<ProductResponse>> GetAllProducts();
+        Task<List<ProductResponse>> GetProductsByCategoryId(int categoryId);
         Task<ProductResponse> GetProductById(int productId);
         Task<ProductResponse> CreateProduct(NewProduct newProduct);
         Task<ProductImageResponse> CreateProductImage(NewProductImage newProductImage, int productId);
@@ -50,7 +51,8 @@ namespace WebShop.API.Services
                 Category = new ProductCategoryResponse
                 {
                     Id = p.Category.Id,
-                    //Name = p.Category.Name
+                    Name = p.Category.Name,
+                    Picture = p.Category.Picture
                 },
                 Images = p.Images.Select(i => new ProductImageResponse
                 {
@@ -87,7 +89,8 @@ namespace WebShop.API.Services
                 Category = new ProductCategoryResponse
                 {
                     Id = product.Category.Id,
-                    //Name = product.Category.Name
+                    Name = product.Category.Name,
+                    Picture = product.Category.Picture
 
                 },
                 Images = product.Images.Select(p => new ProductImageResponse
@@ -98,6 +101,33 @@ namespace WebShop.API.Services
                 }).ToList()
             };
         }
+        #endregion
+        #region Get Product By CategoryId
+        public async Task<List<ProductResponse>> GetProductsByCategoryId(int categoryId) 
+        {
+            List<Product> products = await _productRepository.GetProductsByCategoryId(categoryId);
+            return products == null ? null : products.Select(p => new ProductResponse
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Price = p.Price,
+                Description = p.Description,
+                Category = new ProductCategoryResponse
+                {
+                    Id = p.Category.Id,
+                    Name = p.Category.Name,
+                    Picture = p.Category.Picture
+                },
+                Images = p.Images.Select(i => new ProductImageResponse
+                {
+                    Id = i.Id,
+                    Path = i.Path,
+                    ProductId = p.Id
+                }).ToList()
+            }).ToList();
+
+        }
+
         #endregion
         #region Get Category By Id
         public async Task<CategoryResponse> GetCategoryById(int categoryId)

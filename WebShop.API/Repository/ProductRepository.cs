@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
+using System.Linq;
 
 namespace WebShop.API.Repository
 {
@@ -10,6 +11,7 @@ namespace WebShop.API.Repository
     {
         Task<List<Product>> GetAllProducts();
         Task<Product> GetProductById(int productId);
+        Task<List<Product>> GetProductsByCategoryId(int categoryId);
         Task<Product> CreateProduct(Product product);
         Task<Product> UpdateProduct(int productId, Product product);
         Task<Product> DeleteProduct(int productId);
@@ -42,6 +44,17 @@ namespace WebShop.API.Repository
         }
         #endregion
 
+        #region Get Product By CategoryId
+        public async Task<List<Product>> GetProductsByCategoryId(int categoryId)
+        {
+            return await _context.Product
+                .Where(p => p.CategoryId == categoryId)
+                .Include(c => c.Category)
+                .Include(i => i.Images)
+                .ToListAsync();
+        }
+        #endregion
+
         #region Create Product
         public async Task<Product> CreateProduct(Product product)
         {
@@ -68,13 +81,13 @@ namespace WebShop.API.Repository
         public async Task<Product> UpdateProduct(int productId, Product product)
         {
             Product updateProduct = await _context.Product.FirstOrDefaultAsync(a => a.Id == productId);
-            if (updateProduct !=null)
+            if (updateProduct != null)
             {
                 updateProduct.Name = product.Name;
                 updateProduct.Price = product.Price;
                 updateProduct.Description = product.Description;
                 updateProduct.CategoryId = product.CategoryId;
-                
+
                 await _context.SaveChangesAsync();
             }
             return updateProduct;

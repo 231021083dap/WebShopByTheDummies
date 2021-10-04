@@ -14,6 +14,7 @@ import { ProductImageComponent } from './product-image/product-image.component';
 import { CartComponent } from './cart/cart.component';
 import { ItemComponent } from './item/item.component';
 import { AdminCustomerComponent } from './admin/customer/customer.component';
+import { CategoryProductsComponent } from './category-products/category-products.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AdminCustomerComponent } from './admin/customer/customer.component';
     AdminCategoryComponent,
     AdminProductComponent,
     ItemComponent,
-    AdminCustomerComponent
+    AdminCustomerComponent,
+    CategoryProductsComponent
   ],
   imports: [
     BrowserModule,
