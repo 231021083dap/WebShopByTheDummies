@@ -1,8 +1,8 @@
-<div style="display: flex; justify-content: center; position: relative; top: 1em">
-    <div *ngFor="let category of categories" style="height: 400; width: 300;">
+<div class="wrapper">
+    <div *ngFor="let category of categories" class="categoryCard">
         <div style="display: flex; justify-content: center; align-items: center;">
-        <a routerLink="/Category/Products/{{ category.id }}" style="z-index: 10; position:relative; top: 10em; color: lawngreen; background-color: darkgray; align-self: center; ">{{ category.name }}</a>
+        <a routerLink="/Category/Products/{{ category.id }}" class="CatLink">{{ category.name }}</a>
         </div>
-        <img src="/assets/images/{{ category.picture }}" alt="{{ category.name }}" width="200" height="300" style="display: flex; z-index: -1; position: relative;"/>
+        <img src="/assets/images/{{ category.picture }}" alt="{{ category.name }}" width="200" height="300" />
     </div>
 </div>

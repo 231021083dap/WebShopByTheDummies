@@ -11,6 +11,7 @@ import { ProductComponent } from './product/product.component';
 import { AuthGuard } from './_helpers/auth.guard';
 import { AdminCustomerComponent } from './admin/customer/customer.component';
 import { CategoryProductsComponent } from './category-products/category-products.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: FrontpageComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'Admin/Product', component: AdminProductComponent}, 
   { path: 'Login', component: LoginComponent },
   { path: 'Admin/Customer', component: AdminCustomerComponent},
-  { path: 'Category/Products/:categoryId', component:CategoryProductsComponent } 
+  { path: 'Category/Products/:categoryId', component:CategoryProductsComponent }, 
+  { path: 'Cart', component:CartComponent}
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

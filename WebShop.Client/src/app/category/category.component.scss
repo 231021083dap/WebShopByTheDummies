@@ -1,0 +1,25 @@
+.wrapper{
+    display: flex; 
+    justify-content: center; 
+    position: relative; 
+    top: 1em
+}
+.categoryCard{
+    height: 400px;
+    width: 300px;
+       
+}
+.CatLink{
+    z-index: 10; 
+    position:absolute;
+    align-items: center; 
+    top: 40%;
+    transform: translate(-50%, -50%);
+    color: black; 
+    background-color: coral; 
+}
+img{
+    display: flex;
+    position: relative;
+    border-radius: 25px;
+}
