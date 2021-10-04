@@ -1,14 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
 using WebShop.API.Repository;
-using WebShop.API.Services;
 using Xunit;
 
 namespace WebShop.Tests.RepositoryTests
@@ -18,7 +13,6 @@ namespace WebShop.Tests.RepositoryTests
         private DbContextOptions<WebShopContext> _options;
         private readonly WebShopContext _context;
         private readonly AddressRepository _sut;
-
 
         public AddressRepositoryTests()
         {
@@ -31,6 +25,7 @@ namespace WebShop.Tests.RepositoryTests
             _sut = new AddressRepository(_context);
         }
 
+        #region GetById
         [Fact]
         public async Task GetAddresById_ShouldReturnTheAddress_IfAddressExists()
         {
@@ -75,6 +70,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateAddress_ShouldAddIdToAddress_WhenSavingToDatebase()
         {
@@ -132,6 +130,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
+
+        #region Update
         [Fact]
         public async Task UpdateAddress_ShouldChangeValuesOnAddress_WhenAddressExists()
         {
@@ -206,8 +207,10 @@ namespace WebShop.Tests.RepositoryTests
             #region Assert
             Assert.Null(result);
             #endregion
-
         }
+        #endregion
+
+        #region Delete
         [Fact]
         public async Task DeleteAddress_ShouldReturnDeletedAddress_WhenAddressIsDeleted()
         {
@@ -258,9 +261,6 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
-
-
-
-        
+        #endregion
     }
 }

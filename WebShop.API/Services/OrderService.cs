@@ -30,6 +30,7 @@ namespace WebShop.API.Services
             _addressRepository = addressRepository;
         }
 
+        #region Create Order
         public async Task<OrderResponse> CreateOrder(NewOrder newOrder)
         {
             Order order = new Order
@@ -81,7 +82,7 @@ namespace WebShop.API.Services
                     Zipcode = Billingaddress.ZipCity.Id,
                     City = Billingaddress.ZipCity.City,
                     Country = Billingaddress.Country
-                    
+
                 },
                 OrderItems = order.OrderItems.Select(i => new OrderItemOrderResponse
                 {
@@ -92,7 +93,9 @@ namespace WebShop.API.Services
                 }).ToList()
             };
         }
+        #endregion
 
+        #region Get All Orders
         public async Task<List<OrderResponse>> GetAllOrders()
         {
             List<Order> orders = await _orderRepository.GetAllOrders();
@@ -104,7 +107,9 @@ namespace WebShop.API.Services
                 Email = o.ShippingAddress.Customer.User.Email
             }).ToList();
         }
+        #endregion
 
+        #region Get Order By Id
         public async Task<OrderResponse> GetOrderById(int orderId)
         {
             Order order = await _orderRepository.GetOrderById(orderId);
@@ -142,7 +147,9 @@ namespace WebShop.API.Services
                 }
             };
         }
+        #endregion
 
+        #region Update Order
         public async Task<OrderResponse> UpdateOrder(int orderId, UpdateOrder updateOrder)
         {
             Order order = new()
@@ -166,6 +173,9 @@ namespace WebShop.API.Services
                 }
             };
         }
+        #endregion
+
+        #region Update Order Item
         public async Task<OrderItemResponse> UpdateOrderItem(int orderItemId, UpdateOrderItem updateOrderItem)
         {
             OrderItem orderItem = new()
@@ -181,6 +191,6 @@ namespace WebShop.API.Services
                 CurrentPrice = orderItem.CurrentPrice
             };
         }
-
+        #endregion
     }
 }

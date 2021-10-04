@@ -34,6 +34,7 @@ namespace WebShop.API.Services
             List<Customer> customers = await _customerRepository.GetAllCustomers();
             return customers == null ? null : customers.Select(customer => new CustomerResponse
             {
+                Id = customer.Id,
                 User = new CustomerUserResponse
                 {
                     Id = customer.User.Id,
@@ -94,12 +95,31 @@ namespace WebShop.API.Services
             {
                 User user = new User
                 {
+                    //Id = updateCustomer.User.id,
                     Email = updateCustomer.User.Email,
-                    Password = updateCustomer.User.Password
-                    //Role will be visable but not change anything.
-                    //Change this by making a new response instead of using User.
+                    //Password = updateCustomer.User.Password
+                    //Role ?
                 };
-                user = await _userRepository.UpdateUser(customerId, user);
+                if (updateCustomer.User.Password != null && updateCustomer.User.Password != "")
+                {
+                    user.Password = updateCustomer.User.Password;
+                }
+                //user her er null hvilket skyldes fejl med id..
+                //user = await _userRepository.UpdateUser(userId, user);
+
+                return customer == null ? null : new CustomerResponse
+                {
+                    Id = customer.Id,
+                    FirstName = customer.FirstName,
+                    MiddleName = customer.MiddleName,
+                    LastName = customer.LastName,
+                    Addresses = new(),
+                    User = new CustomerUserResponse
+                    {
+                        Id = customer.User.Id,
+                        Email = customer.User.Email
+                    }
+                };
             }
             return null;
         }

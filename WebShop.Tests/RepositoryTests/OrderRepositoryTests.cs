@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -17,7 +15,6 @@ namespace WebShop.Tests.RepositoryTests
         private readonly WebShopContext _context;
         private readonly OrderRepository _sut;
 
-
         public OrderRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
@@ -28,6 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new OrderRepository(_context);
         }
+
+        #region GetAll
         [Fact]
         public async Task GetAllOrders_ShouldReturnListOfOrders_WhenOrdersExists()
         {
@@ -80,7 +79,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Empty(result);
             #endregion
         }
+        #endregion
 
+        #region GetById
         [Fact]
         public async Task GetOrderById_ShouldReturnTheOrder_IfOrderExists()
         {
@@ -128,6 +129,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateOrder_ShouldAddIdToOrder_WhenSavingToDatebase()
         {
@@ -181,6 +185,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
+
+        #region Update
         [Fact]
         public async Task UpdateOrder_ShouldChangeValuesOnOrder_WhenOrderExists()
         {
@@ -250,6 +257,6 @@ namespace WebShop.Tests.RepositoryTests
             #endregion
 
         }
-
+        #endregion
     }
 }

@@ -62,7 +62,10 @@ namespace WebShop.API.Repository
             if (updateUser != null)
             {
                 updateUser.Email = user.Email;
-                updateUser.Password = user.Password;
+                if (user.Password != null && user.Password != "")
+                {
+                    updateUser.Password = user.Password;
+                }
                 await _context.SaveChangesAsync();
             }
             return updateUser;

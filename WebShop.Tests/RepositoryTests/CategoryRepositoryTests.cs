@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -17,7 +15,6 @@ namespace WebShop.Tests.RepositoryTests
         private readonly WebShopContext _context;
         private readonly CategoryRepository _sut;
 
-
         public CategoryRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
@@ -28,6 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new CategoryRepository(_context);
         }
+
+        #region GetAll
         [Fact]
         public async Task GetAllCategories_ShouldReturnListOfCategories_WhenCategoriesExists()
         {
@@ -47,7 +46,7 @@ namespace WebShop.Tests.RepositoryTests
             });
             await _context.SaveChangesAsync();
         #endregion
-        #region Act
+            #region Act
         var result = await _sut.GetAllCategories();
             #endregion
             #region Assert
@@ -55,7 +54,7 @@ namespace WebShop.Tests.RepositoryTests
             Assert.IsType<List<Category>>(result);
             Assert.Equal(2, result.Count);
         #endregion
-    }
+        }
         [Fact]
         public async Task GetAllCategories_ShouldReturnEmptyListOfCategories_WhenNoCategoriesExists()
         {
@@ -72,7 +71,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Empty(result);
             #endregion
         }
+        #endregion
 
+        #region GetById
         [Fact]
         public async Task GetCategoryById_ShouldReturnTheCategory_IfCategoryExists()
         {
@@ -110,6 +111,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateCategory_ShouldAddIdToCategory_WhenSavingToDatebase()
         {
@@ -155,6 +159,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
+
+        #region Update
         [Fact]
         public async Task UpdateCategory_ShouldChangeValuesOnCategory_WhenCategoryExists()
         {
@@ -210,6 +217,9 @@ namespace WebShop.Tests.RepositoryTests
             #endregion
 
         }
+        #endregion
+
+        #region Delete
         [Fact]
         public async Task DeleteCategory_ShouldReturnDeletedCategory_WhenCategoryIsDeleted()
         {
@@ -238,8 +248,6 @@ namespace WebShop.Tests.RepositoryTests
 
             Assert.Empty(deletedAddress);
             #endregion
-
-
         }
 
         [Fact]
@@ -256,19 +264,6 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
     }
-
-
-    //[Fact]
-    //public async Task
-    //{
-    #region Arrange
-    //await _context.Database.EnsureDeletedAsync();
-    #endregion
-    #region Act
-    //var result = await _sut.UpdateAddress(addressId, updateAddress);
-    #endregion
-    #region Assert
-    #endregion
-    //}
 }

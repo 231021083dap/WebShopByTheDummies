@@ -11,7 +11,7 @@ import { CustomerService } from 'src/app/_services/customer.service';
 export class AdminCustomerComponent implements OnInit {
 
   customers: Customer[] = [];
-  customer: Customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [], /*user User*/  }
+  customer: Customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [], user: { id: 0, email: '' } }
 
   constructor(
     private customerService: CustomerService
@@ -36,19 +36,20 @@ export class AdminCustomerComponent implements OnInit {
     }
   }
   cancel(): void {
-    this.customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: []}
+    this.customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [], user: { id: 0, email: '' } }
   }
   save(): void{
     if (this.customer.id == 0){
       this.customerService.addCustomer(this.customer)
       .subscribe(c => {
         this.customers.push(c)
-        this.customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [] }
+        this.customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [], user: { id: 0, email: '' } }
       });
     }else {
+      console.log(this.customer);
       this.customerService.updateCustomer(this.customer.id, this.customer)
       .subscribe(() => {
-        this.customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [] }
+        this.customer = { id: 0, userId: 0, firstName: '', middleName: '', lastName: '', address: [], user: { id: 0, email: '' } }
       })
     }
   }

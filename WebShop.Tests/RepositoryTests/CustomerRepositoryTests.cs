@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -27,6 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new CustomerRepository(_context);
         }
+
+        #region GetAll
         [Fact]
         public async Task GetAllCustomers_ShouldReturnAListOfCustomers_WhenCustomersExists()
         {
@@ -77,6 +77,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Empty(result);
             #endregion
         }
+        #endregion
+
+        #region GetById
         [Fact]
         public async Task GetCustomerById_ShouldReturnTheCustomer_IfCustomerExists()
         {
@@ -118,6 +121,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateCustomer_ShouldAddIdToCustomer_WhenSavingToDatebase()
         {
@@ -169,6 +175,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
+
+        #region update
         [Fact]
         public async Task UpdateCustomer_ShouldChangeValuesOnCustomer_WhenCustomerExists()
         {
@@ -234,27 +243,7 @@ namespace WebShop.Tests.RepositoryTests
             #region Assert
             Assert.Null(result);
             #endregion
-
         }
-        
-
-
-
+        #endregion
     }
-
-
-
-
-    //[Fact]
-    //public async Task
-    //{
-    #region Arrange
-    //await _context.Database.EnsureDeletedAsync();
-    #endregion
-    #region Act
-    //var result = await _sut.UpdateAddress(addressId, updateAddress);
-    #endregion
-    #region Assert
-    #endregion
-    //}
 }
