@@ -1,8 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -17,7 +13,6 @@ namespace WebShop.Tests.RepositoryTests
         private readonly WebShopContext _context;
         private readonly ZipCityRepository _sut;
 
-
         public ZipCityRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
@@ -28,6 +23,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new ZipCityRepository(_context);
         }
+
+        #region GetById
         [Fact]
         public async Task GetZipCityyById_ShouldReturnTheZipCity_IfZipCityExists()
         {
@@ -51,6 +48,7 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Equal(zipCityId, result.Id);
             #endregion
         }
+
         [Fact]
         public async Task GetZipCityById_ShouldReturnNull_IfCityDoesNotExists()
         {
@@ -65,5 +63,6 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
     }
 }

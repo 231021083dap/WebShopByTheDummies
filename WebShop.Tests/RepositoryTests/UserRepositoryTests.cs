@@ -1,14 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
 using WebShop.API.Repository;
 using Xunit;
-
 
 namespace WebShop.Tests.RepositoryTests
 {
@@ -17,7 +14,6 @@ namespace WebShop.Tests.RepositoryTests
         private DbContextOptions<WebShopContext> _options;
         private readonly WebShopContext _context;
         private readonly UserRepository _sut;
-
 
         public UserRepositoryTests()
         {
@@ -29,6 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new UserRepository(_context);
         }
+
+        #region GetAllUsers
         [Fact]
         public async Task GetAllUsers_ShouldReturnListOfUsers_WhenUsersExists()
         {
@@ -59,6 +57,7 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Equal(2, result.Count);
             #endregion
         }
+
         [Fact]
         public async Task GetAllUsers_ShouldReturnEmptyListOfUsers_WhenNoUsersExists()
         {
@@ -75,7 +74,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Empty(result);
             #endregion
         }
+        #endregion
 
+        #region GetById
         [Fact]
         public async Task GetUserById_ShouldReturnTheUser_IfUserExists()
         {
@@ -100,6 +101,7 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Equal(userId, result.Id);
             #endregion
         }
+
         [Fact]
         public async Task GetUserById_ShouldReturnNull_IfUserDoesNotExists()
         {
@@ -114,6 +116,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region GetByEmail
         [Fact]
         public async Task GetUserByEmail_ShouldReturnTheUser_IfUserExists()
         {
@@ -155,6 +160,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateUser_ShouldAddIdToUser_WhenSavingToDatebase()
         {
@@ -202,7 +210,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
 
+        #region Update
         [Fact]
         public async Task UpdateUser_ShouldChangeValuesOnUser_WhenUserExists()
         {
@@ -260,7 +270,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
 
+        #region Delete
         [Fact]
         public async Task DeleteUser_ShouldReturnDeletedUser_WhenUserIsDeleted()
         {
@@ -304,5 +316,6 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
     }
 }

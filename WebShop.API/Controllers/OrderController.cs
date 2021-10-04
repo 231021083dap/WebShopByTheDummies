@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using WebShop.API.DTO.Requests;
 using WebShop.API.DTO.Responses;
@@ -21,6 +20,7 @@ namespace WebShop.API.Controllers
             _orderService = orderService;
         }
 
+        #region Get All Orders
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -46,7 +46,9 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
 
+        #region Get Order By Id
         [HttpGet("{orderId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -69,6 +71,9 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+
+        #region Update Order
         [HttpPut("{orderId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -90,6 +95,9 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
+
+        #region Update Order Item
         [HttpPut("OrderItem/{orderItemId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -111,5 +119,6 @@ namespace WebShop.API.Controllers
                 return Problem(ex.Message);
             }
         }
+        #endregion
     }
 }

@@ -19,12 +19,11 @@ namespace WebShop.API.Database.Entities
         [Required]
         public int Number { get; set; }
 
-        
         public string Floor { get; set; }
 
-        //Unsure if this would work?
         [ForeignKey("ZipCity.Id")]
         public int ZipCityId { get; set; }
+
         public ZipCity ZipCity { get; set; }
 
         [Required]

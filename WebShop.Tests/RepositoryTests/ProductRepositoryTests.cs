@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -17,7 +15,6 @@ namespace WebShop.Tests.RepositoryTests
         private readonly WebShopContext _context;
         private readonly ProductRepository _sut;
 
-
         public ProductRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
@@ -28,6 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new ProductRepository(_context);
         }
+
+        #region GetAll
         [Fact]
         public async Task GetAllProducts_ShouldReturnListOfProducts_WhenProductsExists()
         {
@@ -77,7 +76,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Empty(result);
             #endregion
         }
+        #endregion
 
+        #region GetById
         [Fact]
         public async Task GetProductById_ShouldReturnTheProduct_IfProductExists()
         {
@@ -118,6 +119,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateProduct_ShouldAddIdToProduct_WhenSavingToDatebase()
         {
@@ -169,6 +173,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
+
+        #region Update
         [Fact]
         public async Task UpdateProduct_ShouldChangeValuesOnProduct_WhenProductExists()
         {
@@ -233,6 +240,9 @@ namespace WebShop.Tests.RepositoryTests
             #endregion
 
         }
+        #endregion
+
+        #region Delete
         [Fact]
         public async Task DeleteProduct_ShouldReturnDeletedProduct_WhenProductIsDeleted()
         {
@@ -264,7 +274,6 @@ namespace WebShop.Tests.RepositoryTests
 
 
         }
-
         [Fact]
         public async Task DeleteProduct_ShouldReturnNull_WhenProductDoesNotExist()
         {
@@ -279,5 +288,6 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
     }
 }

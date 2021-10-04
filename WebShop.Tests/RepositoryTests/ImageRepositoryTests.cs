@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -17,7 +15,6 @@ namespace WebShop.Tests.RepositoryTests
         private readonly WebShopContext _context;
         private readonly ImageRepository _sut;
 
-
         public ImageRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
@@ -28,6 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new ImageRepository(_context);
         }
+
+        #region GetAll
         [Fact]
         public async Task GetAllImages_ShouldReturnListOfImages_WhenImagesExists()
         {
@@ -37,7 +36,7 @@ namespace WebShop.Tests.RepositoryTests
             {
                 Id = 1,
                 Path = "Test/Path",
-                Product = new() { Id = 1},
+                Product = new() { Id = 1 },
                 ProductId = 1
             });
             _context.Image.Add(new Image
@@ -73,7 +72,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Empty(result);
             #endregion
         }
+        #endregion
 
+        #region GetById
         [Fact]
         public async Task GetImageById_ShouldReturnTheImage_IfImageExists()
         {
@@ -112,6 +113,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
+
+        #region Create
         [Fact]
         public async Task CreateImage_ShouldAddIdToImage_WhenSavingToDatebase()
         {
@@ -159,7 +163,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
-        
+        #endregion
+
+        #region Delete
         [Fact]
         public async Task DeleteImage_ShouldReturnImageCategory_WhenImageIsDeleted()
         {
@@ -189,8 +195,6 @@ namespace WebShop.Tests.RepositoryTests
 
             Assert.Empty(deletedImage);
             #endregion
-
-
         }
 
         [Fact]
@@ -207,5 +211,6 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Null(result);
             #endregion
         }
+        #endregion
     }
 }

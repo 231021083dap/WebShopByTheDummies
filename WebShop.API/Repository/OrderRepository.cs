@@ -23,7 +23,6 @@ namespace WebShop.API.Repository
         public OrderRepository(WebShopContext context)
         {
             _context = context;
-
         }
 
         #region Get All Orders

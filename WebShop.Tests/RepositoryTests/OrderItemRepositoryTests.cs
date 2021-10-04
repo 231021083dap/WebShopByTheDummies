@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WebShop.API.Database;
 using WebShop.API.Database.Entities;
@@ -17,7 +15,6 @@ namespace WebShop.Tests.RepositoryTests
         private readonly WebShopContext _context;
         private readonly OrderItemRepository _sut;
 
-
         public OrderItemRepositoryTests()
         {
             _options = new DbContextOptionsBuilder<WebShopContext>()
@@ -28,7 +25,8 @@ namespace WebShop.Tests.RepositoryTests
 
             _sut = new OrderItemRepository(_context);
         }
-       
+
+        #region Create
         [Fact]
         public async Task CreateOrderItem_ShouldAddIdToOrderItem_WhenSavingToDatebase()
         {
@@ -83,6 +81,9 @@ namespace WebShop.Tests.RepositoryTests
             Assert.Contains("already been added", ex.Message);
             #endregion
         }
+        #endregion
+
+        #region Update
         //[Fact]
         //public async Task UpdateOrderItem_ShouldChangeValuesOnOrderItem_WhenOrderItemExists()
         //{
@@ -136,8 +137,10 @@ namespace WebShop.Tests.RepositoryTests
         //    #region Assert
         //    Assert.Null(result);
         //    #endregion
-
         //}
+        #endregion
+
+        #region Delete
         //[Fact]
         //public async Task DeleteOrderItem_ShouldReturnDeletedOrderItem_WhenOrderItemIsDeleted()
         //{
@@ -166,8 +169,6 @@ namespace WebShop.Tests.RepositoryTests
 
         //    Assert.Empty(deletedAddress);
         //    #endregion
-
-
         //}
 
         //[Fact]
@@ -184,5 +185,6 @@ namespace WebShop.Tests.RepositoryTests
         //    Assert.Null(result);
         //    #endregion
         //}
+        #endregion
     }
 }
