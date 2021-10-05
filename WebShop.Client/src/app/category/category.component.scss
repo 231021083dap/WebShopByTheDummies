@@ -1,25 +1,29 @@
 .wrapper{
     display: flex; 
-    justify-content: center; 
-    position: relative; 
-    top: 1em
+    justify-content: center;
+    margin: 40px 0px;
+    justify-content: space-evenly;
 }
-.categoryCard{
-    height: 400px;
-    width: 300px;
-       
-}
-.CatLink{
-    z-index: 10; 
-    position:absolute;
-    align-items: center; 
-    top: 40%;
-    transform: translate(-50%, -50%);
-    color: black; 
-    background-color: coral; 
-}
+
 img{
     display: flex;
-    position: relative;
     border-radius: 25px;
+    height: 300px;
+    width: 200px;
+}
+
+a {
+    text-decoration-line: none;
+}
+
+label {
+    position: relative;
+    top: 160px;
+    display: flex;
+    color: coral;
+    font-size: 25px;
+    font-weight: bold;
+    justify-content: center;
+    background-color: black;
+    cursor: pointer;
 }
