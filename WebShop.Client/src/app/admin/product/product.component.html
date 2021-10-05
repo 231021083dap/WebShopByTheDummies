@@ -1,0 +1,27 @@
+<div>
+    <label>Product:</label>
+    <input type="text" [(ngModel)]="product.name">
+</div>
+<div> 
+    <label>Category</label>
+    <input type="text" [(ngModel)]="product.categoryId">
+</div>
+<div> 
+    <label>Product Price</label>
+    <input type="text" [(ngModel)]="product.price">
+</div>
+<div> 
+    <label>Product Description</label>
+    <input type="text" [(ngModel)]="product.description">
+</div>
+
+<button (click)="save()">Save/Create</button>
+<button (click)="cancel()">Cancel</button>
+
+<ul>
+    <li *ngFor="let product of products">
+        <button (click)="edit(product)">Edit</button>
+        <button (click)="delete(product)">Delete</button>
+        <label>{{ product.name }} </label>
+    </li>
+</ul>

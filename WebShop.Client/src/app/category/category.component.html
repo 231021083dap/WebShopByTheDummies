@@ -1,0 +1,10 @@
+<div class="wrapper">
+    <div *ngFor="let category of categories" class="categoryCard">
+        <a routerLink="/Category/Products/{{ category.id }}" class="CatLink">
+        <div>
+            <label for="">{{ category.name }}</label>
+        </div>
+        <img src="/assets/images/{{ category.picture }}" alt="{{ category.name }}"/>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+nav {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    background-color: coral;
+    div {
+        a {
+            padding: 0 30px;
+            text-decoration-line: none;
+            color: black;
+            font-size: 25px;
+            font-weight: bold;
+        }
+    }
+}

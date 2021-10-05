@@ -1,0 +1,26 @@
+<div class="parent ">
+    <div *ngFor="let product of products" class="ProductContainer child">
+        <div class="ProductCard">
+                <a routerLink="/item/{{ product.id }}" style="text-decoration: none; color: black;">
+                <div class="ProductCardHead">
+                    <img src="../assets/cow4.jpg" alt="">
+                </div>
+                <div class="ProductCardBody">
+                    <div class="ProductDescription">
+                        <span class="ProductTitle">
+                            <b>{{ product.name }}</b>
+                        </span>
+                        <span class="ProductCaption">
+                            {{ product.description }}
+                        </span>
+                    </div>
+                    <div>
+                        <span class="ProductPrice">
+                            {{ product.price }} <b>KR</b>
+                        </span>
+                    </div>
+                </div>    
+            </a>    
+        </div>
+    </div>
+</div>

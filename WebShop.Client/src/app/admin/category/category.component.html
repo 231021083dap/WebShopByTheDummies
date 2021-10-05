@@ -1,0 +1,19 @@
+<div>
+    <label>Category:</label>
+    <input type="text" [(ngModel)]="category.name">
+</div>
+<div> 
+    <label>PicturePath</label>
+    <input type="text" [(ngModel)]="category.picture">
+</div>
+<button (click)="save()">Save/Create</button>
+<button (click)="cancel()">Cancel</button>
+
+<ul>
+    <li *ngFor="let category of categories">
+        <button (click)="edit(category)">Edit</button>
+        <button (click)="delete(category)">Delete</button>
+        <img src="/assets/images/{{category.picture}}" height="120" width="90">
+        {{ category.name }} 
+    </li>
+</ul>
