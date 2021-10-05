@@ -9,7 +9,7 @@ using WebShop.API.Services;
 
 namespace WebShop.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("API/[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
