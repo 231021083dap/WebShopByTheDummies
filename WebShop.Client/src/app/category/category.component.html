@@ -1,8 +1,10 @@
 <div class="wrapper">
     <div *ngFor="let category of categories" class="categoryCard">
-        <div style="display: flex; justify-content: center; align-items: center;">
-        <a routerLink="/Category/Products/{{ category.id }}" class="CatLink">{{ category.name }}</a>
+        <a routerLink="/Category/Products/{{ category.id }}" class="CatLink">
+        <div>
+            <label for="">{{ category.name }}</label>
         </div>
-        <img src="/assets/images/{{ category.picture }}" alt="{{ category.name }}" width="200" height="300" />
+        <img src="/assets/images/{{ category.picture }}" alt="{{ category.name }}"/>
+        </a>
     </div>
 </div>
