@@ -193,7 +193,7 @@ namespace WebShop.API.Database
             {
                 Id = 4,
                 Name = "TestProduct4",
-                CategoryId = 3,
+                CategoryId = 4,
                 Price = 300,
                 Description = "MAKE TESTS GREAT AGIAN"
             },
@@ -202,7 +202,7 @@ namespace WebShop.API.Database
             {
                 Id = 5,
                 Name = "TestProduct5",
-                CategoryId = 3,
+                CategoryId = 1,
                 Price = 300,
                 Description = "MAKE TESTS GREAT AGIAN"
             },
@@ -211,7 +211,7 @@ namespace WebShop.API.Database
             {
                 Id = 6,
                 Name = "TestProduct6",
-                CategoryId = 3,
+                CategoryId = 2,
                 Price = 300,
                 Description = "MAKE TESTS GREAT AGIAN"
             },
@@ -229,7 +229,7 @@ namespace WebShop.API.Database
             {
                 Id = 8,
                 Name = "TestProduct8",
-                CategoryId = 3,
+                CategoryId = 4,
                 Price = 300,
                 Description = "MAKE TESTS GREAT AGIAN"
             });

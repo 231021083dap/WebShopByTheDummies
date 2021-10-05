@@ -240,13 +240,13 @@ namespace WebShop.API.Migrations
                 values: new object[,]
                 {
                     { 1, 1, "MAKE TESTS GREAT AGIAN", "TestProduct1", 100 },
+                    { 5, 1, "MAKE TESTS GREAT AGIAN", "TestProduct5", 300 },
                     { 2, 2, "MAKE TESTS GREAT AGIAN", "TestProduct2", 200 },
+                    { 6, 2, "MAKE TESTS GREAT AGIAN", "TestProduct6", 300 },
                     { 3, 3, "MAKE TESTS GREAT AGIAN", "TestProduct3", 300 },
-                    { 4, 3, "MAKE TESTS GREAT AGIAN", "TestProduct4", 300 },
-                    { 5, 3, "MAKE TESTS GREAT AGIAN", "TestProduct5", 300 },
-                    { 6, 3, "MAKE TESTS GREAT AGIAN", "TestProduct6", 300 },
                     { 7, 3, "MAKE TESTS GREAT AGIAN", "TestProduct7", 300 },
-                    { 8, 3, "MAKE TESTS GREAT AGIAN", "TestProduct8", 300 }
+                    { 4, 4, "MAKE TESTS GREAT AGIAN", "TestProduct4", 300 },
+                    { 8, 4, "MAKE TESTS GREAT AGIAN", "TestProduct8", 300 }
                 });
 
             migrationBuilder.InsertData(

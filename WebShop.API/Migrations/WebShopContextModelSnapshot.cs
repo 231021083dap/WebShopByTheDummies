@@ -312,7 +312,7 @@ namespace WebShop.API.Migrations
                         new
                         {
                             Id = 4,
-                            CategoryId = 3,
+                            CategoryId = 4,
                             Description = "MAKE TESTS GREAT AGIAN",
                             Name = "TestProduct4",
                             Price = 300
@@ -320,7 +320,7 @@ namespace WebShop.API.Migrations
                         new
                         {
                             Id = 5,
-                            CategoryId = 3,
+                            CategoryId = 1,
                             Description = "MAKE TESTS GREAT AGIAN",
                             Name = "TestProduct5",
                             Price = 300
@@ -328,7 +328,7 @@ namespace WebShop.API.Migrations
                         new
                         {
                             Id = 6,
-                            CategoryId = 3,
+                            CategoryId = 2,
                             Description = "MAKE TESTS GREAT AGIAN",
                             Name = "TestProduct6",
                             Price = 300
@@ -344,7 +344,7 @@ namespace WebShop.API.Migrations
                         new
                         {
                             Id = 8,
-                            CategoryId = 3,
+                            CategoryId = 4,
                             Description = "MAKE TESTS GREAT AGIAN",
                             Name = "TestProduct8",
                             Price = 300
